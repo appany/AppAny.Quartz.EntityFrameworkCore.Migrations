@@ -1,5 +1,7 @@
 # PostgreSQL migrations using EntityFrameworkCore for Quartz.NET Job Scheduler
 
+[![Nuget](https://img.shields.io/nuget/v/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.svg)](https://www.nuget.org/packages/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL)
+
 This library handles schema migrations for Quartz.NET using EntityFrameworkCore migrations toolkit with one line of configuration
 
 ## Usage
