@@ -5,24 +5,33 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
 	public class QuartzCalendarEntityTypeConfiguration : IEntityTypeConfiguration<QuartzCalendar>
 	{
+		private readonly string prefix;
+		private readonly string? schema;
+
+		public QuartzCalendarEntityTypeConfiguration(string prefix, string? schema)
+		{
+			this.prefix = prefix;
+			this.schema = schema;
+		}
+
 		public void Configure(EntityTypeBuilder<QuartzCalendar> builder)
 		{
-			builder.ToTable("calendars");
+			builder.ToTable("calendars", schema);
 
 			builder.HasKey(x => new {x.SchedulerName, x.CalendarName});
 
 			builder.Property(x => x.SchedulerName)
-				.HasColumnName("sched_name")
+				.HasColumnName($"{prefix}sched_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.CalendarName)
-				.HasColumnName("calendar_name")
+				.HasColumnName($"{prefix}calendar_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.Calendar)
-				.HasColumnName("calendar")
+				.HasColumnName($"{prefix}calendar")
 				.HasColumnType("bytea")
 				.IsRequired();
 		}

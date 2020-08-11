@@ -5,72 +5,81 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
 	public class QuartzFiredTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzFiredTrigger>
 	{
+		private readonly string prefix;
+		private readonly string? schema;
+
+		public QuartzFiredTriggerEntityTypeConfiguration(string prefix, string? schema)
+		{
+			this.prefix = prefix;
+			this.schema = schema;
+		}
+
 		public void Configure(EntityTypeBuilder<QuartzFiredTrigger> builder)
 		{
-			builder.ToTable("fired_triggers");
+			builder.ToTable("fired_triggers", schema);
 
 			builder.HasKey(x => new {x.SchedulerName, x.EntryId});
 
 			builder.Property(x => x.SchedulerName)
-				.HasColumnName("sched_name")
+				.HasColumnName($"{prefix}sched_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.EntryId)
-				.HasColumnName("entry_id")
+				.HasColumnName($"{prefix}entry_id")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.TriggerName)
-				.HasColumnName("trigger_name")
+				.HasColumnName($"{prefix}trigger_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.TriggerGroup)
-				.HasColumnName("trigger_group")
+				.HasColumnName($"{prefix}trigger_group")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.InstanceName)
-				.HasColumnName("instance_name")
+				.HasColumnName($"{prefix}instance_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.FiredTime)
-				.HasColumnName("fired_time")
+				.HasColumnName($"{prefix}fired_time")
 				.HasColumnType("bigint")
 				.IsRequired();
 
 			builder.Property(x => x.ScheduledTime)
-				.HasColumnName("sched_time")
+				.HasColumnName($"{prefix}sched_time")
 				.HasColumnType("bigint")
 				.IsRequired();
 
 			builder.Property(x => x.Priority)
-				.HasColumnName("priority")
+				.HasColumnName($"{prefix}priority")
 				.HasColumnType("integer")
 				.IsRequired();
 
 			builder.Property(x => x.State)
-				.HasColumnName("state")
+				.HasColumnName($"{prefix}state")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.JobName)
-				.HasColumnName("job_name")
+				.HasColumnName($"{prefix}job_name")
 				.HasColumnType("text");
 
 			builder.Property(x => x.JobGroup)
-				.HasColumnName("job_group")
+				.HasColumnName($"{prefix}job_group")
 				.HasColumnType("text");
 
 			builder.Property(x => x.IsNonConcurrent)
-				.HasColumnName("is_nonconcurrent")
+				.HasColumnName($"{prefix}is_nonconcurrent")
 				.HasColumnType("bool")
 				.IsRequired();
 
 			builder.Property(x => x.RequestsRecovery)
-				.HasColumnName("requests_recovery")
+				.HasColumnName($"{prefix}requests_recovery")
 				.HasColumnType("bool");
 
 			builder.HasIndex(x => x.TriggerName)

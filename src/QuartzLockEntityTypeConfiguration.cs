@@ -5,19 +5,28 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
 	public class QuartzLockEntityTypeConfiguration : IEntityTypeConfiguration<QuartzLock>
 	{
+		private readonly string prefix;
+		private readonly string? schema;
+
+		public QuartzLockEntityTypeConfiguration(string prefix, string? schema)
+		{
+			this.prefix = prefix;
+			this.schema = schema;
+		}
+
 		public void Configure(EntityTypeBuilder<QuartzLock> builder)
 		{
-			builder.ToTable("locks");
+			builder.ToTable("locks", schema);
 
 			builder.HasKey(x => new {x.SchedulerName, x.LockName});
 
 			builder.Property(x => x.SchedulerName)
-				.HasColumnName("sched_name")
+				.HasColumnName($"{prefix}sched_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.LockName)
-				.HasColumnName("lock_name")
+				.HasColumnName($"{prefix}lock_name")
 				.HasColumnType("text")
 				.IsRequired();
 		}
