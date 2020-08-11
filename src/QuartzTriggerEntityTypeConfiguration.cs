@@ -106,6 +106,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 				.HasDatabaseName("idx_qrtz_t_state");
 
 			builder.HasIndex(x => new {x.NextFireTime, x.TriggerState})
+				// TODO: Prefix?
 				.HasDatabaseName("idx_qrtz_t_nft_st");
 		}
 	}
