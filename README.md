@@ -17,7 +17,9 @@ public class DatabaseContext : DbContext
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     // Adds Quartz.NET schema to EntityFrameworkCore Model
-    modelBuilder.AddQuartzPostgreSQL();
+    modelBuilder.AddQuartzPostgres(builder => builder
+      .UseSchema("quartz")
+      .UseNoPrefix());
   }
 }
 ```
