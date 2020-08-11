@@ -5,10 +5,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
 	public class QuartzCalendarEntityTypeConfiguration : IEntityTypeConfiguration<QuartzCalendar>
 	{
-		private readonly string prefix;
+		private readonly string? prefix;
 		private readonly string? schema;
 
-		public QuartzCalendarEntityTypeConfiguration(string prefix, string? schema)
+		public QuartzCalendarEntityTypeConfiguration(string? prefix, string? schema)
 		{
 			this.prefix = prefix;
 			this.schema = schema;

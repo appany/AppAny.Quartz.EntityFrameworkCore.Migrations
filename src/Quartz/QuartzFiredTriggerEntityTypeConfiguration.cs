@@ -5,10 +5,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
 	public class QuartzFiredTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzFiredTrigger>
 	{
-		private readonly string prefix;
+		private readonly string? prefix;
 		private readonly string? schema;
 
-		public QuartzFiredTriggerEntityTypeConfiguration(string prefix, string? schema)
+		public QuartzFiredTriggerEntityTypeConfiguration(string? prefix, string? schema)
 		{
 			this.prefix = prefix;
 			this.schema = schema;

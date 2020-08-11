@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
-		<Version>0.0.3</Version>
+		<Version>0.0.4</Version>
 		<RootNamespace>AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL</RootNamespace>
 		<Authors>sergeyshaykhullin</Authors>
 		<Description>EntityFrameworkCore PostgreSQL migrations for Quartz.NET</Description>

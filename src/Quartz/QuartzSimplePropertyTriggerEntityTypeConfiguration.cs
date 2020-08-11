@@ -6,10 +6,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 	public class QuartzSimplePropertyTriggerEntityTypeConfiguration
 		: IEntityTypeConfiguration<QuartzSimplePropertyTrigger>
 	{
-		private readonly string prefix;
+		private readonly string? prefix;
 		private readonly string? schema;
 
-		public QuartzSimplePropertyTriggerEntityTypeConfiguration(string prefix, string? schema)
+		public QuartzSimplePropertyTriggerEntityTypeConfiguration(string? prefix, string? schema)
 		{
 			this.prefix = prefix;
 			this.schema = schema;

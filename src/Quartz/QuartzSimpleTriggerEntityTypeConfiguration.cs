@@ -3,20 +3,20 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
-	public class QuartzCronTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzCronTrigger>
+	public class QuartzSimpleTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzSimpleTrigger>
 	{
-		private readonly string prefix;
+		private readonly string? prefix;
 		private readonly string? schema;
 
-		public QuartzCronTriggerEntityTypeConfiguration(string prefix, string? schema)
+		public QuartzSimpleTriggerEntityTypeConfiguration(string? prefix, string? schema)
 		{
 			this.prefix = prefix;
 			this.schema = schema;
 		}
 
-		public void Configure(EntityTypeBuilder<QuartzCronTrigger> builder)
+		public void Configure(EntityTypeBuilder<QuartzSimpleTrigger> builder)
 		{
-			builder.ToTable($"{prefix}cron_triggers", schema);
+			builder.ToTable($"{prefix}simple_triggers", schema);
 
 			builder.HasKey(x => new {x.SchedulerName, x.TriggerName, x.TriggerGroup});
 
@@ -35,17 +35,23 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 				.HasColumnType("text")
 				.IsRequired();
 
-			builder.Property(x => x.CronExpression)
-				.HasColumnName("cron_expression")
-				.HasColumnType("text")
+			builder.Property(x => x.RepeatCount)
+				.HasColumnName("repeat_count")
+				.HasColumnType("bigint")
 				.IsRequired();
 
-			builder.Property(x => x.TimeZoneId)
-				.HasColumnName("time_zone_id")
-				.HasColumnType("text");
+			builder.Property(x => x.RepeatInterval)
+				.HasColumnName("repeat_interval")
+				.HasColumnType("bigint")
+				.IsRequired();
+
+			builder.Property(x => x.TimesTriggered)
+				.HasColumnName("times_triggered")
+				.HasColumnType("bigint")
+				.IsRequired();
 
 			builder.HasOne(x => x.Trigger)
-				.WithMany(x => x.CronTriggers)
+				.WithMany(x => x.SimpleTriggers)
 				.HasForeignKey(x => new {x.SchedulerName, x.TriggerName, x.TriggerGroup})
 				.OnDelete(DeleteBehavior.Cascade);
 		}

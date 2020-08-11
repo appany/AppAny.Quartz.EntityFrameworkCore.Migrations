@@ -5,10 +5,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
 	public class QuartzBlobTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzBlobTrigger>
 	{
-		private readonly string prefix;
+		private readonly string? prefix;
 		private readonly string? schema;
 
-		public QuartzBlobTriggerEntityTypeConfiguration(string prefix, string? schema)
+		public QuartzBlobTriggerEntityTypeConfiguration(string? prefix, string? schema)
 		{
 			this.prefix = prefix;
 			this.schema = schema;

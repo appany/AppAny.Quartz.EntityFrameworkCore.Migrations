@@ -5,10 +5,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
 	public class QuartzLockEntityTypeConfiguration : IEntityTypeConfiguration<QuartzLock>
 	{
-		private readonly string prefix;
+		private readonly string? prefix;
 		private readonly string? schema;
 
-		public QuartzLockEntityTypeConfiguration(string prefix, string? schema)
+		public QuartzLockEntityTypeConfiguration(string? prefix, string? schema)
 		{
 			this.prefix = prefix;
 			this.schema = schema;
