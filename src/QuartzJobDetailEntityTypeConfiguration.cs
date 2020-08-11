@@ -16,57 +16,57 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 
 		public void Configure(EntityTypeBuilder<QuartzJobDetail> builder)
 		{
-			builder.ToTable("job_details", schema);
+			builder.ToTable($"{prefix}job_details", schema);
 
 			builder.HasKey(x => new {x.SchedulerName, x.JobName, x.JobGroup});
 
 			builder.Property(x => x.SchedulerName)
-				.HasColumnName($"{prefix}sched_name")
+				.HasColumnName("sched_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.JobName)
-				.HasColumnName($"{prefix}job_name")
+				.HasColumnName("job_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.JobGroup)
-				.HasColumnName($"{prefix}job_group")
+				.HasColumnName("job_group")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.Description)
-				.HasColumnName($"{prefix}description")
+				.HasColumnName("description")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.JobClassName)
-				.HasColumnName($"{prefix}job_class_name")
+				.HasColumnName("job_class_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.IsDurable)
-				.HasColumnName($"{prefix}is_durable")
+				.HasColumnName("is_durable")
 				.HasColumnType("bool")
 				.IsRequired();
 
 			builder.Property(x => x.IsNonConcurrent)
-				.HasColumnName($"{prefix}is_nonconcurrent")
+				.HasColumnName("is_nonconcurrent")
 				.HasColumnType("bool")
 				.IsRequired();
 
 			builder.Property(x => x.IsUpdateData)
-				.HasColumnName($"{prefix}is_update_data")
+				.HasColumnName("is_update_data")
 				.HasColumnType("bool")
 				.IsRequired();
 
 			builder.Property(x => x.RequestsRecovery)
-				.HasColumnName($"{prefix}requests_recovery")
+				.HasColumnName("requests_recovery")
 				.HasColumnType("bool")
 				.IsRequired();
 
 			builder.Property(x => x.JobData)
-				.HasColumnName($"{prefix}job_data")
+				.HasColumnName("job_data")
 				.HasColumnType("bytea");
 
 			builder.HasIndex(x => x.RequestsRecovery)

@@ -16,17 +16,17 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 
 		public void Configure(EntityTypeBuilder<QuartzLock> builder)
 		{
-			builder.ToTable("locks", schema);
+			builder.ToTable($"{prefix}locks", schema);
 
 			builder.HasKey(x => new {x.SchedulerName, x.LockName});
 
 			builder.Property(x => x.SchedulerName)
-				.HasColumnName($"{prefix}sched_name")
+				.HasColumnName("sched_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.LockName)
-				.HasColumnName($"{prefix}lock_name")
+				.HasColumnName("lock_name")
 				.HasColumnType("text")
 				.IsRequired();
 		}

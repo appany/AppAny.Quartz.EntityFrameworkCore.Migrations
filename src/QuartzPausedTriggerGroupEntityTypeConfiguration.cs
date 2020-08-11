@@ -16,17 +16,17 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 
 		public void Configure(EntityTypeBuilder<QuartzPausedTriggerGroup> builder)
 		{
-			builder.ToTable("paused_trigger_grps", schema);
+			builder.ToTable($"{prefix}paused_trigger_grps", schema);
 
 			builder.HasKey(x => new {x.SchedulerName, x.TriggerGroup});
 
 			builder.Property(x => x.SchedulerName)
-				.HasColumnName($"{prefix}sched_name")
+				.HasColumnName("sched_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.TriggerGroup)
-				.HasColumnName($"{prefix}trigger_group")
+				.HasColumnName("trigger_group")
 				.HasColumnType("text")
 				.IsRequired();
 		}

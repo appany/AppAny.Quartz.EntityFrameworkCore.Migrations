@@ -17,71 +17,71 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 
 		public void Configure(EntityTypeBuilder<QuartzSimplePropertyTrigger> builder)
 		{
-			builder.ToTable("SIMPROP_TRIGGERS", schema);
+			builder.ToTable($"{prefix}SIMPROP_TRIGGERS", schema);
 
 			builder.HasKey(x => new {x.SchedulerName, x.TriggerName, x.TriggerGroup});
 
 			builder.Property(x => x.SchedulerName)
-				.HasColumnName($"{prefix}sched_name")
+				.HasColumnName("sched_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.TriggerName)
-				.HasColumnName($"{prefix}trigger_name")
+				.HasColumnName("trigger_name")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.TriggerGroup)
-				.HasColumnName($"{prefix}trigger_group")
+				.HasColumnName("trigger_group")
 				.HasColumnType("text")
 				.IsRequired();
 
 			builder.Property(x => x.StringProperty1)
-				.HasColumnName($"{prefix}str_prop_1")
+				.HasColumnName("str_prop_1")
 				.HasColumnType("text");
 
 			builder.Property(x => x.StringProperty2)
-				.HasColumnName($"{prefix}str_prop_2")
+				.HasColumnName("str_prop_2")
 				.HasColumnType("text");
 
 			builder.Property(x => x.StringProperty3)
-				.HasColumnName($"{prefix}str_prop_3")
+				.HasColumnName("str_prop_3")
 				.HasColumnType("text");
 
 			builder.Property(x => x.IntegerProperty1)
-				.HasColumnName($"{prefix}int_prop_1")
+				.HasColumnName("int_prop_1")
 				.HasColumnType("integer");
 
 			builder.Property(x => x.IntegerProperty2)
-				.HasColumnName($"{prefix}int_prop_2")
+				.HasColumnName("int_prop_2")
 				.HasColumnType("integer");
 
 			builder.Property(x => x.LongProperty1)
-				.HasColumnName($"{prefix}long_prop_1")
+				.HasColumnName("long_prop_1")
 				.HasColumnType("bigint");
 
 			builder.Property(x => x.LongProperty2)
-				.HasColumnName($"{prefix}long_prop_2")
+				.HasColumnName("long_prop_2")
 				.HasColumnType("bigint");
 
 			builder.Property(x => x.DecimalProperty1)
-				.HasColumnName($"{prefix}dec_prop_1")
+				.HasColumnName("dec_prop_1")
 				.HasColumnType("numeric");
 
 			builder.Property(x => x.DecimalProperty2)
-				.HasColumnName($"{prefix}dec_prop_2")
+				.HasColumnName("dec_prop_2")
 				.HasColumnType("numeric");
 
 			builder.Property(x => x.BooleanProperty1)
-				.HasColumnName($"{prefix}bool_prop_1")
+				.HasColumnName("bool_prop_1")
 				.HasColumnType("bool");
 
 			builder.Property(x => x.BooleanProperty2)
-				.HasColumnName($"{prefix}bool_prop_2")
+				.HasColumnName("bool_prop_2")
 				.HasColumnType("bool");
 
 			builder.Property(x => x.TimeZoneId)
-				.HasColumnName($"{prefix}time_zone_id")
+				.HasColumnName("time_zone_id")
 				.HasColumnType("text");
 
 			builder.HasOne(x => x.Trigger)
