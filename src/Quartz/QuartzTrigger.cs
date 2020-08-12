@@ -9,7 +9,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 		public string TriggerGroup { get; set; } = null!;
 		public string JobName { get; set; } = null!;
 		public string JobGroup { get; set; } = null!;
-		public string Description { get; set; } = null!;
+		public string? Description { get; set; } = null!;
 		public long? NextFireTime { get; set; }
 		public long? PreviousFireTime { get; set; }
 		public int? Priority { get; set; }

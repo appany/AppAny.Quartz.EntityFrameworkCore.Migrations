@@ -37,8 +37,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 
 			builder.Property(x => x.Description)
 				.HasColumnName("description")
-				.HasColumnType("text")
-				.IsRequired();
+				.HasColumnType("text");
 
 			builder.Property(x => x.JobClassName)
 				.HasColumnName("job_class_name")
