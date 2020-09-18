@@ -83,32 +83,25 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 				.HasColumnType("bool");
 
 			builder.HasIndex(x => x.TriggerName)
-				// TODO: Prefix?
-				.HasDatabaseName("idx_qrtz_ft_trig_name");
+				.HasDatabaseName($"idx_{prefix}ft_trig_name");
 
 			builder.HasIndex(x => x.TriggerGroup)
-				// TODO: Prefix?
-				.HasDatabaseName("idx_qrtz_ft_trig_group");
+				.HasDatabaseName($"idx_{prefix}ft_trig_group");
 
 			builder.HasIndex(x => new {x.SchedulerName, x.TriggerName, x.TriggerGroup})
-				// TODO: Prefix?
-				.HasDatabaseName("idx_qrtz_ft_trig_nm_gp");
+				.HasDatabaseName($"idx_{prefix}ft_trig_nm_gp");
 
 			builder.HasIndex(x => x.InstanceName)
-				// TODO: Prefix?
-				.HasDatabaseName("idx_qrtz_ft_trig_inst_name");
+				.HasDatabaseName($"idx_{prefix}ft_trig_inst_name");
 
 			builder.HasIndex(x => x.JobName)
-				// TODO: Prefix?
-				.HasDatabaseName("idx_qrtz_ft_job_name");
+				.HasDatabaseName($"idx_{prefix}ft_job_name");
 
 			builder.HasIndex(x => x.JobGroup)
-				// TODO: Prefix?
-				.HasDatabaseName("idx_qrtz_ft_job_group");
+				.HasDatabaseName($"idx_{prefix}ft_job_group");
 
 			builder.HasIndex(x => x.RequestsRecovery)
-				// TODO: Prefix?
-				.HasDatabaseName("idx_qrtz_ft_job_req_recovery");
+				.HasDatabaseName($"idx_{prefix}ft_job_req_recovery");
 		}
 	}
 }

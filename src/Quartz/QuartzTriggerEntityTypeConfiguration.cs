@@ -98,16 +98,13 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 				.IsRequired();
 
 			builder.HasIndex(x => x.NextFireTime)
-				// TODO: Prefix?
-				.HasDatabaseName("idx_qrtz_t_next_fire_time");
-			
+				.HasDatabaseName($"idx_{prefix}t_next_fire_time");
+
 			builder.HasIndex(x => x.TriggerState)
-				// TODO: Prefix?
-				.HasDatabaseName("idx_qrtz_t_state");
+				.HasDatabaseName($"idx_{prefix}t_state");
 
 			builder.HasIndex(x => new {x.NextFireTime, x.TriggerState})
-				// TODO: Prefix?
-				.HasDatabaseName("idx_qrtz_t_nft_st");
+				.HasDatabaseName($"idx_{prefix}t_nft_st");
 		}
 	}
 }

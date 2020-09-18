@@ -69,8 +69,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 				.HasColumnType("bytea");
 
 			builder.HasIndex(x => x.RequestsRecovery)
-				// TODO: Prefix?
-				.HasDatabaseName("idx_qrtz_j_req_recovery");
+				.HasDatabaseName($"idx_{prefix}j_req_recovery");
 		}
 	}
 }
