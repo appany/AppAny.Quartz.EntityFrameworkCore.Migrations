@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
+namespace Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
 	public class QuartzTrigger
 	{

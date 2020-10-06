@@ -1,22 +1,22 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
+namespace Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
-	public class QuartzBlobTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzBlobTrigger>
+	public class QuartzSimpleTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzSimpleTrigger>
 	{
 		private readonly string? prefix;
 		private readonly string? schema;
 
-		public QuartzBlobTriggerEntityTypeConfiguration(string? prefix, string? schema)
+		public QuartzSimpleTriggerEntityTypeConfiguration(string? prefix, string? schema)
 		{
 			this.prefix = prefix;
 			this.schema = schema;
 		}
 
-		public void Configure(EntityTypeBuilder<QuartzBlobTrigger> builder)
+		public void Configure(EntityTypeBuilder<QuartzSimpleTrigger> builder)
 		{
-			builder.ToTable($"{prefix}blob_triggers", schema);
+			builder.ToTable($"{prefix}simple_triggers", schema);
 
 			builder.HasKey(x => new {x.SchedulerName, x.TriggerName, x.TriggerGroup});
 
@@ -35,12 +35,23 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 				.HasColumnType("text")
 				.IsRequired();
 
-			builder.Property(x => x.BlobData)
-				.HasColumnName("blob_data")
-				.HasColumnType("bytea");
+			builder.Property(x => x.RepeatCount)
+				.HasColumnName("repeat_count")
+				.HasColumnType("bigint")
+				.IsRequired();
+
+			builder.Property(x => x.RepeatInterval)
+				.HasColumnName("repeat_interval")
+				.HasColumnType("bigint")
+				.IsRequired();
+
+			builder.Property(x => x.TimesTriggered)
+				.HasColumnName("times_triggered")
+				.HasColumnType("bigint")
+				.IsRequired();
 
 			builder.HasOne(x => x.Trigger)
-				.WithMany(x => x.BlobTriggers)
+				.WithMany(x => x.SimpleTriggers)
 				.HasForeignKey(x => new {x.SchedulerName, x.TriggerName, x.TriggerGroup})
 				.OnDelete(DeleteBehavior.Cascade);
 		}

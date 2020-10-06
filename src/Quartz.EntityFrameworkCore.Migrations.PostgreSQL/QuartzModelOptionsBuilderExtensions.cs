@@ -1,4 +1,4 @@
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
+namespace Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
 	public static class QuartzModelOptionsBuilderExtensions
 	{
