@@ -9,14 +9,13 @@
 		<Description>EntityFrameworkCore PostgreSQL migrations for AppAny.Quartz.NET</Description>
 		<PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;AppAny.Quartz.NET;PostgreSQL</PackageTags>
 		<PackageIcon>logo.png</PackageIcon>
-		<!-- <PackageIconUrl>https://raw.githubusercontent.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations/master/src/logo.png</PackageIconUrl> -->
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL</PackageProjectUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="../logo.png" Pack="true" PackagePath="" />
+		<None Include="../../logo.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 
 	<ItemGroup>
