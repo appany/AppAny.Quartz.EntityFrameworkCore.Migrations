@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
-		<Version>3.2.2</Version>
+		<Version>3.2.3</Version>
 		<RootNamespace>AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL</RootNamespace>
 		<Authors>sergeyshaykhullin</Authors>
 		<Description>EntityFrameworkCore PostgreSQL migrations for AppAny.Quartz.NET</Description>
@@ -14,11 +14,11 @@
 		<PackageProjectUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL</PackageProjectUrl>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<ItemGroup Label="Logo">
 		<None Include="../../logo.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<ItemGroup Label="Packages">
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0-rc2" />
 	</ItemGroup>
 
