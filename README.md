@@ -8,7 +8,7 @@ This library handles schema migrations for Quartz.NET using EntityFrameworkCore 
 
 Feel free to contribute another drivers support
 
-- [x] [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL/5.0.0-rc1)
+- [x] [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL/5.0.1)
 
 ### Usage
 
