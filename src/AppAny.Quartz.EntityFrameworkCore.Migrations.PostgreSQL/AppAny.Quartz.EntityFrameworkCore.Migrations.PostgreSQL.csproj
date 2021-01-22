@@ -3,16 +3,20 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
-		<Version>0.1.1</Version>
+		<Version>0.1.2</Version>
 		<LangVersion>9</LangVersion>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL</PackageProjectUrl>
-		<PackageIcon>content/logo.png</PackageIcon>
-		<PackageLicenseFile>content/LICENSE</PackageLicenseFile>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Copyright>Copyright ©2021 AppAny</Copyright>
 		<Authors>sergeyshaykhullin</Authors>
 		<Description>EntityFrameworkCore PostgreSQL migrations for AppAny.Quartz.NET</Description>
@@ -20,12 +24,12 @@
 	</PropertyGroup>
 
 	<ItemGroup Label="Packages">
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.1" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
 	</ItemGroup>
 
 	<ItemGroup Label="Assets">
-		<None Include="../../assets/logo.png" Pack="true" Visible="false" />
-		<None Include="../../LICENSE" Pack="true" Visible="false" />
+		<None Include="../../assets/logo.png" Pack="true" Visible="false" PackagePath="" />
+		<None Include="../../LICENSE" Pack="true" Visible="false" PackagePath="" />
 	</ItemGroup>
 
 </Project>
