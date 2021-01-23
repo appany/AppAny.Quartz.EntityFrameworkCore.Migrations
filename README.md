@@ -1,4 +1,4 @@
-# EntityFrameworkCore migrations for Quartz.NET Job Scheduler
+# EntityFrameworkCore migrations for Quartz.NET
 
 [![Nuget](https://img.shields.io/nuget/v/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.svg)](https://www.nuget.org/packages/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL)
 
@@ -6,31 +6,39 @@ This library handles schema migrations for Quartz.NET using EntityFrameworkCore 
 
 ## Supported drivers
 
-Feel free to contribute another drivers support
+- [x] [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL)
 
-- [x] [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL/5.0.1)
+Feel free to contribute another drivers support
 
 ### Usage
 
 ```cs
+# Configure DbContext
 public class DatabaseContext : DbContext
 {
-  public DatabaseContext(DbContextOptions<DatabaseContext> options)
-  : base(options)
-  {
-  }
+  // ...
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
-    // Adds Quartz.NET schema to EntityFrameworkCore Model
-    modelBuilder.AddQuartzPostgres(builder => builder
+    // Adds Quartz.NET PostgreSQL schema to EntityFrameworkCore
+    modelBuilder.AddQuartz(builder => builder
+      .UsePostgres()
       .UseSchema("quartz")
       .UseNoPrefix());
   }
 }
+
+# Configure Quartz.NET
+storeOptions.UsePostgres(postgresOptions =>
+{
+  postgresOptions.UseDriverDelegate<PostgreSQLDelegate>();
+  postgresOptions.ConnectionString = ...;
+  postgresOptions.TablePrefix = ...;
+});
+
 ```
 
-Then add EntityFrameworkCore with Quartz.NET schema migration `dotnet ef migrations add AddQuartz` and:
+Then add EntityFrameworkCore migration with Quartz.NET schema `dotnet ef migrations add AddQuartz` and:
 
 - Add in-process migration using `databaseContext.Database.MigrateAsync()`
 - Add out-of-process migration using `dotnet ef database update`
