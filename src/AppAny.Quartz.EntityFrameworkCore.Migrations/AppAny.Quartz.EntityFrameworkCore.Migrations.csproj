@@ -18,21 +18,12 @@
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Copyright>Copyright ©2021 AppAny</Copyright>
 		<Authors>sergeyshaykhullin</Authors>
-		<Description>EntityFrameworkCore PostgreSQL migrations for Quartz.NET</Description>
-		<PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;Quartz.NET;PostgreSQL</PackageTags>
+		<Description>EntityFrameworkCore migrations for Quartz.NET</Description>
+		<PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;Quartz.NET</PackageTags>
 	</PropertyGroup>
 
-	<ItemGroup Label="Projects">
-		<ProjectReference Include="..\AppAny.Quartz.EntityFrameworkCore.Migrations\AppAny.Quartz.EntityFrameworkCore.Migrations.csproj" />
-	</ItemGroup>
-
 	<ItemGroup Label="Packages">
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
-	</ItemGroup>
-
-	<ItemGroup Label="Assets">
-		<None Include="../../assets/logo.png" Pack="true" Visible="false" PackagePath="" />
-		<None Include="../../LICENSE" Pack="true" Visible="false" PackagePath="" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
 	</ItemGroup>
 
 </Project>
