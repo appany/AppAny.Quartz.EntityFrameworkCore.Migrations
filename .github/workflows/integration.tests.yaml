@@ -31,7 +31,5 @@ jobs:
       with:
         dotnet-version: 5.0.x
 
-    - run: docker ps -a
-
     - name: Migrations | Tests
       run: dotnet test
