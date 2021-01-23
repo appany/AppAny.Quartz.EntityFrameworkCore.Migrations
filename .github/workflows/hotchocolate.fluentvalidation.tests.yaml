@@ -1,0 +1,25 @@
+name: Integration Tests
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    name: Migrations | Apply
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+    - name: Migrations | Checkout
+      uses: actions/checkout@v2
+
+    - name: Migrations | .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+
+    - name: Migrations | Docker
+      run: docker run -p 5432:5432 -e POSTGRES_USER=test -e POSTGRES_PASSWORD=test -e POSTGRES_DB=test postgres
+
+    - name: Migrations | Tests
+      run: dotnet test
