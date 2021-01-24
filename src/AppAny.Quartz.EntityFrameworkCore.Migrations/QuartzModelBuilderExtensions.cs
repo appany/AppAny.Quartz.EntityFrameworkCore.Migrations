@@ -1,26 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
 	public static class QuartzModelBuilderExtensions
 	{
-		public static ModelBuilder AddQuartz(
-			this ModelBuilder modelBuilder,
-			Action<QuartzModelBuilder>? configure)
+		public static QuartzModelBuilder UseNoPrefix(this QuartzModelBuilder builder)
 		{
-			var options = new QuartzModel();
-			configure?.Invoke(new DefaultQuartzModelBuilder(options));
-
-			if (options.EntityTypeConfigurations is null)
-			{
-				throw new InvalidOperationException("No database provider");
-			}
-
-			options.EntityTypeConfigurations.Invoke(
-				new EntityTypeConfigurationContext(options.Prefix, options.Schema, modelBuilder));
-
-			return modelBuilder;
+			return builder.UsePrefix(null);
 		}
 	}
 }

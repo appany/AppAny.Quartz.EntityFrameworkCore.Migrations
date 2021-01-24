@@ -13,23 +13,23 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 
 	public class DefaultQuartzModelBuilder : QuartzModelBuilder
 	{
-		private readonly QuartzModel options;
+		private readonly QuartzModel model;
 
-		public DefaultQuartzModelBuilder(QuartzModel options)
+		public DefaultQuartzModelBuilder(QuartzModel model)
 		{
-			this.options = options;
+			this.model = model;
 		}
 
 		public QuartzModelBuilder UsePrefix(string? prefix)
 		{
-			options.Prefix = prefix;
+			model.Prefix = prefix;
 
 			return this;
 		}
 
 		public QuartzModelBuilder UseSchema(string schema)
 		{
-			options.Schema = schema;
+			model.Schema = schema;
 
 			return this;
 		}
@@ -37,7 +37,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 		public QuartzModelBuilder UseEntityTypeConfigurations(
 			Action<EntityTypeConfigurationContext> entityTypeConfigurations)
 		{
-			options.EntityTypeConfigurations = entityTypeConfigurations;
+			model.EntityTypeConfigurations = entityTypeConfigurations;
 
 			return this;
 		}
