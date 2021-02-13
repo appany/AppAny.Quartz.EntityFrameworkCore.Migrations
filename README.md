@@ -5,6 +5,12 @@
 
 This library handles schema migrations for Quartz.NET using EntityFrameworkCore migrations toolkit with one line of configuration
 
+## Installation
+
+```bash
+$> dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
+```
+
 ## Supported drivers
 
 - [x] [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL)
