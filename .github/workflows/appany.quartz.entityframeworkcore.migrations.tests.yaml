@@ -1,0 +1,41 @@
+name: AppAny | Quartz | EntityFrameworkCore | Migrations
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  postgresql:
+    name: AppAny | Quartz | EntityFrameworkCore | Migrations | PostgreSQL
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    services:
+      postgres:
+        image: postgres:13.1
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: test
+
+    steps:
+    - name: AppAny | Quartz | EntityFrameworkCore | Migrations | Checkout
+      uses: actions/checkout@v2
+
+    - name: AppAny | Quartz | EntityFrameworkCore | Migrations | Setup
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+
+    - name: AppAny | Quartz | EntityFrameworkCore | Migrations | Tests
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=coverage/ /p:CoverletOutputFormat=lcov
+
+    - name: AppAny | Quartz | EntityFrameworkCore | Migrations | Tests | Coverage | Publish
+      uses: coverallsapp/github-action@v1.0.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: tests/AppAny.Quartz.EntityFrameworkCore.Migrations.Tests/coverage/coverage.info
