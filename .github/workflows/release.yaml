@@ -2,6 +2,10 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      release:
+        description: Release
+        required: true
 
 jobs:
   release:
@@ -17,32 +21,24 @@ jobs:
       with:
         dotnet-version: 5.0.x
 
-    - name: Release | Publish
-      id: publish
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations/AppAny.Quartz.EntityFrameworkCore.Migrations.csproj
-        TAG_FORMAT: '*'
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-        INCLUDE_SYMBOLS: true
-
-    - name: Release | Publish | PostgreSQL
-      id: publish_postgresql
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-        PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj
-        TAG_FORMAT: '*'
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-        INCLUDE_SYMBOLS: true
-
     - name: Release
       id: release
       uses: actions/create-release@v1.1.4
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.publish.outputs.VERSION }}
-        release_name: ${{ steps.publish.outputs.VERSION }}
+        tag_name: ${{ github.event.inputs.release }}
+        release_name: ${{ github.event.inputs.release }}
+
+    - name: Release | Publish
+      id: publish
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations/AppAny.Quartz.EntityFrameworkCore.Migrations.csproj
+        VERSION_STATIC: ${{ github.event.inputs.release }}
+        TAG_FORMAT: '*'
+        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        INCLUDE_SYMBOLS: true
 
     - name: Release | Assets | Nuget
       uses: actions/upload-release-asset@v1.0.2
@@ -63,6 +59,16 @@ jobs:
         asset_name: ${{ steps.publish.outputs.SYMBOLS_PACKAGE_NAME }}
         asset_path: ${{ steps.publish.outputs.SYMBOLS_PACKAGE_PATH }}
         asset_content_type: application/zip
+
+    - name: Release | Publish | PostgreSQL
+      id: publish_postgresql
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj
+        VERSION_STATIC: ${{ github.event.inputs.release }}
+        TAG_FORMAT: '*'
+        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        INCLUDE_SYMBOLS: true
 
     - name: Release | Assets | PostgreSQL | Nuget
       uses: actions/upload-release-asset@v1.0.2
