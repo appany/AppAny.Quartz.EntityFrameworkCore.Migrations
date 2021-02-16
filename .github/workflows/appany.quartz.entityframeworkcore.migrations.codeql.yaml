@@ -1,4 +1,4 @@
-name: CodeQL
+name: AppAny | Quartz | EntityFrameworkCore | Migrations | CodeQL
 
 on:
   push:
