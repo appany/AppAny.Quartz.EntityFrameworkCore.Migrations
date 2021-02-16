@@ -34,13 +34,13 @@ jobs:
       id: publish
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
+        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
         PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations/AppAny.Quartz.EntityFrameworkCore.Migrations.csproj
         VERSION_STATIC: ${{ github.event.inputs.release }}
         TAG_FORMAT: '*'
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
         INCLUDE_SYMBOLS: true
 
-    - name: Release | Assets | Nuget
+    - name: Release | Assets
       uses: actions/upload-release-asset@v1.0.2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -50,7 +50,7 @@ jobs:
         asset_path: ${{ steps.publish.outputs.PACKAGE_PATH }}
         asset_content_type: application/zip
 
-    - name: Release | Assets | Nuget | Symbols
+    - name: Release | Assets | Symbols
       uses: actions/upload-release-asset@v1.0.2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -64,13 +64,13 @@ jobs:
       id: publish_postgresql
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
+        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
         PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj
         VERSION_STATIC: ${{ github.event.inputs.release }}
         TAG_FORMAT: '*'
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
         INCLUDE_SYMBOLS: true
 
-    - name: Release | Assets | PostgreSQL | Nuget
+    - name: Release | Assets | PostgreSQL
       uses: actions/upload-release-asset@v1.0.2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -80,7 +80,7 @@ jobs:
         asset_path: ${{ steps.publish_postgresql.outputs.PACKAGE_PATH }}
         asset_content_type: application/zip
 
-    - name: Release | Assets | PostgreSQL | Nuget | Symbols
+    - name: Release | Assets | PostgreSQL | Symbols
       uses: actions/upload-release-asset@v1.0.2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
