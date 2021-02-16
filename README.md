@@ -1,6 +1,10 @@
 # EntityFrameworkCore migrations for Quartz.NET
 
-[![Nuget](https://img.shields.io/nuget/v/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.svg)](https://www.nuget.org/packages/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL) ![Integration Tests](https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations/workflows/Integration%20Tests/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/appany/Minio.AspNetCore/badge.svg?branch=main)](https://coveralls.io/github/appany/Minio.AspNetCore?branch=main)
+[![License](https://img.shields.io/github/license/appany/AppAny.HotChocolate.FluentValidation.svg)](https://github.com/appany/AppAny.HotChocolate.FluentValidation/blob/main/LICENSE)
+[![Nuget](https://img.shields.io/nuget/v/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.svg)](https://www.nuget.org/packages/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL)
+[![Downloads](https://img.shields.io/nuget/dt/AppAny.Quartz.EntityFrameworkCore.Migrations)](https://www.nuget.org/packages/AppAny.Quartz.EntityFrameworkCore.Migrations)
+![Tests](https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations/workflows/Tests/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/appany/Minio.AspNetCore/badge.svg?branch=main)](https://coveralls.io/github/appany/Minio.AspNetCore?branch=main)
 
 This library handles schema migrations for Quartz.NET using EntityFrameworkCore migrations toolkit with one line of configuration
 
