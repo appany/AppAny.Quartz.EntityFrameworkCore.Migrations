@@ -1,14 +1,12 @@
-name: AppAny | Quartz | EntityFrameworkCore | Migrations
+name: Tests
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  postgresql:
-    name: AppAny | Quartz | EntityFrameworkCore | Migrations | PostgreSQL
+  tests:
+    name: Tests
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -23,18 +21,18 @@ jobs:
           POSTGRES_DB: test
 
     steps:
-    - name: AppAny | Quartz | EntityFrameworkCore | Migrations | Checkout
+    - name: Tests | Checkout
       uses: actions/checkout@v2
 
-    - name: AppAny | Quartz | EntityFrameworkCore | Migrations | Setup
+    - name: Tests | Setup
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
 
-    - name: AppAny | Quartz | EntityFrameworkCore | Migrations | Tests
+    - name: Tests
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=coverage/ /p:CoverletOutputFormat=lcov
 
-    - name: AppAny | Quartz | EntityFrameworkCore | Migrations | Tests | Coverage | Publish
+    - name: Tests | Coverage
       uses: coverallsapp/github-action@v1.0.1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,85 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Release | Checkout
+      uses: actions/checkout@v2.3.4
+
+    - name: Release | Setup
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 5.0.x
+
+    - name: Release | Publish
+      id: publish
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations/AppAny.Quartz.EntityFrameworkCore.Migrations.csproj
+        TAG_FORMAT: '*'
+        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        INCLUDE_SYMBOLS: true
+
+    - name: Release | Publish | PostgreSQL
+      id: publish_postgresql
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj
+        TAG_FORMAT: '*'
+        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        INCLUDE_SYMBOLS: true
+
+    - name: Release
+      id: release
+      uses: actions/create-release@v1.1.4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.publish.outputs.VERSION }}
+        release_name: ${{ steps.publish.outputs.VERSION }}
+
+    - name: Release | Assets | Nuget
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.release.outputs.upload_url }}
+        asset_name: ${{ steps.publish.outputs.PACKAGE_NAME }}
+        asset_path: ${{ steps.publish.outputs.PACKAGE_PATH }}
+        asset_content_type: application/zip
+
+    - name: Release | Assets | Nuget | Symbols
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.release.outputs.upload_url }}
+        asset_name: ${{ steps.publish.outputs.SYMBOLS_PACKAGE_NAME }}
+        asset_path: ${{ steps.publish.outputs.SYMBOLS_PACKAGE_PATH }}
+        asset_content_type: application/zip
+
+    - name: Release | Assets | PostgreSQL | Nuget
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.release.outputs.upload_url }}
+        asset_name: ${{ steps.publish_postgresql.outputs.PACKAGE_NAME }}
+        asset_path: ${{ steps.publish_postgresql.outputs.PACKAGE_PATH }}
+        asset_content_type: application/zip
+
+    - name: Release | Assets | PostgreSQL | Nuget | Symbols
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.release.outputs.upload_url }}
+        asset_name: ${{ steps.publish_postgresql.outputs.SYMBOLS_PACKAGE_NAME }}
+        asset_path: ${{ steps.publish_postgresql.outputs.SYMBOLS_PACKAGE_PATH }}
+        asset_content_type: application/zip
