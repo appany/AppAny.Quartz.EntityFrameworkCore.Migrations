@@ -20,7 +20,7 @@ $> dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 
 🚧 Feel free to **create as issue** for driver support 🚧
 
-### 🎨 Usage 🎨
+## 🎨 Usage 🎨
 
 ✅ Configure `DbContext`
 ```cs
