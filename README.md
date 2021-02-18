@@ -49,7 +49,7 @@ storeOptions.UsePostgres(postgresOptions =>
 });
 ```
 
-✅ Then add EntityFrameworkCore migration with Quartz.NET schema `dotnet ef migrations add AddQuartz` and:
+✅ Add EntityFrameworkCore migration with Quartz.NET schema `dotnet ef migrations add AddQuartz` and:
 
 🚩 Add in-process migration using `databaseContext.Database.MigrateAsync()`
 
