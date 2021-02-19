@@ -4,7 +4,7 @@
 [![Nuget](https://img.shields.io/nuget/v/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.svg)](https://www.nuget.org/packages/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL)
 [![Downloads](https://img.shields.io/nuget/dt/AppAny.Quartz.EntityFrameworkCore.Migrations)](https://www.nuget.org/packages/AppAny.Quartz.EntityFrameworkCore.Migrations)
 ![Tests](https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations/workflows/Tests/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/appany/Minio.AspNetCore/badge.svg?branch=main)](https://coveralls.io/github/appany/Minio.AspNetCore?branch=main)
+[![codecov](https://codecov.io/gh/appany/AppAny.Quartz.EntityFrameworkCore.Migrations/branch/main/graph/badge.svg?token=589PU3Y1S9)](https://codecov.io/gh/appany/AppAny.Quartz.EntityFrameworkCore.Migrations)
 
 ⚡️ This library handles schema migrations for Quartz.NET using EntityFrameworkCore migrations toolkit with one line of configuration ⚡️
 
