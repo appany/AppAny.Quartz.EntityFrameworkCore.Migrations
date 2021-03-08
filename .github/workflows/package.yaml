@@ -4,10 +4,16 @@ on:
   release:
     types: [created]
 
+env:
+  DOTNET_VERSION: 5.0.x
+  NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+  TAG_FORMAT: '*'
+
 jobs:
   package:
     name: Package
     runs-on: ubuntu-20.04
+    timeout-minutes: 5
 
     steps:
     - name: Package | Checkout

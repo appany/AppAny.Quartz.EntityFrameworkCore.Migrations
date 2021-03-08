@@ -9,7 +9,6 @@ on:
 env:
   DOTNET_VERSION: 5.0.x
 
-  COVERAGE_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   COVERAGE_REPORT: coverage.info
 
 jobs:
@@ -43,5 +42,5 @@ jobs:
     - name: Tests | Coverage
       uses: codecov/codecov-action@v1.2.1
       with:
-        token: ${{ env.COVERAGE_TOKEN }}
+        flags: unittests
         files: ${{ env.COVERAGE_REPORT }}
