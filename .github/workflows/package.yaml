@@ -26,22 +26,22 @@ jobs:
     - name: Package | Setup
       uses: actions/setup-dotnet@v1.7.2
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Package | Publish
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        NUGET_KEY: ${{ env.NUGET_KEY }}
         PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations/AppAny.Quartz.EntityFrameworkCore.Migrations.csproj
         VERSION_STATIC: ${{ steps.release.outputs.tag }}
-        TAG_FORMAT: '*'
+        TAG_FORMAT: ${{ env.TAG_FORMAT }}
         INCLUDE_SYMBOLS: true
 
     - name: Package | Publish | PostgreSQL
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        NUGET_KEY: ${{ env.NUGET_KEY }}
         PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj
         VERSION_STATIC: ${{ steps.release.outputs.tag }}
-        TAG_FORMAT: '*'
+        TAG_FORMAT: ${{ env.TAG_FORMAT }}
         INCLUDE_SYMBOLS: true
