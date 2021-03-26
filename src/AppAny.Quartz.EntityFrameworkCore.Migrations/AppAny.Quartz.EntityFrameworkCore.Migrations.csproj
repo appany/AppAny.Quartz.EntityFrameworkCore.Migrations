@@ -1,42 +1,42 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<Version>0.1.8</Version>
-		<LangVersion>9</LangVersion>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<IncludeSymbols>true</IncludeSymbols>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <Version>0.1.9</Version>
+    <LangVersion>9</LangVersion>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
 
-	<PropertyGroup>
-		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations</PackageProjectUrl>
-		<PackageIcon>logo.png</PackageIcon>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<Copyright>Copyright ©2021 AppAny</Copyright>
-		<Authors>sergeyshaykhullin</Authors>
-		<Description>EntityFrameworkCore migrations for Quartz.NET</Description>
-		<PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;Quartz.NET</PackageTags>
-	</PropertyGroup>
+  <PropertyGroup>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations</PackageProjectUrl>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Copyright>Copyright ©2021 AppAny</Copyright>
+    <Authors>sergeyshaykhullin</Authors>
+    <Description>EntityFrameworkCore migrations for Quartz.NET</Description>
+    <PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;Quartz.NET</PackageTags>
+  </PropertyGroup>
 
-	<ItemGroup Label="Packages">
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
-	</ItemGroup>
+  <ItemGroup Label="Packages">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+  </ItemGroup>
 
-	<ItemGroup Label="Assets">
-		<None Include="../../assets/logo.png">
-			<Pack>true</Pack>
-			<Visible>false</Visible>
-			<PackagePath />
-		</None>
-		<None Include="../../LICENSE">
-			<Pack>true</Pack>
-			<Visible>false</Visible>
-			<PackagePath />
-		</None>
-	</ItemGroup>
+  <ItemGroup Label="Assets">
+    <None Include="../../assets/logo.png">
+      <Pack>true</Pack>
+      <Visible>false</Visible>
+      <PackagePath />
+    </None>
+    <None Include="../../LICENSE">
+      <Pack>true</Pack>
+      <Visible>false</Visible>
+      <PackagePath />
+    </None>
+  </ItemGroup>
 
 </Project>
