@@ -27,19 +27,19 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Package | Publish
-        uses: brandedoutcast/publish-nuget@v2
+        uses: drusellers/publish-nuget@v3
         with:
-          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-          PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations/AppAny.Quartz.EntityFrameworkCore.Migrations.csproj
-          VERSION_STATIC: ${{ steps.release.outputs.tag }}
-          TAG_FORMAT: '*'
-          INCLUDE_SYMBOLS: true
+          project-file-path: src/AppAny.Quartz.EntityFrameworkCore.Migrations/AppAny.Quartz.EntityFrameworkCore.Migrations.csproj
+          version: ${{ steps.release.outputs.tag }}
+          tag-format: '*'
+          nuget-key: ${{ secrets.NUGET_API_KEY }}
+          include-symbols: true
 
       - name: Package | Publish | PostgreSQL
-        uses: brandedoutcast/publish-nuget@v2
+        uses: drusellers/publish-nuget@v3
         with:
-          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-          PROJECT_FILE_PATH: src/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj
-          VERSION_STATIC: ${{ steps.release.outputs.tag }}
-          TAG_FORMAT: '*'
-          INCLUDE_SYMBOLS: true
+          project-file-path: src/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj
+          version: ${{ steps.release.outputs.tag }}
+          tag-format: '*'
+          nuget-key: ${{ secrets.NUGET_API_KEY }}
+          include-symbols: true
