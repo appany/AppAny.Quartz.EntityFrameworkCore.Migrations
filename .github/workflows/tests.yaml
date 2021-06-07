@@ -36,9 +36,9 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tests
-        run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=../../ /p:CoverletOutputFormat=lcov
+        run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
 
       - name: Tests | Coverage
         uses: codecov/codecov-action@v1
         with:
-          files: coverage.info
+          files: tests/AppAny.Quartz.EntityFrameworkCore.Migrations.Tests/coverage.info
