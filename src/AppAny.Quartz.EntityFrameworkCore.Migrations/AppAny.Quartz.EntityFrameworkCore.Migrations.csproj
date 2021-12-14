@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <LangVersion>9</LangVersion>
+    <LangVersion>10</LangVersion>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Packages">
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0-preview.6.21352.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup Label="Assets">
