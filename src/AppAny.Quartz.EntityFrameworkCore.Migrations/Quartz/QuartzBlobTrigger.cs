@@ -1,12 +1,12 @@
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Quartz
 {
-	public class QuartzBlobTrigger
-	{
-		public string SchedulerName { get; set; } = null!;
-		public string TriggerName { get; set; } = null!;
-		public string TriggerGroup { get; set; } = null!;
-		public byte[]? BlobData { get; set; }
+  public class QuartzBlobTrigger
+  {
+    public string SchedulerName { get; set; } = null!;
+    public string TriggerName { get; set; } = null!;
+    public string TriggerGroup { get; set; } = null!;
+    public byte[]? BlobData { get; set; }
 
-		public QuartzTrigger Trigger { get; set; } = null!;
-	}
+    public QuartzTrigger Trigger { get; set; } = null!;
+  }
 }

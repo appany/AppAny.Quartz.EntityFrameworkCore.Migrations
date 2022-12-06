@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations
 {
   public static class ModelBuilderExtensions
   {

@@ -1,4 +1,4 @@
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Quartz
 {
   public class QuartzSchedulerState
   {

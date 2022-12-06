@@ -1,34 +1,37 @@
-using AppAny.Quartz.EntityFrameworkCore.Migrations.Quartz;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AppAny.Quartz.EntityFrameworkCore.Migrations.Quartz;
 
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.EntityTypeConfigurations
 {
   public class QuartzLockEntityTypeConfiguration : IEntityTypeConfiguration<QuartzLock>
   {
     private readonly string? prefix;
-    private readonly string? schema;
 
-    public QuartzLockEntityTypeConfiguration(string? prefix, string? schema)
+    public QuartzLockEntityTypeConfiguration(string? prefix)
     {
       this.prefix = prefix;
-      this.schema = schema;
     }
 
     public void Configure(EntityTypeBuilder<QuartzLock> builder)
     {
-      builder.ToTable($"{prefix}locks", schema);
+      builder.ToTable($"{prefix}locks");
 
       builder.HasKey(x => new { x.SchedulerName, x.LockName });
 
       builder.Property(x => x.SchedulerName)
         .HasColumnName("sched_name")
-        .HasColumnType("text")
+        .HasColumnType("varchar(120)")
         .IsRequired();
 
       builder.Property(x => x.LockName)
         .HasColumnName("lock_name")
-        .HasColumnType("text")
+        .HasColumnType("varchar(40)")
         .IsRequired();
     }
   }

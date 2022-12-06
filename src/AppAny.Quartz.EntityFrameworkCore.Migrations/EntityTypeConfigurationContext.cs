@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations
 {
   public readonly struct EntityTypeConfigurationContext
   {
