@@ -6,5 +6,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
     {
       return builder.UsePrefix(null);
     }
+
+    public static QuartzModelBuilder UseNoSchema(this QuartzModelBuilder builder)
+    {
+      return builder.UseSchema(null);
+    }
   }
 }

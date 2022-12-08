@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
 {
-  public class IntegrationDbContextDesignTimeFactory : IDesignTimeDbContextFactory<IntegrationDbContext>
+  public class IntegrationDbContextDesignTimeFactory : IDesignTimeDbContextFactory<PostgresIntegrationDbContext>
   {
-    public IntegrationDbContext CreateDbContext(string[] args)
+    public PostgresIntegrationDbContext CreateDbContext(string[] args)
     {
-      var options = new DbContextOptionsBuilder<IntegrationDbContext>().UseNpgsql(TestSetup.ConnectionString).Options;
+      var options = new DbContextOptionsBuilder<PostgresIntegrationDbContext>().UseNpgsql(TestSetup.PostgresConnectionString).Options;
 
-      return new IntegrationDbContext(options);
+      return new PostgresIntegrationDbContext(options);
     }
   }
 }

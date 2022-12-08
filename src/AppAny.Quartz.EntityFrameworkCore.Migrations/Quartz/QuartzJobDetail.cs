@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Quartz
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations
 {
   public class QuartzJobDetail
   {

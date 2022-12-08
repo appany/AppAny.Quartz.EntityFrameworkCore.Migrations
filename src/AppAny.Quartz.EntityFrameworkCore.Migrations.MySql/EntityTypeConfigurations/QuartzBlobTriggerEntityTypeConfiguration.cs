@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AppAny.Quartz.EntityFrameworkCore.Migrations.Quartz;
+using AppAny.Quartz.EntityFrameworkCore.Migrations;
 
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.EntityTypeConfigurations
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
 {
   public class QuartzBlobTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzBlobTrigger>
   {

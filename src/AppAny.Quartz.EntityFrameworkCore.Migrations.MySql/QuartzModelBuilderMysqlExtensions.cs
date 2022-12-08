@@ -1,4 +1,3 @@
-using AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.EntityTypeConfigurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;

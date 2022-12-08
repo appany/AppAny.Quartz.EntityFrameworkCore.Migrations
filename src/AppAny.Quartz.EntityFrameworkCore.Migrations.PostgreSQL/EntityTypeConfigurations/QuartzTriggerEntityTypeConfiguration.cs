@@ -1,4 +1,3 @@
-using AppAny.Quartz.EntityFrameworkCore.Migrations.Quartz;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

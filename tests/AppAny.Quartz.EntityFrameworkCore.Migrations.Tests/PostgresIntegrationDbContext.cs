@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
 {
-  public class IntegrationDbContext : DbContext
+  public class PostgresIntegrationDbContext : DbContext
   {
-    public IntegrationDbContext(DbContextOptions<IntegrationDbContext> options)
+    public PostgresIntegrationDbContext(DbContextOptions<PostgresIntegrationDbContext> options)
       : base(options)
     {
     }

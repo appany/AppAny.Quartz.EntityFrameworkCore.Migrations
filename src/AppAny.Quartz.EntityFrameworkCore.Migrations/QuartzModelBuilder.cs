@@ -5,7 +5,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
   public interface QuartzModelBuilder
   {
     QuartzModelBuilder UsePrefix(string? prefix);
-    QuartzModelBuilder UseSchema(string schema);
+    QuartzModelBuilder UseSchema(string? schema);
 
     QuartzModelBuilder UseEntityTypeConfigurations(Action<EntityTypeConfigurationContext> entityTypeConfigurations);
   }
@@ -26,7 +26,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
       return this;
     }
 
-    public QuartzModelBuilder UseSchema(string schema)
+    public QuartzModelBuilder UseSchema(string? schema)
     {
       model.Schema = schema;
 

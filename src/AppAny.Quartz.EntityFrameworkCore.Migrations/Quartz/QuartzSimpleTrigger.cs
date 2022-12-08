@@ -1,4 +1,4 @@
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Quartz
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations
 {
   public class QuartzSimpleTrigger
   {
