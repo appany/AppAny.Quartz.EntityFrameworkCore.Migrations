@@ -41,3 +41,12 @@ jobs:
           tag-format: '*'
           nuget-key: ${{ secrets.NUGET_API_KEY }}
           include-symbols: true
+          
+      - name: Package | Publish | MySql
+        uses: drusellers/publish-nuget@v3
+        with:
+          project-file-path: src/AppAny.Quartz.EntityFrameworkCore.Migrations.MySql/AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.csproj
+          version: ${{ steps.release.outputs.tag }}
+          tag-format: '*'
+          nuget-key: ${{ secrets.NUGET_API_KEY }}
+          include-symbols: true
