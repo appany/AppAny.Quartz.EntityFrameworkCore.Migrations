@@ -1,4 +1,4 @@
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations
 {
   public class QuartzSimplePropertyTrigger
   {
