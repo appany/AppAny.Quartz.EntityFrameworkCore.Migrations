@@ -25,28 +25,22 @@ jobs:
           include-prerelease: true
 
       - name: Package | Publish
-        uses: drusellers/publish-nuget@v3
-        with:
-          project-file-path: src/AppAny.Quartz.EntityFrameworkCore.Migrations/AppAny.Quartz.EntityFrameworkCore.Migrations.csproj
-          version: ${{ steps.release.outputs.tag }}
-          tag-format: '*'
-          nuget-key: ${{ secrets.NUGET_API_KEY }}
-          include-symbols: true
+        run: dotnet pack -c Release -o ./pack /p:Version=$VERSION $PROJECT
+        env:
+          PROJECT: src/AppAny.Quartz.EntityFrameworkCore.Migrations/AppAny.Quartz.EntityFrameworkCore.Migrations.csproj
+          VERSION: ${{ steps.release.outputs.tag }}
 
       - name: Package | Publish | PostgreSQL
-        uses: drusellers/publish-nuget@v3
-        with:
-          project-file-path: src/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj
-          version: ${{ steps.release.outputs.tag }}
-          tag-format: '*'
-          nuget-key: ${{ secrets.NUGET_API_KEY }}
-          include-symbols: true
-          
-      - name: Package | Publish | MySql
-        uses: drusellers/publish-nuget@v3
-        with:
-          project-file-path: src/AppAny.Quartz.EntityFrameworkCore.Migrations.MySql/AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.csproj
-          version: ${{ steps.release.outputs.tag }}
-          tag-format: '*'
-          nuget-key: ${{ secrets.NUGET_API_KEY }}
-          include-symbols: true
+        run: dotnet pack -c Release -o ./pack /p:Version=$VERSION $PROJECT
+        env:
+          PROJECT: src/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL/AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj
+          VERSION: ${{ steps.release.outputs.tag }}
+
+      - name: Package | Publish | MySQL
+        run: dotnet pack -c Release -o ./pack /p:Version=$VERSION $PROJECT
+        env:
+          PROJECT: src/AppAny.Quartz.EntityFrameworkCore.Migrations.MySql/AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.csproj
+          VERSION: ${{ steps.release.outputs.tag }}
+
+      - name: Package | Push
+        run: dotnet nuget push pack/*.nupkg -k ${{ secrets. }} -s https://api.nuget.org/v3/index.json --skip-duplicate
