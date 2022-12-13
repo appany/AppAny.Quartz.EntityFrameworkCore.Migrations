@@ -87,8 +87,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQL.EntityTypeConfigurati
       builder.Property(x => x.CalendarName)
         .HasColumnName("CALENDAR_NAME")
         .HasMaxLength(200)
-        .IsUnicode()
-        .IsRequired();
+        .IsUnicode();
 
       builder.Property(x => x.MisfireInstruction)
         .HasColumnName("MISFIRE_INSTR");
