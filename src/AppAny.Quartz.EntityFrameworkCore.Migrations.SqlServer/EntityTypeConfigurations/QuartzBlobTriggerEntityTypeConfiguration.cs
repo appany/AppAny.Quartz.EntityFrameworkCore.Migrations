@@ -1,22 +1,22 @@
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQL.EntityTypeConfigurations
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.EntityTypeConfigurations
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-  public class QuartzSimpleTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzSimpleTrigger>
+  public class QuartzBlobTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzBlobTrigger>
   {
     private readonly string? prefix;
     private readonly string? schema;
 
-    public QuartzSimpleTriggerEntityTypeConfiguration(string? prefix, string? schema)
+    public QuartzBlobTriggerEntityTypeConfiguration(string? prefix, string? schema)
     {
       this.prefix = prefix;
       this.schema = schema;
     }
 
-    public void Configure(EntityTypeBuilder<QuartzSimpleTrigger> builder)
+    public void Configure(EntityTypeBuilder<QuartzBlobTrigger> builder)
     {
-      builder.ToTable($"{prefix}SIMPLE_TRIGGERS", schema);
+      builder.ToTable($"{prefix}BLOB_TRIGGERS", schema);
 
       builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
@@ -38,20 +38,11 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQL.EntityTypeConfigurati
         .IsUnicode()
         .IsRequired();
 
-      builder.Property(x => x.RepeatCount)
-        .HasColumnName("REPEAT_COUNT")
-        .IsRequired();
-
-      builder.Property(x => x.RepeatInterval)
-        .HasColumnName("REPEAT_INTERVAL")
-        .IsRequired();
-
-      builder.Property(x => x.TimesTriggered)
-        .HasColumnName("TIMES_TRIGGERED")
-        .IsRequired();
+      builder.Property(x => x.BlobData)
+        .HasColumnName("BLOB_DATA");
 
       builder.HasOne(x => x.Trigger)
-        .WithMany(x => x.SimpleTriggers)
+        .WithMany(x => x.BlobTriggers)
         .HasForeignKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup })
         .OnDelete(DeleteBehavior.Cascade);
     }

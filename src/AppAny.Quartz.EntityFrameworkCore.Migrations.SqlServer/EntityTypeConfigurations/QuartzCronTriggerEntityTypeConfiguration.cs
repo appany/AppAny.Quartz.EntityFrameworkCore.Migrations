@@ -1,22 +1,22 @@
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQL.EntityTypeConfigurations
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.EntityTypeConfigurations
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-  public class QuartzBlobTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzBlobTrigger>
+  public class QuartzCronTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzCronTrigger>
   {
     private readonly string? prefix;
     private readonly string? schema;
 
-    public QuartzBlobTriggerEntityTypeConfiguration(string? prefix, string? schema)
+    public QuartzCronTriggerEntityTypeConfiguration(string? prefix, string? schema)
     {
       this.prefix = prefix;
       this.schema = schema;
     }
 
-    public void Configure(EntityTypeBuilder<QuartzBlobTrigger> builder)
+    public void Configure(EntityTypeBuilder<QuartzCronTrigger> builder)
     {
-      builder.ToTable($"{prefix}BLOB_TRIGGERS", schema);
+      builder.ToTable($"{prefix}CRON_TRIGGERS", schema);
 
       builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
@@ -38,11 +38,19 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQL.EntityTypeConfigurati
         .IsUnicode()
         .IsRequired();
 
-      builder.Property(x => x.BlobData)
-        .HasColumnName("BLOB_DATA");
+      builder.Property(x => x.CronExpression)
+        .HasColumnName("CRON_EXPRESSION")
+        .HasMaxLength(120)
+        .IsUnicode()
+        .IsRequired();
+
+      builder.Property(x => x.TimeZoneId)
+        .HasColumnName("TIME_ZONE_ID")
+        .HasMaxLength(120)
+        .IsUnicode();
 
       builder.HasOne(x => x.Trigger)
-        .WithMany(x => x.BlobTriggers)
+        .WithMany(x => x.CronTriggers)
         .HasForeignKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup })
         .OnDelete(DeleteBehavior.Cascade);
     }

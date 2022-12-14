@@ -1,4 +1,4 @@
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQL.EntityTypeConfigurations
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.EntityTypeConfigurations
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.EntityFrameworkCore.Metadata.Builders;

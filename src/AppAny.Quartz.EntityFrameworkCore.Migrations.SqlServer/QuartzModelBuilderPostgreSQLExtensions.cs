@@ -1,6 +1,6 @@
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQL
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
 {
-  using AppAny.Quartz.EntityFrameworkCore.Migrations.SQL.EntityTypeConfigurations;
+  using AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.EntityTypeConfigurations;
 
   public static class QuartzModelBuilderSqlExtensions
   {
@@ -27,19 +27,19 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQL
           new QuartzBlobTriggerEntityTypeConfiguration(context.Prefix, context.Schema));
 
         context.ModelBuilder.ApplyConfiguration(
-        new QuartzCalendarEntityTypeConfiguration(context.Prefix, context.Schema));
+          new QuartzCalendarEntityTypeConfiguration(context.Prefix, context.Schema));
 
         context.ModelBuilder.ApplyConfiguration(
-        new QuartzPausedTriggerGroupEntityTypeConfiguration(context.Prefix, context.Schema));
+          new QuartzPausedTriggerGroupEntityTypeConfiguration(context.Prefix, context.Schema));
 
         context.ModelBuilder.ApplyConfiguration(
-        new QuartzFiredTriggerEntityTypeConfiguration(context.Prefix, context.Schema));
+          new QuartzFiredTriggerEntityTypeConfiguration(context.Prefix, context.Schema));
 
         context.ModelBuilder.ApplyConfiguration(
-        new QuartzSchedulerStateEntityTypeConfiguration(context.Prefix, context.Schema));
+          new QuartzSchedulerStateEntityTypeConfiguration(context.Prefix, context.Schema));
 
         context.ModelBuilder.ApplyConfiguration(
-        new QuartzLockEntityTypeConfiguration(context.Prefix, context.Schema));
+          new QuartzLockEntityTypeConfiguration(context.Prefix, context.Schema));
       });
 
       return builder;

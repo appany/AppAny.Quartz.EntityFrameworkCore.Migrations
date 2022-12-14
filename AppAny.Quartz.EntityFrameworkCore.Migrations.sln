@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppAny.Quartz.EntityFramewo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppAny.Quartz.EntityFrameworkCore.Migrations.MySql", "src\AppAny.Quartz.EntityFrameworkCore.Migrations.MySql\AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.csproj", "{C6D9078D-F57B-43A9-84A3-60882741022D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppAny.Quartz.EntityFrameworkCore.Migrations.SQL", "src\AppAny.Quartz.EntityFrameworkCore.Migrations.SQL\AppAny.Quartz.EntityFrameworkCore.Migrations.SQL.csproj", "{81D33747-2D69-4E32-B2F3-1A0C7960FB9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer", "src\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.csproj", "{81D33747-2D69-4E32-B2F3-1A0C7960FB9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-using AppAny.Quartz.EntityFrameworkCore.Migrations.SQL;
+using AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer;
 using Microsoft.EntityFrameworkCore;
 
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests

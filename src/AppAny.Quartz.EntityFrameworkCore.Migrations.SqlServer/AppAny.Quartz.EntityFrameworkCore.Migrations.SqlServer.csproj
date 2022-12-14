@@ -7,6 +7,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RootNamespace>AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -18,7 +19,7 @@
     <Copyright>Copyright ©2021 AppAny</Copyright>
     <Authors>sergeyshaykhullin</Authors>
     <Description>EntityFrameworkCore SQL migrations for Quartz.NET</Description>
-    <PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;Quartz.NET;PostgreSQL</PackageTags>
+    <PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;Quartz.NET;SqlServer</PackageTags>
   </PropertyGroup>
 
   <ItemGroup Label="Projects">

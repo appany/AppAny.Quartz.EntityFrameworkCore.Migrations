@@ -1,22 +1,22 @@
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQL.EntityTypeConfigurations
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.EntityTypeConfigurations
 {
   using Microsoft.EntityFrameworkCore;
   using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-  public class QuartzCronTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzCronTrigger>
+  public class QuartzSimpleTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzSimpleTrigger>
   {
     private readonly string? prefix;
     private readonly string? schema;
 
-    public QuartzCronTriggerEntityTypeConfiguration(string? prefix, string? schema)
+    public QuartzSimpleTriggerEntityTypeConfiguration(string? prefix, string? schema)
     {
       this.prefix = prefix;
       this.schema = schema;
     }
 
-    public void Configure(EntityTypeBuilder<QuartzCronTrigger> builder)
+    public void Configure(EntityTypeBuilder<QuartzSimpleTrigger> builder)
     {
-      builder.ToTable($"{prefix}CRON_TRIGGERS", schema);
+      builder.ToTable($"{prefix}SIMPLE_TRIGGERS", schema);
 
       builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
@@ -38,19 +38,20 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQL.EntityTypeConfigurati
         .IsUnicode()
         .IsRequired();
 
-      builder.Property(x => x.CronExpression)
-        .HasColumnName("CRON_EXPRESSION")
-        .HasMaxLength(120)
-        .IsUnicode()
+      builder.Property(x => x.RepeatCount)
+        .HasColumnName("REPEAT_COUNT")
         .IsRequired();
 
-      builder.Property(x => x.TimeZoneId)
-        .HasColumnName("TIME_ZONE_ID")
-        .HasMaxLength(120)
-        .IsUnicode();
+      builder.Property(x => x.RepeatInterval)
+        .HasColumnName("REPEAT_INTERVAL")
+        .IsRequired();
+
+      builder.Property(x => x.TimesTriggered)
+        .HasColumnName("TIMES_TRIGGERED")
+        .IsRequired();
 
       builder.HasOne(x => x.Trigger)
-        .WithMany(x => x.CronTriggers)
+        .WithMany(x => x.SimpleTriggers)
         .HasForeignKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup })
         .OnDelete(DeleteBehavior.Cascade);
     }
