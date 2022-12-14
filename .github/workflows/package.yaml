@@ -41,6 +41,12 @@ jobs:
         env:
           PROJECT: src/AppAny.Quartz.EntityFrameworkCore.Migrations.MySql/AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.csproj
           VERSION: ${{ steps.release.outputs.tag }}
+          
+      - name: Package | Publish | SQLite
+        run: dotnet pack -c Release -o ./pack /p:Version=$VERSION $PROJECT
+        env:
+          PROJECT: src/AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite/AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.csproj
+          VERSION: ${{ steps.release.outputs.tag }}
 
       - name: Package | Publish | SqlServer
         run: dotnet pack -c Release -o ./pack /p:Version=$VERSION $PROJECT
