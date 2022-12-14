@@ -28,7 +28,7 @@ public class SQLiteIntegrationDbContext_IntegrationTests : IDisposable
   {
     var exception = Record.Exception(() => _dbContext.Database.Migrate());
 
-    Assert.NotNull(exception);
+    Assert.Null(exception);
   }
 
   public void Dispose()
