@@ -1,7 +1,6 @@
 using System;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Shouldly;
 using Xunit;
 
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLite;
