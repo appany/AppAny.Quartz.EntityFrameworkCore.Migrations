@@ -16,7 +16,7 @@
     <PackageIcon>logo.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Copyright>Copyright ©2021 AppAny</Copyright>
-    <Authors>sergeyshaykhullin</Authors>
+    <Authors>sergeyshaykhullin,ZaoralJ</Authors>
     <Description>EntityFrameworkCore migrations for Quartz.NET</Description>
     <PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;Quartz.NET</PackageTags>
   </PropertyGroup>
