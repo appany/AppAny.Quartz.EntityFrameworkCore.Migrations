@@ -1,10 +1,9 @@
+using System;
 using Xunit;
 using Microsoft.EntityFrameworkCore;
 
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
 {
-  using System;
-
   public class IntegrationTests
   {
     [Fact]
@@ -37,13 +36,13 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
     [Fact]
     public void Sql_CompleteMigration()
     {
-      var options = new DbContextOptionsBuilder<SqlIntegrationDbContext>()
-        .UseSqlServer(TestSetup.SqlConnectionString)
+      var options = new DbContextOptionsBuilder<SqlServerIntegrationDbContext>()
+        .UseSqlServer(TestSetup.SqlServerConnectionString)
         .EnableSensitiveDataLogging()
         .LogTo(Console.WriteLine)
         .Options;
 
-      using (var dbContext = new SqlIntegrationDbContext(options))
+      using (var dbContext = new SqlServerIntegrationDbContext(options))
       {
         dbContext.Database.Migrate();
       }

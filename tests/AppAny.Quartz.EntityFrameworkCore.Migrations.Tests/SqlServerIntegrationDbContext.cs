@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
 {
-  public class SqlIntegrationDbContext : DbContext
+  public class SqlServerIntegrationDbContext : DbContext
   {
-    public SqlIntegrationDbContext(DbContextOptions<SqlIntegrationDbContext> options)
+    public SqlServerIntegrationDbContext(DbContextOptions<SqlServerIntegrationDbContext> options)
       : base(options)
     {
     }

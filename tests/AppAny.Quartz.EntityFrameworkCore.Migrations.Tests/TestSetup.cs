@@ -4,6 +4,6 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
   {
     public const string PostgresConnectionString = "host=localhost; port=5432; db=test; uid=test; pwd=test;";
     public const string MysqlConnectionString = "server=localhost; port=33306; database=test; uid=test; pwd=test;";
-    public const string SqlConnectionString = "Server=tcp:localhost,1433;Initial Catalog=test;Persist Security Info=True;User ID=sa;Password=Test12@.;Encrypt=True;TrustServerCertificate=True;";
+    public const string SqlServerConnectionString = "Server=tcp:localhost,1433;Initial Catalog=test;Persist Security Info=True;User ID=sa;Password=Test12@.;Encrypt=True;TrustServerCertificate=True;";
   }
 }
