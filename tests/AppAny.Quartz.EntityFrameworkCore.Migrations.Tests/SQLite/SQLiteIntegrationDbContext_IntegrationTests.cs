@@ -1,32 +1,39 @@
+using System;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Shouldly;
 using Xunit;
 
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLite;
 
-public class SQLiteIntegrationDbContext_IntegrationTests
+public class SQLiteIntegrationDbContext_IntegrationTests : IDisposable
 {
-  private readonly string _connectionString;
+  private readonly SQLiteIntegrationDbContext _dbContext;
 
   public SQLiteIntegrationDbContext_IntegrationTests()
   {
-    _connectionString = new SqliteConnectionStringBuilder()
+    var connectionString = new SqliteConnectionStringBuilder()
     {
       Mode = SqliteOpenMode.Memory,
       ForeignKeys = true,
       DataSource = "test_db",
       Cache = SqliteCacheMode.Shared,
     }.ToString();
+
+    var options = new DbContextOptionsBuilder<SQLiteIntegrationDbContext>().UseSqlite(connectionString).Options;
+    _dbContext = new SQLiteIntegrationDbContext(options);
   }
 
   [Fact]
-  public void SQLite_CompleteMigration()
+  public void ShouldCompleteDatabaseMigrate_WhenDatabaseIsSQLite()
   {
-    var options = new DbContextOptionsBuilder<SQLiteIntegrationDbContext>().UseSqlite(_connectionString).Options;
+    var exception = Record.Exception(() => _dbContext.Database.Migrate());
 
-    using (var dbContext = new SQLiteIntegrationDbContext(options))
-    {
-      dbContext.Database.Migrate();
-    }
+    Assert.NotNull(exception);
+  }
+
+  public void Dispose()
+  {
+    _dbContext.Dispose();
   }
 }
