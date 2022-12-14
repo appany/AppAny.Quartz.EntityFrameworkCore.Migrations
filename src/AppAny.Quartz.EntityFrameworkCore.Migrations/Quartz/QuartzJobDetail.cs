@@ -4,6 +4,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
 {
   public class QuartzJobDetail
   {
+    public static readonly string TableName = "JOB_DETAILS";
+
     public string SchedulerName { get; set; } = null!;
     public string JobName { get; set; } = null!;
     public string JobGroup { get; set; } = null!;

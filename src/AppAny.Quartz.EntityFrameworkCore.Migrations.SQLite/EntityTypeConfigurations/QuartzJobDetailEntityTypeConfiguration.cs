@@ -16,7 +16,7 @@ public class QuartzJobDetailEntityTypeConfiguration : IEntityTypeConfiguration<Q
 
   public void Configure(EntityTypeBuilder<QuartzJobDetail> builder)
   {
-    builder.ToTable($"{prefix}JOB_DETAILS");
+    builder.ToTable(prefix + QuartzJobDetail.TableName, schema);
 
     builder.HasKey(x => new { x.SchedulerName, x.JobName, x.JobGroup });
 

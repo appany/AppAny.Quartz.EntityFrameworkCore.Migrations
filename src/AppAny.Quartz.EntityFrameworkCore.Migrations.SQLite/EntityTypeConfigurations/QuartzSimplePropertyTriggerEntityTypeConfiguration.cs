@@ -17,7 +17,7 @@ public class QuartzSimplePropertyTriggerEntityTypeConfiguration
 
   public void Configure(EntityTypeBuilder<QuartzSimplePropertyTrigger> builder)
   {
-    builder.ToTable($"{prefix}SIMPROP_TRIGGERS");
+    builder.ToTable(prefix + QuartzSimplePropertyTrigger.TableName, schema);
 
     builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 

@@ -2,6 +2,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
 {
   public class QuartzFiredTrigger
   {
+    public static readonly string TableName = "FIRED_TRIGGERS";
+
     public string SchedulerName { get; set; } = null!;
     public string EntryId { get; set; } = null!;
     public string TriggerName { get; set; } = null!;

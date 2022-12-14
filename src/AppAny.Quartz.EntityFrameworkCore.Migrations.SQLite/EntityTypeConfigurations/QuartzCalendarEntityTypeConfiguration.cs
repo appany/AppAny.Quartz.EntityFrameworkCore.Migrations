@@ -16,7 +16,7 @@ public class QuartzCalendarEntityTypeConfiguration : IEntityTypeConfiguration<Qu
 
   public void Configure(EntityTypeBuilder<QuartzCalendar> builder)
   {
-    builder.ToTable($"{prefix}CALENDARS");
+    builder.ToTable(prefix + QuartzCalendar.TableName, schema);
 
     builder.HasKey(x => new { x.SchedulerName, x.CalendarName });
 

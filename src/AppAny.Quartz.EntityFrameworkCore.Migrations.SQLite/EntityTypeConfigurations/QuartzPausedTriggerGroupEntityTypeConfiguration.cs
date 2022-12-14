@@ -16,7 +16,7 @@ public class QuartzPausedTriggerGroupEntityTypeConfiguration : IEntityTypeConfig
 
   public void Configure(EntityTypeBuilder<QuartzPausedTriggerGroup> builder)
   {
-    builder.ToTable($"{prefix}PAUSED_TRIGGER_GRPS");
+    builder.ToTable(prefix + QuartzPausedTriggerGroup.TableName, schema);
 
     builder.HasKey(x => new { x.SchedulerName, x.TriggerGroup });
 

@@ -2,6 +2,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
 {
   public class QuartzSimplePropertyTrigger
   {
+    public static readonly string TableName = "SIMPROP_TRIGGERS";
+
     public string SchedulerName { get; set; } = null!;
     public string TriggerName { get; set; } = null!;
     public string TriggerGroup { get; set; } = null!;
