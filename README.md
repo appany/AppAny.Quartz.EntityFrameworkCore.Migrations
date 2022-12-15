@@ -6,25 +6,50 @@
 ![Tests](https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations/workflows/Tests/badge.svg)
 [![codecov](https://codecov.io/gh/appany/AppAny.Quartz.EntityFrameworkCore.Migrations/branch/main/graph/badge.svg?token=589PU3Y1S9)](https://codecov.io/gh/appany/AppAny.Quartz.EntityFrameworkCore.Migrations)
 
-⚡️ This library handles schema migrations for Quartz.NET using EntityFrameworkCore migrations toolkit with one line of configuration ⚡️
-
-## 🔧 Installation 🔧
-
-```bash
-$> dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
-```
+⚡️ This library handles schema creation and migrations for Quartz.NET using EntityFrameworkCore migrations toolkit with one line of configuration ⚡️
 
 ## 💡 Supported drivers 💡
 
+- [x] [MySQL](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql)
 - [x] [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL)
-- [x] [MySQL](Pomelo.EntityFrameworkCore.MySql)
+- [x] [SQLite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite)
 - [x] [SQLServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)
 
 🚧 Feel free to **create as issue** for driver support 🚧
 
+## 🔧 Installation 🔧
+
+### MySql
+
+```bash
+dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
+```
+
+### PostgreSQL
+
+```bash
+dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
+```
+
+### SQLite
+
+```bash
+dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite
+```
+
+### SqlServer
+
+```bash
+dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
+```
+
+
+
+
+
 ## 🎨 Usage 🎨
 
-✅ Configure `DbContext`
+✅ Configure the `DbContext` that will hold the Quartz.NET tables
 ```cs
 public class DatabaseContext : DbContext
 {
@@ -32,29 +57,74 @@ public class DatabaseContext : DbContext
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
+    // Adds Quartz.NET MySql schema to EntityFrameworkCore
+    modelBuilder.AddQuartz(builder => builder.UseMySql());
+
     // Adds Quartz.NET PostgreSQL schema to EntityFrameworkCore
-    modelBuilder.AddQuartz(builder => builder
-      .UsePostgreSql()
-      .UseSchema("quartz")
-      .UseNoPrefix());
+    modelBuilder.AddQuartz(builder => builder.UsePostgreSql());
+
+    // Adds Quartz.NET SQLite schema to EntityFrameworkCore
+    modelBuilder.AddQuartz(builder => builder.UseSQLite());
+
+    // Adds Quartz.NET SqlServer schema to EntityFrameworkCore
+    modelBuilder.AddQuartz(builder => builder.UseSqlServer());
   }
 }
 ```
 
-✅ Configure `Quartz.NET`
-```cs
-storeOptions.UsePostgreSql(postgresOptions =>
+✅ (Optional) [ASP.NET Core Integration](https://www.quartz-scheduler.net/documentation/quartz-3.x/packages/aspnet-core-integration.html#using) Configuration
+
+```csharp
+// Startup.cs
+public void ConfigureServices(IServiceCollection services)
 {
-  postgresOptions.UseDriverDelegate<PostgreSQLDelegate>();
-  postgresOptions.ConnectionString = ...;
-  postgresOptions.TablePrefix = ...;
-});
+    services.AddQuartz(q =>
+    {
+        q.UsePersistentStore(c =>
+        {
+            // Use for MySQL database
+            c.UseMySql(mysqlOptions =>
+            {
+                  mysqlOptions.UseDriverDelegate<MySQLDelegate>();
+                  mysqlOptions.ConnectionString = ...;
+                  mysqlOptions.TablePrefix = ...;
+            });
+
+            // Use for PostgresSQL database
+            c.UsePostgres(postgresOptions =>
+            {
+                  postgresOptions.UseDriverDelegate<PostgreSQLDelegate>();
+                  postgresOptions.ConnectionString = ...;
+                  postgresOptions.TablePrefix = ...;
+            });
+
+            // Use for SQLite database
+            c.UseSQLite(sqlLiteOptions =>
+            {
+                  sqlLiteOptions.UseDriverDelegate<SQLiteDelegate>();
+                  sqlLiteOptions.ConnectionString = ...;
+                  sqlLiteOptions.TablePrefix = ...;
+            });
+
+            // Use for SqlServer database
+            c.UseSqlServer(sqlServerOptions =>
+            {
+                  sqlServerOptions.UseDriverDelegate<SqlServerDelegate>();
+                  sqlServerOptions.ConnectionString = ...;
+                  sqlServerOptions.TablePrefix = ...;
+            });
+        });
+    });
+}
+
 ```
 
-✅ Add EntityFrameworkCore migration with Quartz.NET schema `dotnet ef migrations add AddQuartz` and:
+## 🚩 Finish 🚩
 
-🚩 Add in-process migration using `databaseContext.Database.MigrateAsync()`
+✅ Add EntityFrameworkCore migration with Quartz.NET schema `dotnet ef migrations add AddQuartz` and then
 
-🚩 Add out-of-process migration using `dotnet ef database update`
+* 🚩 Add in-process migration using `databaseContext.Database.MigrateAsync()`
 
-🚩 Extract SQL for your migration tool `dotnet ef migrations script PreviousMigration AddQuartz`
+* 🚩 Add out-of-process migration using `dotnet ef database update`
+
+* 🚩 Extract SQL for your migration tool `dotnet ef migrations script PreviousMigration AddQuartz`
