@@ -21,22 +21,22 @@ public class QuartzSchedulerStateEntityTypeConfiguration : IEntityTypeConfigurat
     builder.HasKey(x => new { x.SchedulerName, x.InstanceName });
 
     builder.Property(x => x.SchedulerName)
-      .HasColumnName("sched_name")
+      .HasColumnName("SCHED_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.InstanceName)
-      .HasColumnName("instance_name")
+      .HasColumnName("INSTANCE_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.LastCheckInTime)
-      .HasColumnName("last_checkin_time")
+      .HasColumnName("LAST_CHECKIN_TIME")
       .HasColumnType("bigint")
       .IsRequired();
 
     builder.Property(x => x.CheckInInterval)
-      .HasColumnName("checkin_interval")
+      .HasColumnName("CHECKIN_INTERVAL")
       .HasColumnType("bigint")
       .IsRequired();
   }

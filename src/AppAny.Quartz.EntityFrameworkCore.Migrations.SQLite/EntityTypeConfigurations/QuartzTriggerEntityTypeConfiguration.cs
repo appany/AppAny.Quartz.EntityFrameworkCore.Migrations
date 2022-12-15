@@ -21,75 +21,75 @@ public class QuartzTriggerEntityTypeConfiguration : IEntityTypeConfiguration<Qua
     builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
     builder.Property(x => x.SchedulerName)
-      .HasColumnName("sched_name")
+      .HasColumnName("SCHED_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.TriggerName)
-      .HasColumnName("trigger_name")
+      .HasColumnName("TRIGGER_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.TriggerGroup)
-      .HasColumnName("trigger_group")
+      .HasColumnName("TRIGGER_GROUP")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.JobName)
-      .HasColumnName("job_name")
+      .HasColumnName("JOB_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.JobGroup)
-      .HasColumnName("job_group")
+      .HasColumnName("JOB_GROUP")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.Description)
-      .HasColumnName("description")
+      .HasColumnName("DESCRIPTION")
       .HasColumnType("text");
 
     builder.Property(x => x.NextFireTime)
-      .HasColumnName("next_fire_time")
+      .HasColumnName("NEXT_FIRE_TIME")
       .HasColumnType("bigint");
 
     builder.Property(x => x.PreviousFireTime)
-      .HasColumnName("prev_fire_time")
+      .HasColumnName("PREV_FIRE_TIME")
       .HasColumnType("bigint");
 
     builder.Property(x => x.Priority)
-      .HasColumnName("priority")
+      .HasColumnName("PRIORITY")
       .HasColumnType("integer");
 
     builder.Property(x => x.TriggerState)
-      .HasColumnName("trigger_state")
+      .HasColumnName("TRIGGER_STATE")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.TriggerType)
-      .HasColumnName("trigger_type")
+      .HasColumnName("TRIGGER_TYPE")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.StartTime)
-      .HasColumnName("start_time")
+      .HasColumnName("START_TIME")
       .HasColumnType("bigint")
       .IsRequired();
 
     builder.Property(x => x.EndTime)
-      .HasColumnName("end_time")
+      .HasColumnName("END_TIME")
       .HasColumnType("bigint");
 
     builder.Property(x => x.CalendarName)
-      .HasColumnName("calendar_name")
+      .HasColumnName("CALENDAR_NAME")
       .HasColumnType("text");
 
     builder.Property(x => x.MisfireInstruction)
-      .HasColumnName("misfire_instr")
+      .HasColumnName("MISFIRE_INSTR")
       .HasColumnType("smallint");
 
     builder.Property(x => x.JobData)
-      .HasColumnName("job_data")
+      .HasColumnName("JOB_DATA")
       .HasColumnType("bytea");
 
     builder.HasOne(x => x.JobDetail)
@@ -98,13 +98,13 @@ public class QuartzTriggerEntityTypeConfiguration : IEntityTypeConfiguration<Qua
       .IsRequired();
 
     builder.HasIndex(x => x.NextFireTime)
-      .HasDatabaseName($"idx_{prefix}t_next_fire_time");
+      .HasDatabaseName($"IDX_{prefix}T_NEXT_FIRE_TIME");
 
     builder.HasIndex(x => x.TriggerState)
-      .HasDatabaseName($"idx_{prefix}t_state");
+      .HasDatabaseName($"IDX_{prefix}T_STATE");
 
     builder.HasIndex(x => new { x.NextFireTime, x.TriggerState })
-      .HasDatabaseName($"idx_{prefix}t_nft_st");
+      .HasDatabaseName($"IDX_{prefix}T_NFT_ST");
   }
 }
 

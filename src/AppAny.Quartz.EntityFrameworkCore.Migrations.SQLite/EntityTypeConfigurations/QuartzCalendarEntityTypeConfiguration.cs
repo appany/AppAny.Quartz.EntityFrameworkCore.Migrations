@@ -21,17 +21,17 @@ public class QuartzCalendarEntityTypeConfiguration : IEntityTypeConfiguration<Qu
     builder.HasKey(x => new { x.SchedulerName, x.CalendarName });
 
     builder.Property(x => x.SchedulerName)
-      .HasColumnName("sched_name")
+      .HasColumnName("SCHED_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.CalendarName)
-      .HasColumnName("calendar_name")
+      .HasColumnName("CALENDAR_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.Calendar)
-      .HasColumnName("calendar")
+      .HasColumnName("CALENDAR")
       .HasColumnType("bytea")
       .IsRequired();
   }

@@ -21,12 +21,12 @@ public class QuartzPausedTriggerGroupEntityTypeConfiguration : IEntityTypeConfig
     builder.HasKey(x => new { x.SchedulerName, x.TriggerGroup });
 
     builder.Property(x => x.SchedulerName)
-      .HasColumnName("sched_name")
+      .HasColumnName("SCHED_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.TriggerGroup)
-      .HasColumnName("trigger_group")
+      .HasColumnName("TRIGGER_GROUP")
       .HasColumnType("text")
       .IsRequired();
   }

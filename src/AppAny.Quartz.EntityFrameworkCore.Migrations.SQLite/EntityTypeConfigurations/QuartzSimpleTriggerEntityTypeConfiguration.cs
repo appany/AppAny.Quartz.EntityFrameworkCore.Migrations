@@ -21,32 +21,32 @@ public class QuartzSimpleTriggerEntityTypeConfiguration : IEntityTypeConfigurati
     builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
     builder.Property(x => x.SchedulerName)
-      .HasColumnName("sched_name")
+      .HasColumnName("SCHED_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.TriggerName)
-      .HasColumnName("trigger_name")
+      .HasColumnName("TRIGGER_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.TriggerGroup)
-      .HasColumnName("trigger_group")
+      .HasColumnName("TRIGGER_GROUP")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.RepeatCount)
-      .HasColumnName("repeat_count")
+      .HasColumnName("REPEAT_COUNT")
       .HasColumnType("bigint")
       .IsRequired();
 
     builder.Property(x => x.RepeatInterval)
-      .HasColumnName("repeat_interval")
+      .HasColumnName("REPEAT_INTERVAL")
       .HasColumnType("bigint")
       .IsRequired();
 
     builder.Property(x => x.TimesTriggered)
-      .HasColumnName("times_triggered")
+      .HasColumnName("TIMES_TRIGGERED")
       .HasColumnType("bigint")
       .IsRequired();
 

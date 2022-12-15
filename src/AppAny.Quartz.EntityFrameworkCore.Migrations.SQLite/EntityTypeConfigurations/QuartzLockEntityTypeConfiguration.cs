@@ -21,12 +21,12 @@ public class QuartzLockEntityTypeConfiguration : IEntityTypeConfiguration<Quartz
     builder.HasKey(x => new { x.SchedulerName, x.LockName });
 
     builder.Property(x => x.SchedulerName)
-      .HasColumnName("sched_name")
+      .HasColumnName("SCHED_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.LockName)
-      .HasColumnName("lock_name")
+      .HasColumnName("LOCK_NAME")
       .HasColumnType("text")
       .IsRequired();
   }

@@ -21,55 +21,55 @@ public class QuartzJobDetailEntityTypeConfiguration : IEntityTypeConfiguration<Q
     builder.HasKey(x => new { x.SchedulerName, x.JobName, x.JobGroup });
 
     builder.Property(x => x.SchedulerName)
-      .HasColumnName("sched_name")
+      .HasColumnName("SCHED_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.JobName)
-      .HasColumnName("job_name")
+      .HasColumnName("JOB_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.JobGroup)
-      .HasColumnName("job_group")
+      .HasColumnName("JOB_GROUP")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.Description)
-      .HasColumnName("description")
+      .HasColumnName("DESCRIPTION")
       .HasColumnType("text");
 
     builder.Property(x => x.JobClassName)
-      .HasColumnName("job_class_name")
+      .HasColumnName("JOB_CLASS_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.IsDurable)
-      .HasColumnName("is_durable")
+      .HasColumnName("IS_DURABLE")
       .HasColumnType("bool")
       .IsRequired();
 
     builder.Property(x => x.IsNonConcurrent)
-      .HasColumnName("is_nonconcurrent")
+      .HasColumnName("IS_NONCONCURRENT")
       .HasColumnType("bool")
       .IsRequired();
 
     builder.Property(x => x.IsUpdateData)
-      .HasColumnName("is_update_data")
+      .HasColumnName("IS_UPDATE_DATA")
       .HasColumnType("bool")
       .IsRequired();
 
     builder.Property(x => x.RequestsRecovery)
-      .HasColumnName("requests_recovery")
+      .HasColumnName("REQUESTS_RECOVERY")
       .HasColumnType("bool")
       .IsRequired();
 
     builder.Property(x => x.JobData)
-      .HasColumnName("job_data")
+      .HasColumnName("JOB_DATA")
       .HasColumnType("bytea");
 
     builder.HasIndex(x => x.RequestsRecovery)
-      .HasDatabaseName($"idx_{prefix}j_req_recovery");
+      .HasDatabaseName($"IDX_{prefix}J_REQ_RECOVERY");
   }
 }
 

@@ -22,66 +22,66 @@ public class QuartzSimplePropertyTriggerEntityTypeConfiguration
     builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
     builder.Property(x => x.SchedulerName)
-      .HasColumnName("sched_name")
+      .HasColumnName("SCHED_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.TriggerName)
-      .HasColumnName("trigger_name")
+      .HasColumnName("TRIGGER_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.TriggerGroup)
-      .HasColumnName("trigger_group")
+      .HasColumnName("TRIGGER_GROUP")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.StringProperty1)
-      .HasColumnName("str_prop_1")
+      .HasColumnName("STR_PROP_1")
       .HasColumnType("text");
 
     builder.Property(x => x.StringProperty2)
-      .HasColumnName("str_prop_2")
+      .HasColumnName("STR_PROP_2")
       .HasColumnType("text");
 
     builder.Property(x => x.StringProperty3)
-      .HasColumnName("str_prop_3")
+      .HasColumnName("STR_PROP_3")
       .HasColumnType("text");
 
     builder.Property(x => x.IntegerProperty1)
-      .HasColumnName("int_prop_1")
+      .HasColumnName("INT_PROP_1")
       .HasColumnType("integer");
 
     builder.Property(x => x.IntegerProperty2)
-      .HasColumnName("int_prop_2")
+      .HasColumnName("INT_PROP_2")
       .HasColumnType("integer");
 
     builder.Property(x => x.LongProperty1)
-      .HasColumnName("long_prop_1")
+      .HasColumnName("LONG_PROP_1")
       .HasColumnType("bigint");
 
     builder.Property(x => x.LongProperty2)
-      .HasColumnName("long_prop_2")
+      .HasColumnName("LONG_PROP_2")
       .HasColumnType("bigint");
 
     builder.Property(x => x.DecimalProperty1)
-      .HasColumnName("dec_prop_1")
+      .HasColumnName("DEC_PROP_1")
       .HasColumnType("numeric");
 
     builder.Property(x => x.DecimalProperty2)
-      .HasColumnName("dec_prop_2")
+      .HasColumnName("DEC_PROP_2")
       .HasColumnType("numeric");
 
     builder.Property(x => x.BooleanProperty1)
-      .HasColumnName("bool_prop_1")
+      .HasColumnName("BOOL_PROP_1")
       .HasColumnType("bool");
 
     builder.Property(x => x.BooleanProperty2)
-      .HasColumnName("bool_prop_2")
+      .HasColumnName("BOOL_PROP_2")
       .HasColumnType("bool");
 
     builder.Property(x => x.TimeZoneId)
-      .HasColumnName("time_zone_id")
+      .HasColumnName("TIME_ZONE_ID")
       .HasColumnType("text");
 
     builder.HasOne(x => x.Trigger)

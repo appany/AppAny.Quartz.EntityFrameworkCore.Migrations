@@ -21,22 +21,22 @@ public class QuartzBlobTriggerEntityTypeConfiguration : IEntityTypeConfiguration
     builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
     builder.Property(x => x.SchedulerName)
-      .HasColumnName("sched_name")
+      .HasColumnName("SCHED_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.TriggerName)
-      .HasColumnName("trigger_name")
+      .HasColumnName("TRIGGER_NAME")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.TriggerGroup)
-      .HasColumnName("trigger_group")
+      .HasColumnName("TRIGGER_GROUP")
       .HasColumnType("text")
       .IsRequired();
 
     builder.Property(x => x.BlobData)
-      .HasColumnName("blob_data")
+      .HasColumnName("BLOB_DATA")
       .HasColumnType("bytea");
 
     builder.HasOne(x => x.Trigger)
