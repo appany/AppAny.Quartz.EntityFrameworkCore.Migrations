@@ -17,8 +17,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
         throw new InvalidOperationException("No database provider");
       }
 
-      model.EntityTypeConfigurations.Invoke(
-        new EntityTypeConfigurationContext(model.Prefix, model.Schema, modelBuilder));
+      model.EntityTypeConfigurations.Invoke(new EntityTypeConfigurationContext(modelBuilder));
 
       return modelBuilder;
     }
