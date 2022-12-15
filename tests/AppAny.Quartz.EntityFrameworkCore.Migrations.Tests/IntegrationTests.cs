@@ -34,7 +34,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
     }
 
     [Fact]
-    public void Sql_CompleteMigration()
+    public void SqlServer_CompleteMigration()
     {
       var options = new DbContextOptionsBuilder<SqlServerIntegrationDbContext>()
         .UseSqlServer(TestSetup.SqlServerConnectionString)
