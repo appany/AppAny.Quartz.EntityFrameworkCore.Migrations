@@ -12,9 +12,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLServer
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.AddQuartz(builder => builder
-        .UseSqlServer()
-        .UseNoSchema());
+      modelBuilder.AddQuartz(builder => builder.UseSqlServer());
     }
   }
 }

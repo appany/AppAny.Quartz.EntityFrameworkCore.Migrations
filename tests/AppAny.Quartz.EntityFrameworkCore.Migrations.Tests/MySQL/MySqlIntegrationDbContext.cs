@@ -12,9 +12,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.MySQL
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.AddQuartz(builder => builder
-        .UseMySql()
-        .UseNoSchema());
+      modelBuilder.AddQuartz(builder => builder.UseMySql());
     }
   }
 }
