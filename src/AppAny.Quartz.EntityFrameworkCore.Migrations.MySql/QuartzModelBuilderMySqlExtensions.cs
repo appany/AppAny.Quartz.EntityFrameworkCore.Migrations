@@ -1,5 +1,3 @@
-using AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.EntityTypeConfigurations;
-
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
 {
   public static class QuartzModelBuilderMySqlExtensions

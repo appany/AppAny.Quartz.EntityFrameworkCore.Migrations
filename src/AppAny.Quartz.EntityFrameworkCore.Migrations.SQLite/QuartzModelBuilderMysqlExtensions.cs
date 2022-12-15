@@ -1,5 +1,3 @@
-using AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.EntityTypeConfigurations;
-
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite;
 
 public static class QuartzModelBuilderSQLiteExtensions
