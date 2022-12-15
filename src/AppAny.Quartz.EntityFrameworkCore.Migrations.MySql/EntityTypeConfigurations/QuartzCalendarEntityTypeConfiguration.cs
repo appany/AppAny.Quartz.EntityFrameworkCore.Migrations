@@ -14,22 +14,22 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
 
     public void Configure(EntityTypeBuilder<QuartzCalendar> builder)
     {
-      builder.ToTable($"{prefix}calendars");
+      builder.ToTable($"{prefix}CALENDARS");
 
       builder.HasKey(x => new { x.SchedulerName, x.CalendarName });
 
       builder.Property(x => x.SchedulerName)
-        .HasColumnName("sched_name")
+        .HasColumnName("SCHED_NAME")
         .HasColumnType("varchar(120)")
         .IsRequired();
 
       builder.Property(x => x.CalendarName)
-        .HasColumnName("calendar_name")
+        .HasColumnName("CALENDAR_NAME")
         .HasColumnType("varchar(200)")
         .IsRequired();
 
       builder.Property(x => x.Calendar)
-        .HasColumnName("calendar")
+        .HasColumnName("CALENDAR")
         .HasColumnType("blob")
         .IsRequired();
     }

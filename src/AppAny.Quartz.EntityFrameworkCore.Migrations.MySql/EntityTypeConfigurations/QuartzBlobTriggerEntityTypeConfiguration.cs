@@ -14,27 +14,27 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
 
     public void Configure(EntityTypeBuilder<QuartzBlobTrigger> builder)
     {
-      builder.ToTable($"{prefix}blob_triggers");
+      builder.ToTable($"{prefix}BLOB_TRIGGERS");
 
       builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
       builder.Property(x => x.SchedulerName)
-        .HasColumnName("sched_name")
+        .HasColumnName("SCHED_NAME")
         .HasColumnType("varchar(120)")
         .IsRequired();
 
       builder.Property(x => x.TriggerName)
-        .HasColumnName("trigger_name")
+        .HasColumnName("TRIGGER_NAME")
         .HasColumnType("varchar(200)")
         .IsRequired();
 
       builder.Property(x => x.TriggerGroup)
-        .HasColumnName("trigger_group")
+        .HasColumnName("TRIGGER_GROUP")
         .HasColumnType("varchar(200)")
         .IsRequired();
 
       builder.Property(x => x.BlobData)
-        .HasColumnName("blob_data")
+        .HasColumnName("BLOB_DATA")
         .HasColumnType("blob");
 
       builder.HasOne(x => x.Trigger)

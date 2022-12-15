@@ -14,37 +14,37 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
 
     public void Configure(EntityTypeBuilder<QuartzSimpleTrigger> builder)
     {
-      builder.ToTable($"{prefix}simple_triggers");
+      builder.ToTable($"{prefix}SIMPLE_TRIGGERS");
 
       builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
       builder.Property(x => x.SchedulerName)
-        .HasColumnName("sched_name")
+        .HasColumnName("SCHED_NAME")
         .HasColumnType("varchar(120)")
         .IsRequired();
 
       builder.Property(x => x.TriggerName)
-        .HasColumnName("trigger_name")
+        .HasColumnName("TRIGGER_NAME")
         .HasColumnType("varchar(200)")
         .IsRequired();
 
       builder.Property(x => x.TriggerGroup)
-        .HasColumnName("trigger_group")
+        .HasColumnName("TRIGGER_GROUP")
         .HasColumnType("varchar(200)")
         .IsRequired();
 
       builder.Property(x => x.RepeatCount)
-        .HasColumnName("repeat_count")
+        .HasColumnName("REPEAT_COUNT")
         .HasColumnType("bigint(7)")
         .IsRequired();
 
       builder.Property(x => x.RepeatInterval)
-        .HasColumnName("repeat_interval")
+        .HasColumnName("REPEAT_INTERVAL")
         .HasColumnType("bigint(12)")
         .IsRequired();
 
       builder.Property(x => x.TimesTriggered)
-        .HasColumnName("times_triggered")
+        .HasColumnName("TIMES_TRIGGERED")
         .HasColumnType("bigint(10)")
         .IsRequired();
 

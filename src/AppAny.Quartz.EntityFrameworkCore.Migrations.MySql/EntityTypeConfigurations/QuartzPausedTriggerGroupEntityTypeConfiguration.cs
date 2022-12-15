@@ -14,17 +14,17 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
 
     public void Configure(EntityTypeBuilder<QuartzPausedTriggerGroup> builder)
     {
-      builder.ToTable($"{prefix}paused_trigger_grps");
+      builder.ToTable($"{prefix}PAUSED_TRIGGER_GRPS");
 
       builder.HasKey(x => new { x.SchedulerName, x.TriggerGroup });
 
       builder.Property(x => x.SchedulerName)
-        .HasColumnName("sched_name")
+        .HasColumnName("SCHED_NAME")
         .HasColumnType("varchar(120)")
         .IsRequired();
 
       builder.Property(x => x.TriggerGroup)
-        .HasColumnName("trigger_group")
+        .HasColumnName("TRIGGER_GROUP")
         .HasColumnType("varchar(200)")
         .IsRequired();
     }
