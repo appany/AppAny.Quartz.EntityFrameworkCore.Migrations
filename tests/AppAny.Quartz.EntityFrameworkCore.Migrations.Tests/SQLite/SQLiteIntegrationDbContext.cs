@@ -1,5 +1,4 @@
 using AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLite
@@ -13,10 +12,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLite
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.AddQuartz(builder => builder
-        .UseSqlite()
-        .UsePrefix("qrtz_")
-        .UseNoSchema());
+      modelBuilder.AddQuartz(builder => builder.UseSqlite());
     }
   }
 }

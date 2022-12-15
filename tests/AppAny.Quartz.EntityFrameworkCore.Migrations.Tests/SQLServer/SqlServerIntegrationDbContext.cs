@@ -1,7 +1,7 @@
 using AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLServer
 {
   public class SqlServerIntegrationDbContext : DbContext
   {
