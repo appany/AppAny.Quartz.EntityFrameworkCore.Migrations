@@ -5,18 +5,18 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.EntityTypeConfigur
 
 public class QuartzTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzTrigger>
 {
-  private readonly string? prefix;
-  private readonly string? schema;
+  private readonly string _prefix;
+  private readonly string _schema;
 
-  public QuartzTriggerEntityTypeConfiguration(string? prefix, string? schema)
+  public QuartzTriggerEntityTypeConfiguration(string prefix, string schema)
   {
-    this.prefix = prefix;
-    this.schema = schema;
+    this._prefix = prefix;
+    this._schema = schema;
   }
 
   public void Configure(EntityTypeBuilder<QuartzTrigger> builder)
   {
-    builder.ToTable(prefix + "TRIGGERS", schema);
+    builder.ToTable(_prefix + "TRIGGERS", _schema);
 
     builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
@@ -98,13 +98,13 @@ public class QuartzTriggerEntityTypeConfiguration : IEntityTypeConfiguration<Qua
       .IsRequired();
 
     builder.HasIndex(x => x.NextFireTime)
-      .HasDatabaseName($"IDX_{prefix}T_NEXT_FIRE_TIME");
+      .HasDatabaseName($"IDX_{_prefix}T_NEXT_FIRE_TIME");
 
     builder.HasIndex(x => x.TriggerState)
-      .HasDatabaseName($"IDX_{prefix}T_STATE");
+      .HasDatabaseName($"IDX_{_prefix}T_STATE");
 
     builder.HasIndex(x => new { x.NextFireTime, x.TriggerState })
-      .HasDatabaseName($"IDX_{prefix}T_NFT_ST");
+      .HasDatabaseName($"IDX_{_prefix}T_NFT_ST");
   }
 }
 

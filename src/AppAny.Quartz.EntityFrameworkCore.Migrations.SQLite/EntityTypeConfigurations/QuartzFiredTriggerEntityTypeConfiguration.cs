@@ -5,18 +5,18 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.EntityTypeConfigur
 
 public class QuartzFiredTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzFiredTrigger>
 {
-  private readonly string? prefix;
-  private readonly string? schema;
+  private readonly string _prefix;
+  private readonly string _schema;
 
-  public QuartzFiredTriggerEntityTypeConfiguration(string? prefix, string? schema)
+  public QuartzFiredTriggerEntityTypeConfiguration(string prefix, string schema)
   {
-    this.prefix = prefix;
-    this.schema = schema;
+    this._prefix = prefix;
+    this._schema = schema;
   }
 
   public void Configure(EntityTypeBuilder<QuartzFiredTrigger> builder)
   {
-    builder.ToTable(prefix + "FIRED_TRIGGERS", schema);
+    builder.ToTable(_prefix + "FIRED_TRIGGERS", _schema);
 
     builder.HasKey(x => new { x.SchedulerName, x.EntryId });
 
@@ -83,25 +83,25 @@ public class QuartzFiredTriggerEntityTypeConfiguration : IEntityTypeConfiguratio
       .HasColumnType("bool");
 
     builder.HasIndex(x => x.TriggerName)
-      .HasDatabaseName($"IDX_{prefix}FT_TRIG_NAME");
+      .HasDatabaseName($"IDX_{_prefix}FT_TRIG_NAME");
 
     builder.HasIndex(x => x.TriggerGroup)
-      .HasDatabaseName($"IDX_{prefix}FT_TRIG_GROUP");
+      .HasDatabaseName($"IDX_{_prefix}FT_TRIG_GROUP");
 
     builder.HasIndex(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup })
-      .HasDatabaseName($"IDX_{prefix}FT_TRIG_NM_GP");
+      .HasDatabaseName($"IDX_{_prefix}FT_TRIG_NM_GP");
 
     builder.HasIndex(x => x.InstanceName)
-      .HasDatabaseName($"IDX_{prefix}FT_TRIG_INST_NAME");
+      .HasDatabaseName($"IDX_{_prefix}FT_TRIG_INST_NAME");
 
     builder.HasIndex(x => x.JobName)
-      .HasDatabaseName($"IDX_{prefix}FT_JOB_NAME");
+      .HasDatabaseName($"IDX_{_prefix}FT_JOB_NAME");
 
     builder.HasIndex(x => x.JobGroup)
-      .HasDatabaseName($"IDX_{prefix}FT_JOB_GROUP");
+      .HasDatabaseName($"IDX_{_prefix}FT_JOB_GROUP");
 
     builder.HasIndex(x => x.RequestsRecovery)
-      .HasDatabaseName($"IDX_{prefix}FT_JOB_REQ_RECOVERY");
+      .HasDatabaseName($"IDX_{_prefix}FT_JOB_REQ_RECOVERY");
   }
 }
 

@@ -5,18 +5,18 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.EntityTypeConfigur
 
 public class QuartzSchedulerStateEntityTypeConfiguration : IEntityTypeConfiguration<QuartzSchedulerState>
 {
-  private readonly string? prefix;
-  private readonly string? schema;
+  private readonly string _prefix;
+  private readonly string _schema;
 
-  public QuartzSchedulerStateEntityTypeConfiguration(string? prefix, string? schema)
+  public QuartzSchedulerStateEntityTypeConfiguration(string prefix, string schema)
   {
-    this.prefix = prefix;
-    this.schema = schema;
+    this._prefix = prefix;
+    this._schema = schema;
   }
 
   public void Configure(EntityTypeBuilder<QuartzSchedulerState> builder)
   {
-    builder.ToTable(prefix + "SCHEDULER_STATE", schema);
+    builder.ToTable(_prefix + "SCHEDULER_STATE", _schema);
 
     builder.HasKey(x => new { x.SchedulerName, x.InstanceName });
 

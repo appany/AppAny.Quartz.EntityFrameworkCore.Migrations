@@ -5,18 +5,18 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.EntityTypeConfigur
 
 public class QuartzPausedTriggerGroupEntityTypeConfiguration : IEntityTypeConfiguration<QuartzPausedTriggerGroup>
 {
-  private readonly string? prefix;
-  private readonly string? schema;
+  private readonly string _prefix;
+  private readonly string _schema;
 
-  public QuartzPausedTriggerGroupEntityTypeConfiguration(string? prefix, string? schema)
+  public QuartzPausedTriggerGroupEntityTypeConfiguration(string prefix, string schema)
   {
-    this.prefix = prefix;
-    this.schema = schema;
+    this._prefix = prefix;
+    this._schema = schema;
   }
 
   public void Configure(EntityTypeBuilder<QuartzPausedTriggerGroup> builder)
   {
-    builder.ToTable(prefix + "PAUSED_TRIGGER_GRPS", schema);
+    builder.ToTable(_prefix + "PAUSED_TRIGGER_GRPS", _schema);
 
     builder.HasKey(x => new { x.SchedulerName, x.TriggerGroup });
 
