@@ -1,8 +1,11 @@
 using System;
-using Xunit;
+using AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.Base;
+using AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.MySQL;
+using AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLServer;
 using Microsoft.EntityFrameworkCore;
+using Xunit;
 
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.PostgreSQL
 {
   public class IntegrationTests
   {
@@ -10,7 +13,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
     public void PostgreSQL_CompleteMigration()
     {
       var options = new DbContextOptionsBuilder<PostgreSqlIntegrationDbContext>()
-        .UseNpgsql(TestSetup.PostgreSqlConnectionString)
+        .UseNpgsql(ConnectionStrings.PostgreSqlConnectionString)
         .EnableSensitiveDataLogging()
         .LogTo(Console.WriteLine)
         .Options;
@@ -24,13 +27,13 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
     [Fact]
     public void MySQL_CompleteMigration()
     {
-      var options = new DbContextOptionsBuilder<MySqlintegrationDbContext>()
-        .UseMySql(TestSetup.MySqlConnectionString, ServerVersion.AutoDetect(TestSetup.MySqlConnectionString))
+      var options = new DbContextOptionsBuilder<MySqlIntegrationDbContext>()
+        .UseMySql(ConnectionStrings.MySqlConnectionString, ServerVersion.AutoDetect(ConnectionStrings.MySqlConnectionString))
         .EnableSensitiveDataLogging()
         .LogTo(Console.WriteLine)
         .Options;
 
-      using (var dbContext = new MySqlintegrationDbContext(options))
+      using (var dbContext = new MySqlIntegrationDbContext(options))
       {
         dbContext.Database.Migrate();
       }
@@ -40,7 +43,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
     public void SqlServer_CompleteMigration()
     {
       var options = new DbContextOptionsBuilder<SqlServerIntegrationDbContext>()
-        .UseSqlServer(TestSetup.SqlServerConnectionString)
+        .UseSqlServer(ConnectionStrings.SqlServerConnectionString)
         .EnableSensitiveDataLogging()
         .LogTo(Console.WriteLine)
         .Options;

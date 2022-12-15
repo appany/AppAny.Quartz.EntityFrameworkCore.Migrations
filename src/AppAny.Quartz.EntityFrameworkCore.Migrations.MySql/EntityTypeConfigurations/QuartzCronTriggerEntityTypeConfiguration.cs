@@ -14,32 +14,32 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
 
     public void Configure(EntityTypeBuilder<QuartzCronTrigger> builder)
     {
-      builder.ToTable($"{prefix}cron_triggers");
+      builder.ToTable($"{prefix}CRON_TRIGGERS");
 
       builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
       builder.Property(x => x.SchedulerName)
-        .HasColumnName("sched_name")
+        .HasColumnName("SCHED_NAME")
         .HasColumnType("varchar(120)")
         .IsRequired();
 
       builder.Property(x => x.TriggerName)
-        .HasColumnName("trigger_name")
+        .HasColumnName("TRIGGER_NAME")
         .HasColumnType("varchar(200)")
         .IsRequired();
 
       builder.Property(x => x.TriggerGroup)
-        .HasColumnName("trigger_group")
+        .HasColumnName("TRIGGER_GROUP")
         .HasColumnType("varchar(200)")
         .IsRequired();
 
       builder.Property(x => x.CronExpression)
-        .HasColumnName("cron_expression")
+        .HasColumnName("CRON_EXPRESSION")
         .HasColumnType("varchar(120)")
         .IsRequired();
 
       builder.Property(x => x.TimeZoneId)
-        .HasColumnName("time_zone_id")
+        .HasColumnName("TIME_ZONE_ID")
         .HasColumnType("varchar(80)");
 
       builder.HasOne(x => x.Trigger)

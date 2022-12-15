@@ -14,17 +14,17 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
 
     public void Configure(EntityTypeBuilder<QuartzLock> builder)
     {
-      builder.ToTable($"{prefix}locks");
+      builder.ToTable($"{prefix}LOCKS");
 
       builder.HasKey(x => new { x.SchedulerName, x.LockName });
 
       builder.Property(x => x.SchedulerName)
-        .HasColumnName("sched_name")
+        .HasColumnName("SCHED_NAME")
         .HasColumnType("varchar(120)")
         .IsRequired();
 
       builder.Property(x => x.LockName)
-        .HasColumnName("lock_name")
+        .HasColumnName("LOCK_NAME")
         .HasColumnType("varchar(40)")
         .IsRequired();
     }

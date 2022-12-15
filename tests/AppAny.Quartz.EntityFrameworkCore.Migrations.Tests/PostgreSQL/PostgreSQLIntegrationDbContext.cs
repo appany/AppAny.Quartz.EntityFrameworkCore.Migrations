@@ -1,7 +1,7 @@
 using AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.PostgreSQL
 {
   public class PostgreSqlIntegrationDbContext : DbContext
   {
@@ -12,10 +12,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.AddQuartz(builder => builder
-        .UsePostgreSql()
-        .UseSchema("quartz")
-        .UseNoPrefix());
+      modelBuilder.AddQuartz(builder => builder.UsePostgreSql());
     }
   }
 }

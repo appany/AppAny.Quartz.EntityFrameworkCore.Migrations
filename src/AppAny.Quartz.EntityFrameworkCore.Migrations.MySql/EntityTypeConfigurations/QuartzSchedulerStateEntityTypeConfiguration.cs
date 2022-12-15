@@ -14,27 +14,27 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
 
     public void Configure(EntityTypeBuilder<QuartzSchedulerState> builder)
     {
-      builder.ToTable($"{prefix}scheduler_state");
+      builder.ToTable($"{prefix}SCHEDULER_STATE");
 
       builder.HasKey(x => new { x.SchedulerName, x.InstanceName });
 
       builder.Property(x => x.SchedulerName)
-        .HasColumnName("sched_name")
+        .HasColumnName("SCHED_NAME")
         .HasColumnType("varchar(120)")
         .IsRequired();
 
       builder.Property(x => x.InstanceName)
-        .HasColumnName("instance_name")
+        .HasColumnName("INSTANCE_NAME")
         .HasColumnType("varchar(200)")
         .IsRequired();
 
       builder.Property(x => x.LastCheckInTime)
-        .HasColumnName("last_checkin_time")
+        .HasColumnName("LAST_CHECKIN_TIME")
         .HasColumnType("bigint(19)")
         .IsRequired();
 
       builder.Property(x => x.CheckInInterval)
-        .HasColumnName("checkin_interval")
+        .HasColumnName("CHECKIN_INTERVAL")
         .HasColumnType("bigint(19)")
         .IsRequired();
     }

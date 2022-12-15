@@ -9,6 +9,7 @@
   <ItemGroup Label="References">
     <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.MySql\AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.csproj" />
     <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL\AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj" />
+    <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite\AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.csproj" />
     <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.csproj" />
   </ItemGroup>
 
@@ -21,6 +22,8 @@
 
   <ItemGroup Label="xUnit">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0-preview-20211130-02" />
+    <PackageReference Include="Quartz" Version="3.5.0" />
+    <PackageReference Include="Quartz.Serialization.Json" Version="3.5.0" />
     <PackageReference Include="xunit" Version="2.4.2-pre.12" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>

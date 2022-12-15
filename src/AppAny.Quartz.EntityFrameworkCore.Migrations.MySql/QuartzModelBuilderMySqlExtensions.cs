@@ -2,44 +2,43 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
 {
   public static class QuartzModelBuilderMySqlExtensions
   {
-    public const string DefaultPrefix = "QRTZ_";
 
-    public static QuartzModelBuilder UseMySql(this QuartzModelBuilder builder)
+    public static QuartzModelBuilder UseMySql(this QuartzModelBuilder builder, string prefix = "QRTZ_")
     {
-      builder.UsePrefix(DefaultPrefix).UseEntityTypeConfigurations(context =>
+      builder.UseEntityTypeConfigurations(context =>
       {
         context.ModelBuilder.ApplyConfiguration(
-          new QuartzJobDetailEntityTypeConfiguration(context.Prefix));
+          new QuartzJobDetailEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
-          new QuartzTriggerEntityTypeConfiguration(context.Prefix));
+          new QuartzTriggerEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
-          new QuartzSimpleTriggerEntityTypeConfiguration(context.Prefix));
+          new QuartzSimpleTriggerEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
-          new QuartzSimplePropertyTriggerEntityTypeConfiguration(context.Prefix));
+          new QuartzSimplePropertyTriggerEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
-          new QuartzCronTriggerEntityTypeConfiguration(context.Prefix));
+          new QuartzCronTriggerEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
-          new QuartzBlobTriggerEntityTypeConfiguration(context.Prefix));
+          new QuartzBlobTriggerEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
-          new QuartzCalendarEntityTypeConfiguration(context.Prefix));
+          new QuartzCalendarEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
-          new QuartzPausedTriggerGroupEntityTypeConfiguration(context.Prefix));
+          new QuartzPausedTriggerGroupEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
-          new QuartzFiredTriggerEntityTypeConfiguration(context.Prefix));
+          new QuartzFiredTriggerEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
-          new QuartzSchedulerStateEntityTypeConfiguration(context.Prefix));
+          new QuartzSchedulerStateEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
-          new QuartzLockEntityTypeConfiguration(context.Prefix));
+          new QuartzLockEntityTypeConfiguration(prefix));
       });
 
       return builder;

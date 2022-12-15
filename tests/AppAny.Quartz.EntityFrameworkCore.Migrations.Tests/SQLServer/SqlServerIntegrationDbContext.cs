@@ -1,7 +1,7 @@
 using AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLServer
 {
   public class SqlServerIntegrationDbContext : DbContext
   {
@@ -12,9 +12,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.AddQuartz(builder => builder
-        .UseSqlServer()
-        .UseNoSchema());
+      modelBuilder.AddQuartz(builder => builder.UseSqlServer());
     }
   }
 }
