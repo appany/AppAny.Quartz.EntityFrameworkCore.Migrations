@@ -16,7 +16,7 @@ public class QuartzCronTriggerEntityTypeConfiguration : IEntityTypeConfiguration
 
   public void Configure(EntityTypeBuilder<QuartzCronTrigger> builder)
   {
-    builder.ToTable(prefix + QuartzCronTrigger.TableName, schema);
+    builder.ToTable(prefix + "CRON_TRIGGERS", schema);
 
     builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 

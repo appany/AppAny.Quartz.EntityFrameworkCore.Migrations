@@ -16,7 +16,7 @@ public class QuartzLockEntityTypeConfiguration : IEntityTypeConfiguration<Quartz
 
   public void Configure(EntityTypeBuilder<QuartzLock> builder)
   {
-    builder.ToTable(prefix + QuartzLock.TableName, schema);
+    builder.ToTable(prefix + "LOCKS", schema);
 
     builder.HasKey(x => new { x.SchedulerName, x.LockName });
 

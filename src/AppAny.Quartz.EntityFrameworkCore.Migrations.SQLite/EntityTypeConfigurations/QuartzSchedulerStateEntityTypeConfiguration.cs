@@ -16,7 +16,7 @@ public class QuartzSchedulerStateEntityTypeConfiguration : IEntityTypeConfigurat
 
   public void Configure(EntityTypeBuilder<QuartzSchedulerState> builder)
   {
-    builder.ToTable(prefix + QuartzSchedulerState.TableName, schema);
+    builder.ToTable(prefix + "SCHEDULER_STATE", schema);
 
     builder.HasKey(x => new { x.SchedulerName, x.InstanceName });
 
