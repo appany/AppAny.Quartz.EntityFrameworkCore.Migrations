@@ -4,14 +4,43 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LangVersion>10</LangVersion>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations</PackageProjectUrl>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Copyright>Copyright ©2022 AppAny</Copyright>
+    <Authors>JasonLandbridge</Authors>
+    <Description>EntityFrameworkCore SQLite migrations for Quartz.NET</Description>
+    <PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;Quartz.NET;SQLite</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AppAny.Quartz.EntityFrameworkCore.Migrations\AppAny.Quartz.EntityFrameworkCore.Migrations.csproj"/>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.1"/>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AppAny.Quartz.EntityFrameworkCore.Migrations\AppAny.Quartz.EntityFrameworkCore.Migrations.csproj"/>
+  <ItemGroup Label="Assets">
+    <None Include="../../assets/logo.png">
+      <Pack>true</Pack>
+      <Visible>false</Visible>
+      <PackagePath />
+    </None>
+    <None Include="../../LICENSE">
+      <Pack>true</Pack>
+      <Visible>false</Visible>
+      <PackagePath />
+    </None>
   </ItemGroup>
 
 </Project>
