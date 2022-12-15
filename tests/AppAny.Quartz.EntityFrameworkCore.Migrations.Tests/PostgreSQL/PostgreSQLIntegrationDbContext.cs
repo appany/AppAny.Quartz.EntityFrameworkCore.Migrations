@@ -12,10 +12,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.PostgreSQL
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.AddQuartz(builder => builder
-        .UsePostgreSql()
-        .UseSchema("quartz")
-        .UseNoPrefix());
+      modelBuilder.AddQuartz(builder => builder.UsePostgreSql());
     }
   }
 }
