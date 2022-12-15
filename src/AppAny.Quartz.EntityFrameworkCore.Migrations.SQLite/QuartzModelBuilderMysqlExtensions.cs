@@ -2,7 +2,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite;
 
 public static class QuartzModelBuilderSQLiteExtensions
 {
-  public static QuartzModelBuilder UseSqlite(this QuartzModelBuilder builder, string prefix = "QRTZ_", string schema = "")
+  public static QuartzModelBuilder UseSqlite(this QuartzModelBuilder builder, string prefix = "QRTZ_", string schema = "quartz")
   {
     builder.UseEntityTypeConfigurations(context =>
     {
