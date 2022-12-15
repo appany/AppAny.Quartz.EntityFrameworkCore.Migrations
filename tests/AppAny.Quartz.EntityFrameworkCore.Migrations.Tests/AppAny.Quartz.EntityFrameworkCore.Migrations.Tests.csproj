@@ -9,6 +9,7 @@
   <ItemGroup Label="References">
     <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.MySql\AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.csproj" />
     <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL\AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj" />
+    <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.csproj" />
   </ItemGroup>
 
   <ItemGroup Label="Tests">
