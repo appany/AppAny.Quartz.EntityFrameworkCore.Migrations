@@ -11,11 +11,6 @@
     <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL\AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.csproj" />
     <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite\AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.csproj" />
     <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.csproj" />
-<<<<<<< HEAD
-    <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.csproj" />
-=======
-    <ProjectReference Include="..\..\src\AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite\AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.csproj" />
->>>>>>> 1f842d1 (Draft version of SQLite implementation with integration test)
   </ItemGroup>
 
   <ItemGroup Label="Tests">
