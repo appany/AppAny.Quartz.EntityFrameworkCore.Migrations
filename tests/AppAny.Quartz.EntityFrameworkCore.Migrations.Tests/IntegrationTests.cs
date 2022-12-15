@@ -7,13 +7,15 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
   public class IntegrationTests
   {
     [Fact]
-    public void Postgres_CompleteMigration()
+    public void PostgreSQL_CompleteMigration()
     {
-      var options = new DbContextOptionsBuilder<PostgresIntegrationDbContext>()
-        .UseNpgsql(TestSetup.PostgresConnectionString)
+      var options = new DbContextOptionsBuilder<PostgreSqlIntegrationDbContext>()
+        .UseNpgsql(TestSetup.PostgreSqlConnectionString)
+        .EnableSensitiveDataLogging()
+        .LogTo(Console.WriteLine)
         .Options;
 
-      using (var dbContext = new PostgresIntegrationDbContext(options))
+      using (var dbContext = new PostgreSqlIntegrationDbContext(options))
       {
         dbContext.Database.Migrate();
       }
@@ -22,12 +24,13 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
     [Fact]
     public void MySQL_CompleteMigration()
     {
-      var options = new DbContextOptionsBuilder<MysqlintegrationDbContext>().UseMySql(
-          TestSetup.MysqlConnectionString,
-          ServerVersion.AutoDetect(TestSetup.MysqlConnectionString))
+      var options = new DbContextOptionsBuilder<MySqlintegrationDbContext>()
+        .UseMySql(TestSetup.MySqlConnectionString, ServerVersion.AutoDetect(TestSetup.MySqlConnectionString))
+        .EnableSensitiveDataLogging()
+        .LogTo(Console.WriteLine)
         .Options;
 
-      using (var dbContext = new MysqlintegrationDbContext(options))
+      using (var dbContext = new MySqlintegrationDbContext(options))
       {
         dbContext.Database.Migrate();
       }

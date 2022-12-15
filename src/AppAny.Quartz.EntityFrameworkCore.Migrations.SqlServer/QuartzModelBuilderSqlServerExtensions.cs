@@ -1,10 +1,12 @@
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
 {
-  public static class QuartzModelBuilderSqlExtensions
+  public static class QuartzModelBuilderSqlServerExtensions
   {
+    public const string DefaultPrefix = "QRTZ_";
+
     public static QuartzModelBuilder UseSqlServer(this QuartzModelBuilder builder)
     {
-      builder.UseEntityTypeConfigurations(context =>
+      builder.UsePrefix(DefaultPrefix).UseEntityTypeConfigurations(context =>
       {
         context.ModelBuilder.ApplyConfiguration(
           new QuartzJobDetailEntityTypeConfiguration(context.Prefix, context.Schema));

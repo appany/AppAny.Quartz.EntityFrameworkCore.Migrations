@@ -2,9 +2,11 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
   public static class QuartzModelBuilderPostgreSqlExtensions
   {
-    public static QuartzModelBuilder UsePostgres(this QuartzModelBuilder builder)
+    public const string DefaultPrefix = "qrtz_";
+
+    public static QuartzModelBuilder UsePostgreSql(this QuartzModelBuilder builder)
     {
-      builder.UseEntityTypeConfigurations(context =>
+      builder.UsePrefix(DefaultPrefix).UseEntityTypeConfigurations(context =>
       {
         context.ModelBuilder.ApplyConfiguration(
           new QuartzJobDetailEntityTypeConfiguration(context.Prefix, context.Schema));
