@@ -17,7 +17,7 @@ $> dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 ## 💡 Supported drivers 💡
 
 - [x] [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL)
-- [x] [MySQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.MySQL)
+- [x] [MySQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.MySql)
 - [x] [SQLServer](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.SqlServer)
 
 🚧 Feel free to **create as issue** for driver support 🚧
