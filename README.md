@@ -57,6 +57,8 @@ public class DatabaseContext : DbContext
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
+    // Prefix and schema can be passed as parameters
+    
     // Adds Quartz.NET MySql schema to EntityFrameworkCore
     modelBuilder.AddQuartz(builder => builder.UseMySql());
 
