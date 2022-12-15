@@ -17,6 +17,8 @@ $> dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 ## 💡 Supported drivers 💡
 
 - [x] [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL)
+- [x] [MySQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.MySQL)
+- [x] [SQLServer](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.SqlServer)
 
 🚧 Feel free to **create as issue** for driver support 🚧
 
@@ -32,7 +34,7 @@ public class DatabaseContext : DbContext
   {
     // Adds Quartz.NET PostgreSQL schema to EntityFrameworkCore
     modelBuilder.AddQuartz(builder => builder
-      .UsePostgres()
+      .UsePostgreSql()
       .UseSchema("quartz")
       .UseNoPrefix());
   }
@@ -41,7 +43,7 @@ public class DatabaseContext : DbContext
 
 ✅ Configure `Quartz.NET`
 ```cs
-storeOptions.UsePostgres(postgresOptions =>
+storeOptions.UsePostgreSql(postgresOptions =>
 {
   postgresOptions.UseDriverDelegate<PostgreSQLDelegate>();
   postgresOptions.ConnectionString = ...;
