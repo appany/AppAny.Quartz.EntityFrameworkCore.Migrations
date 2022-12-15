@@ -3,18 +3,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
 {
-  public class MysqlintegrationDbContext : DbContext
+  public class MySqlintegrationDbContext : DbContext
   {
-    public MysqlintegrationDbContext(DbContextOptions<MysqlintegrationDbContext> options)
-     : base(options)
+    public MySqlintegrationDbContext(DbContextOptions<MySqlintegrationDbContext> options)
+      : base(options)
     {
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.AddQuartz(builder => builder
-        .UseMysql()
-        .UsePrefix("qrtz_")
+        .UseMySql()
         .UseNoSchema());
     }
   }

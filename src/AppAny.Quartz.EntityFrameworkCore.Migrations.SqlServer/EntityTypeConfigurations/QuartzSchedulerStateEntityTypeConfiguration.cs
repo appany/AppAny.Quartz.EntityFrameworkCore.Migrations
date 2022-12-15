@@ -1,8 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
 {
-  using Microsoft.EntityFrameworkCore;
-  using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
   public class QuartzSchedulerStateEntityTypeConfiguration : IEntityTypeConfiguration<QuartzSchedulerState>
   {
     private readonly string? prefix;

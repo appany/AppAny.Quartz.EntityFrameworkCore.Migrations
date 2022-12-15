@@ -14,7 +14,6 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests
     {
       modelBuilder.AddQuartz(builder => builder
         .UseSqlServer()
-        .UsePrefix("QRTZ_")
         .UseNoSchema());
     }
   }
