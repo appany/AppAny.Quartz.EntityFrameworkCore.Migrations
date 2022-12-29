@@ -17,7 +17,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 
     public void Configure(EntityTypeBuilder<QuartzSimplePropertyTrigger> builder)
     {
-      builder.ToTable($"{prefix}SIMPROP_TRIGGERS", schema);
+      builder.ToTable($"{prefix}simprop_triggers", schema);
 
       builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
