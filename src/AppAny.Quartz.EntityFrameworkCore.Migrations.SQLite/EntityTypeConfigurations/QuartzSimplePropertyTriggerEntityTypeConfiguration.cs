@@ -7,17 +7,15 @@ public class QuartzSimplePropertyTriggerEntityTypeConfiguration
   : IEntityTypeConfiguration<QuartzSimplePropertyTrigger>
 {
   private readonly string _prefix;
-  private readonly string _schema;
 
-  public QuartzSimplePropertyTriggerEntityTypeConfiguration(string prefix, string schema)
+  public QuartzSimplePropertyTriggerEntityTypeConfiguration(string prefix)
   {
     this._prefix = prefix;
-    this._schema = schema;
   }
 
   public void Configure(EntityTypeBuilder<QuartzSimplePropertyTrigger> builder)
   {
-    builder.ToTable(_prefix + "SIMPROP_TRIGGERS", _schema);
+    builder.ToTable(_prefix + "SIMPROP_TRIGGERS");
 
     builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 

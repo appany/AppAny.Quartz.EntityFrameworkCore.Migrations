@@ -6,17 +6,15 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite;
 public class QuartzLockEntityTypeConfiguration : IEntityTypeConfiguration<QuartzLock>
 {
   private readonly string _prefix;
-  private readonly string _schema;
 
-  public QuartzLockEntityTypeConfiguration(string prefix, string schema)
+  public QuartzLockEntityTypeConfiguration(string prefix)
   {
     this._prefix = prefix;
-    this._schema = schema;
   }
 
   public void Configure(EntityTypeBuilder<QuartzLock> builder)
   {
-    builder.ToTable(_prefix + "LOCKS", _schema);
+    builder.ToTable(_prefix + "LOCKS");
 
     builder.HasKey(x => new { x.SchedulerName, x.LockName });
 
