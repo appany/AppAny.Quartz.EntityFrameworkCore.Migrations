@@ -6,17 +6,15 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite;
 public class QuartzJobDetailEntityTypeConfiguration : IEntityTypeConfiguration<QuartzJobDetail>
 {
   private readonly string _prefix;
-  private readonly string _schema;
 
-  public QuartzJobDetailEntityTypeConfiguration(string prefix, string schema)
+  public QuartzJobDetailEntityTypeConfiguration(string prefix)
   {
     this._prefix = prefix;
-    this._schema = schema;
   }
 
   public void Configure(EntityTypeBuilder<QuartzJobDetail> builder)
   {
-    builder.ToTable(_prefix + "JOB_DETAILS", _schema);
+    builder.ToTable(_prefix + "JOB_DETAILS");
 
     builder.HasKey(x => new { x.SchedulerName, x.JobName, x.JobGroup });
 

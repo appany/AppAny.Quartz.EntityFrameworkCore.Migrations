@@ -6,17 +6,15 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite;
 public class QuartzCalendarEntityTypeConfiguration : IEntityTypeConfiguration<QuartzCalendar>
 {
   private readonly string _prefix;
-  private readonly string _schema;
 
-  public QuartzCalendarEntityTypeConfiguration(string prefix, string schema)
+  public QuartzCalendarEntityTypeConfiguration(string prefix)
   {
     this._prefix = prefix;
-    this._schema = schema;
   }
 
   public void Configure(EntityTypeBuilder<QuartzCalendar> builder)
   {
-    builder.ToTable(_prefix + "CALENDARS", _schema);
+    builder.ToTable(_prefix + "CALENDARS");
 
     builder.HasKey(x => new { x.SchedulerName, x.CalendarName });
 

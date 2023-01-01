@@ -6,17 +6,15 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite;
 public class QuartzTriggerEntityTypeConfiguration : IEntityTypeConfiguration<QuartzTrigger>
 {
   private readonly string _prefix;
-  private readonly string _schema;
 
-  public QuartzTriggerEntityTypeConfiguration(string prefix, string schema)
+  public QuartzTriggerEntityTypeConfiguration(string prefix)
   {
     this._prefix = prefix;
-    this._schema = schema;
   }
 
   public void Configure(EntityTypeBuilder<QuartzTrigger> builder)
   {
-    builder.ToTable(_prefix + "TRIGGERS", _schema);
+    builder.ToTable(_prefix + "TRIGGERS");
 
     builder.HasKey(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup });
 
