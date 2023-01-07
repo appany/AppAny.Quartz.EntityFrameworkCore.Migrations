@@ -2,7 +2,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
 {
   public static class QuartzModelBuilderSqlServerExtensions
   {
-    public static QuartzModelBuilder UseSqlServer(this QuartzModelBuilder builder, string prefix = "QRTZ_", string schema = "quartz")
+    public static QuartzModelBuilder UseSqlServer(this QuartzModelBuilder builder, string prefix = "QRTZ_", string? schema = "quartz")
     {
       builder.UseEntityTypeConfigurations(context =>
       {

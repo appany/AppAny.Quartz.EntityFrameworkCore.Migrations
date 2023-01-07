@@ -22,8 +22,11 @@
 
   <ItemGroup Label="xUnit">
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0-preview-20211130-02" />
+    <PackageReference Include="MySql.Data" Version="8.0.31" />
     <PackageReference Include="Quartz" Version="3.5.0" />
     <PackageReference Include="Quartz.Serialization.Json" Version="3.5.0" />
+    <PackageReference Include="TestEnvironment.Docker.Containers.Postgres" Version="2.1.5" />
+    <PackageReference Include="TestEnvironment.Docker.Containers.Mssql" Version="2.1.6" />
     <PackageReference Include="xunit" Version="2.4.2-pre.12" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>

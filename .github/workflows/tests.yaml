@@ -13,33 +13,6 @@ jobs:
     runs-on: ubuntu-20.04
     timeout-minutes: 5
 
-    services:
-      postgres:
-        image: postgres:13.1
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_USER: test
-          POSTGRES_PASSWORD: test
-          POSTGRES_DB: test
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_DATABASE: test
-          MYSQL_USER: test
-          MYSQL_PASSWORD: test
-          MYSQL_ROOT_PASSWORD: test
-        ports:
-          - 33306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-      sqlserver:
-        image: mcr.microsoft.com/azure-sql-edge:latest
-        ports:
-          - 1433:1433
-        env:
-          ACCEPT_EULA: Y
-          SA_PASSWORD: Test12@.
-
     steps:
       - name: Tests | Checkout
         uses: actions/checkout@v2
