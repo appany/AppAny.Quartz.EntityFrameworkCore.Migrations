@@ -2,3 +2,11 @@
 **/obj
 **/bin
 /.vs/AppAny.Quartz.EntityFrameworkCore.Migrations
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Ignore mac folder settings
+.DS_Store

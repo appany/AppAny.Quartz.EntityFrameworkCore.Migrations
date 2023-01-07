@@ -2,7 +2,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 {
   public static class QuartzModelBuilderPostgreSqlExtensions
   {
-    public static QuartzModelBuilder UsePostgreSql(this QuartzModelBuilder builder, string prefix = "qrtz_", string schema = "quartz")
+    public static QuartzModelBuilder UsePostgreSql(this QuartzModelBuilder builder, string prefix = "qrtz_", string? schema = "quartz")
     {
       builder.UseEntityTypeConfigurations(context =>
       {
