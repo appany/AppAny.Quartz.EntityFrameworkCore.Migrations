@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Packages">
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
   </ItemGroup>
 
   <ItemGroup Label="Assets">
