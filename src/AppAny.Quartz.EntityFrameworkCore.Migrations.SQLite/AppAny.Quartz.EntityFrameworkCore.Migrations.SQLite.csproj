@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>10</LangVersion>
@@ -26,20 +26,24 @@
     <ProjectReference Include="..\AppAny.Quartz.EntityFrameworkCore.Migrations\AppAny.Quartz.EntityFrameworkCore.Migrations.csproj"/>
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.13" />
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0' or '$(TargetFramework)' == 'net7.0'" Label="Packages">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.14"/>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'" Label="Packages">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0"/>
   </ItemGroup>
 
   <ItemGroup Label="Assets">
     <None Include="../../assets/logo.png">
       <Pack>true</Pack>
       <Visible>false</Visible>
-      <PackagePath />
+      <PackagePath/>
     </None>
     <None Include="../../LICENSE">
       <Pack>true</Pack>
       <Visible>false</Visible>
-      <PackagePath />
+      <PackagePath/>
     </None>
   </ItemGroup>
 
