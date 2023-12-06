@@ -1,6 +1,6 @@
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations
 {
-  public class QuartzCalendar
+  public partial class QuartzCalendar
   {
     public string SchedulerName { get; set; } = null!;
     public string CalendarName { get; set; } = null!;

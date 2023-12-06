@@ -1,6 +1,6 @@
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations
 {
-  public class QuartzFiredTrigger
+  public partial class QuartzFiredTrigger
   {
     public string SchedulerName { get; set; } = null!;
     public string EntryId { get; set; } = null!;

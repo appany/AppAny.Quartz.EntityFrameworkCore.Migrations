@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations
 {
-  public class QuartzTrigger
+  public partial class QuartzTrigger
   {
     public string SchedulerName { get; set; } = null!;
     public string TriggerName { get; set; } = null!;
