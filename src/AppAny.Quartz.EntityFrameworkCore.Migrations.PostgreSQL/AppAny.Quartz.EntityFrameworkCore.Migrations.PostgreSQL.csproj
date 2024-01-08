@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
     <Nullable>enable</Nullable>
-    <LangVersion>10</LangVersion>
+    <LangVersion>12</LangVersion>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -15,7 +15,7 @@
     <PackageProjectUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations</PackageProjectUrl>
     <PackageIcon>logo.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Copyright>Copyright ©2021 AppAny</Copyright>
+    <Copyright>Copyright ©2023 AppAny</Copyright>
     <Authors>sergeyshaykhullin</Authors>
     <Description>EntityFrameworkCore PostgreSQL migrations for Quartz.NET</Description>
     <PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;Quartz.NET;PostgreSQL</PackageTags>
