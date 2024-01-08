@@ -10,3 +10,5 @@ _ReSharper*/
 
 # Ignore mac folder settings
 .DS_Store
+
+packages/
