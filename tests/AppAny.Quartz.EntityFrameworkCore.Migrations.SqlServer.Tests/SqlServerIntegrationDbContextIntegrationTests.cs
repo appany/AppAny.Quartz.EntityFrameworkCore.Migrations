@@ -1,35 +1,33 @@
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLServer;
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.Tests;
 
 using System;
 using System.Threading.Tasks;
-using AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.Base;
 using global::Quartz;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-[Collection(nameof(TestFixture.ClientCollection))]
-public class SqlServerIntegrationDbContextIntegrationTests : IDisposable
+public class SqlServerIntegrationDbContextIntegrationTests : IClassFixture<DatabaseFixture>, IDisposable
 {
   private readonly SqlServerIntegrationDbContext _dbContext;
   private readonly string _connectionString;
 
-  public SqlServerIntegrationDbContextIntegrationTests(TestFixture testFixture)
+  public SqlServerIntegrationDbContextIntegrationTests(DatabaseFixture fixture)
   {
-    _connectionString = testFixture.SqlServerConnectionString;
+    this._connectionString = fixture.ConnectionString;
 
     var options = new DbContextOptionsBuilder<SqlServerIntegrationDbContext>()
-      .UseSqlServer(_connectionString)
+      .UseSqlServer(this._connectionString)
       .Options;
 
-    _dbContext = new SqlServerIntegrationDbContext(options);
+    this._dbContext = new SqlServerIntegrationDbContext(options);
   }
 
   [Fact]
   public async Task ShouldBuildScheduler()
   {
     // Arrange
-    await _dbContext.Database.EnsureCreatedAsync();
-    await _dbContext.Database.MigrateAsync();
+    await this._dbContext.Database.EnsureCreatedAsync();
+    await this._dbContext.Database.MigrateAsync();
 
     // Act
     var scheduler = await SchedulerBuilder.Create()
@@ -39,8 +37,8 @@ public class SqlServerIntegrationDbContextIntegrationTests : IDisposable
         {
           x.Properties.Add("quartz.jobStore.tablePrefix", "[quartz].QRTZ_");
           x.PerformSchemaValidation = true;
-          x.UseSqlServer(_connectionString);
-          x.UseJsonSerializer();
+          x.UseSqlServer(this._connectionString);
+          x.UseNewtonsoftJsonSerializer();
         })
       .BuildScheduler();
 
@@ -56,7 +54,7 @@ public class SqlServerIntegrationDbContextIntegrationTests : IDisposable
 
   public void Dispose()
   {
-    _dbContext.Database.EnsureDeleted();
-    _dbContext.Dispose();
+    //this._dbContext.Database.EnsureDeleted();
+    this._dbContext.Dispose();
   }
 }

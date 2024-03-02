@@ -1,12 +1,12 @@
-using System;
-using System.Threading.Tasks;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-using Quartz;
-using Xunit;
-
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLite
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.Tests
 {
+  using System;
+  using System.Threading.Tasks;
+  using global::Quartz;
+  using Microsoft.Data.Sqlite;
+  using Microsoft.EntityFrameworkCore;
+  using Xunit;
+
   public class SQLiteIntegrationDbContextIntegrationTests : IDisposable
   {
     private readonly SQLiteIntegrationDbContext _dbContext;
@@ -15,7 +15,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLite
     public SQLiteIntegrationDbContextIntegrationTests()
     {
       // Database is created in [Root]/tests/AppAny.Quartz.EntityFrameworkCore.Migrations.Tests/bin/Debug/net6.0/
-      _connectionString = new SqliteConnectionStringBuilder
+      this._connectionString = new SqliteConnectionStringBuilder
       {
         Mode = SqliteOpenMode.ReadWriteCreate,
         ForeignKeys = true,
@@ -23,16 +23,16 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLite
         Cache = SqliteCacheMode.Shared
       }.ToString();
 
-      var options = new DbContextOptionsBuilder<SQLiteIntegrationDbContext>().UseSqlite(_connectionString).Options;
-      _dbContext = new SQLiteIntegrationDbContext(options);
+      var options = new DbContextOptionsBuilder<SQLiteIntegrationDbContext>().UseSqlite(this._connectionString).Options;
+      this._dbContext = new SQLiteIntegrationDbContext(options);
     }
 
     [Fact]
     public async Task ShouldBuildScheduler()
     {
       // Arrange
-      await _dbContext.Database.EnsureCreatedAsync();
-      await _dbContext.Database.MigrateAsync();
+      await this._dbContext.Database.EnsureCreatedAsync();
+      await this._dbContext.Database.MigrateAsync();
 
       // Act
       var scheduler = await SchedulerBuilder.Create()
@@ -41,8 +41,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLite
           x =>
           {
             x.PerformSchemaValidation = true;
-            x.UseMicrosoftSQLite(_connectionString);
-            x.UseJsonSerializer();
+            x.UseMicrosoftSQLite(this._connectionString);
+            x.UseNewtonsoftJsonSerializer();
           })
         .BuildScheduler();
 
@@ -58,8 +58,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLite
 
     public void Dispose()
     {
-      _dbContext.Database.EnsureDeleted();
-      _dbContext.Dispose();
+      this._dbContext.Database.EnsureDeleted();
+      this._dbContext.Dispose();
     }
   }
 }
