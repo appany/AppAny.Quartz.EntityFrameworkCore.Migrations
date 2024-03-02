@@ -1,35 +1,33 @@
-using System;
-using System.Threading.Tasks;
-using AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.Base;
-using Microsoft.EntityFrameworkCore;
-using Quartz;
-using Xunit;
-
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.PostgreSQL
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.Tests
 {
-  [Collection(nameof(TestFixture.ClientCollection))]
-  public class PostgreSqlIntegrationDbContextIntegrationTests : IDisposable
+  using System;
+  using System.Threading.Tasks;
+  using global::Quartz;
+  using Microsoft.EntityFrameworkCore;
+  using Xunit;
+
+  public class PostgreSqlIntegrationDbContextIntegrationTests : IClassFixture<DatabaseFixture>, IDisposable
   {
     private readonly PostgreSqlIntegrationDbContext _dbContext;
     private readonly string _connectionString;
 
-    public PostgreSqlIntegrationDbContextIntegrationTests(TestFixture testFixture)
+    public PostgreSqlIntegrationDbContextIntegrationTests(DatabaseFixture fixture)
     {
-      _connectionString = testFixture.PostgreSqlConnectionString;
+      this._connectionString = fixture.ConnectionString;
 
       var options = new DbContextOptionsBuilder<PostgreSqlIntegrationDbContext>()
-        .UseNpgsql(_connectionString)
+        .UseNpgsql(this._connectionString)
         .Options;
 
-      _dbContext = new PostgreSqlIntegrationDbContext(options);
+      this._dbContext = new PostgreSqlIntegrationDbContext(options);
     }
 
     [Fact]
     public async Task ShouldBuildScheduler()
     {
       // Arrange
-      await _dbContext.Database.EnsureCreatedAsync();
-      await _dbContext.Database.MigrateAsync();
+      await this._dbContext.Database.EnsureCreatedAsync();
+      await this._dbContext.Database.MigrateAsync();
 
       // Act
       var scheduler = await SchedulerBuilder.Create()
@@ -39,7 +37,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.PostgreSQL
           {
             x.Properties.Add("quartz.jobStore.tablePrefix", "quartz.qrtz_");
             x.PerformSchemaValidation = true;
-            x.UsePostgres(_connectionString);
+            x.UsePostgres(this._connectionString);
             x.UseNewtonsoftJsonSerializer();
           })
         .BuildScheduler();
@@ -56,8 +54,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.PostgreSQL
 
     public void Dispose()
     {
-      _dbContext.Database.EnsureDeleted();
-      _dbContext.Dispose();
+      //this._dbContext.Database.EnsureDeleted();
+      this._dbContext.Dispose();
     }
   }
 }

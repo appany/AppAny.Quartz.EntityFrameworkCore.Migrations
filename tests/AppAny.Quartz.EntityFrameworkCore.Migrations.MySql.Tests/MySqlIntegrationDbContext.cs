@@ -1,8 +1,8 @@
-using AppAny.Quartz.EntityFrameworkCore.Migrations.MySql;
-using Microsoft.EntityFrameworkCore;
-
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.MySQL
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.Tests
 {
+  using AppAny.Quartz.EntityFrameworkCore.Migrations.MySql;
+  using Microsoft.EntityFrameworkCore;
+
   public class MySqlIntegrationDbContext : DbContext
   {
     public MySqlIntegrationDbContext(DbContextOptions<MySqlIntegrationDbContext> options)

@@ -1,8 +1,7 @@
-using AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL;
-using Microsoft.EntityFrameworkCore;
-
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.PostgreSQL
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.Tests
 {
+  using Microsoft.EntityFrameworkCore;
+
   public class PostgreSqlIntegrationDbContext : DbContext
   {
     public PostgreSqlIntegrationDbContext(DbContextOptions<PostgreSqlIntegrationDbContext> options)

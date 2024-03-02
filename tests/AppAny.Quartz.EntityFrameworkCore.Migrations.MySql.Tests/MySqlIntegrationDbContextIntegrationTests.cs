@@ -1,37 +1,35 @@
-using System;
-using System.Threading.Tasks;
-using AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.Base;
-using Microsoft.EntityFrameworkCore;
-using Quartz;
-using Xunit;
-
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.MySQL
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.Tests
 {
-  [Collection(nameof(TestFixture.ClientCollection))]
-  public class MySqlIntegrationDbContextIntegrationTests : IDisposable
+  using System;
+  using System.Threading.Tasks;
+  using global::Quartz;
+  using Microsoft.EntityFrameworkCore;
+  using Xunit;
+
+  public class MySqlIntegrationDbContextIntegrationTests : IClassFixture<DatabaseFixture>, IDisposable
   {
     private readonly MySqlIntegrationDbContext _dbContext;
     private readonly string _connectionString;
 
-    public MySqlIntegrationDbContextIntegrationTests(TestFixture testFixture)
+    public MySqlIntegrationDbContextIntegrationTests(DatabaseFixture fixture)
     {
-      _connectionString = testFixture.MySqlConnectionString;
+      this._connectionString = fixture.ConnectionString;
 
       var options = new DbContextOptionsBuilder<MySqlIntegrationDbContext>()
         .UseMySql(
-          _connectionString,
-          ServerVersion.AutoDetect(testFixture.MySqlConnectionString))
+          this._connectionString,
+          ServerVersion.AutoDetect(fixture.ConnectionString))
         .Options;
 
-      _dbContext = new MySqlIntegrationDbContext(options);
+      this._dbContext = new MySqlIntegrationDbContext(options);
     }
 
     [Fact]
     public async Task ShouldBuildScheduler()
     {
       // Arrange
-      await _dbContext.Database.EnsureCreatedAsync();
-      await _dbContext.Database.MigrateAsync();
+      await this._dbContext.Database.EnsureCreatedAsync();
+      await this._dbContext.Database.MigrateAsync();
 
       // Act
       var scheduler = await SchedulerBuilder.Create()
@@ -40,7 +38,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.MySQL
           x =>
           {
             x.PerformSchemaValidation = true;
-            x.UseMySql(_connectionString);
+            x.UseMySql(this._connectionString);
             x.UseNewtonsoftJsonSerializer();
           })
         .BuildScheduler();
@@ -57,8 +55,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.MySQL
 
     public void Dispose()
     {
-      _dbContext.Database.EnsureDeleted();
-      _dbContext.Dispose();
+      //this._dbContext.Database.EnsureDeleted();
+      this._dbContext.Dispose();
     }
   }
 }

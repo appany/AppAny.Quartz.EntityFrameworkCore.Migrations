@@ -1,8 +1,8 @@
-using AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer;
-using Microsoft.EntityFrameworkCore;
-
-namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLServer
+namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.Tests
 {
+  using AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer;
+  using Microsoft.EntityFrameworkCore;
+
   public class SqlServerIntegrationDbContext : DbContext
   {
     public SqlServerIntegrationDbContext(DbContextOptions<SqlServerIntegrationDbContext> options)
