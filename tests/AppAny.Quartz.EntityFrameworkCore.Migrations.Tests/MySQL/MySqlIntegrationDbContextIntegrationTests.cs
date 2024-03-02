@@ -41,7 +41,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.MySQL
           {
             x.PerformSchemaValidation = true;
             x.UseMySql(_connectionString);
-            x.UseJsonSerializer();
+            x.UseNewtonsoftJsonSerializer();
           })
         .BuildScheduler();
 

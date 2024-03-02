@@ -40,7 +40,7 @@ public class SqlServerIntegrationDbContextIntegrationTests : IDisposable
           x.Properties.Add("quartz.jobStore.tablePrefix", "[quartz].QRTZ_");
           x.PerformSchemaValidation = true;
           x.UseSqlServer(_connectionString);
-          x.UseJsonSerializer();
+          x.UseNewtonsoftJsonSerializer();
         })
       .BuildScheduler();
 

@@ -42,7 +42,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.SQLite
           {
             x.PerformSchemaValidation = true;
             x.UseMicrosoftSQLite(_connectionString);
-            x.UseJsonSerializer();
+            x.UseNewtonsoftJsonSerializer();
           })
         .BuildScheduler();
 

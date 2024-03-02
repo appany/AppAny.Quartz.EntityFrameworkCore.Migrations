@@ -40,7 +40,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.PostgreSQL
             x.Properties.Add("quartz.jobStore.tablePrefix", "quartz.qrtz_");
             x.PerformSchemaValidation = true;
             x.UsePostgres(_connectionString);
-            x.UseJsonSerializer();
+            x.UseNewtonsoftJsonSerializer();
           })
         .BuildScheduler();
 

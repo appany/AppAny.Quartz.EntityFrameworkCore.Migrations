@@ -16,7 +16,7 @@
     <PackageProjectUrl>https://github.com/appany/AppAny.Quartz.EntityFrameworkCore.Migrations</PackageProjectUrl>
     <PackageIcon>logo.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Copyright>Copyright ©2022 AppAny</Copyright>
+    <Copyright>Copyright © 2023-2024 AppAny</Copyright>
     <Authors>JasonLandbridge</Authors>
     <Description>EntityFrameworkCore SQLite migrations for Quartz.NET</Description>
     <PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;Quartz.NET;SQLite</PackageTags>
@@ -27,11 +27,11 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0' or '$(TargetFramework)' == 'net7.0'" Label="Packages">
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.14"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.16"/>
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'" Label="Packages">
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.2"/>
   </ItemGroup>
 
   <ItemGroup Label="Assets">
