@@ -13,11 +13,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F87C6291
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppAny.Quartz.EntityFrameworkCore.Migrations.Tests", "tests\AppAny.Quartz.EntityFrameworkCore.Migrations.Tests\AppAny.Quartz.EntityFrameworkCore.Migrations.Tests.csproj", "{47E591EA-37FC-438D-96E0-EBC609BFDFA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppAny.Quartz.EntityFrameworkCore.Migrations.MySql", "src\AppAny.Quartz.EntityFrameworkCore.Migrations.MySql\AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.csproj", "{C6D9078D-F57B-43A9-84A3-60882741022D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppAny.Quartz.EntityFrameworkCore.Migrations.MySql", "src\AppAny.Quartz.EntityFrameworkCore.Migrations.MySql\AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.csproj", "{C6D9078D-F57B-43A9-84A3-60882741022D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer", "src\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.csproj", "{81D33747-2D69-4E32-B2F3-1A0C7960FB9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer", "src\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer\AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer.csproj", "{81D33747-2D69-4E32-B2F3-1A0C7960FB9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite", "src\AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite\AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.csproj", "{B43D24EE-F42A-4A0A-BE81-9431ED219BBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite", "src\AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite\AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.csproj", "{B43D24EE-F42A-4A0A-BE81-9431ED219BBF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".items", ".items", "{3B77CB85-2093-4F9D-A4BF-242059E9E151}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		AppAny.Quartz.EntityFrameworkCore.Migrations.sln.DotSettings = AppAny.Quartz.EntityFrameworkCore.Migrations.sln.DotSettings
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,8 +120,8 @@ Global
 		{B93044E6-2EA1-4D10-932D-7D232DB02C76} = {6AAE677C-A38E-4AD0-951B-4E64D91EE928}
 		{47E591EA-37FC-438D-96E0-EBC609BFDFA9} = {F87C6291-1953-4FD8-AE97-530A9B63B6B0}
 		{C6D9078D-F57B-43A9-84A3-60882741022D} = {6AAE677C-A38E-4AD0-951B-4E64D91EE928}
-		{B43D24EE-F42A-4A0A-BE81-9431ED219BBF} = {6AAE677C-A38E-4AD0-951B-4E64D91EE928}
 		{81D33747-2D69-4E32-B2F3-1A0C7960FB9D} = {6AAE677C-A38E-4AD0-951B-4E64D91EE928}
+		{B43D24EE-F42A-4A0A-BE81-9431ED219BBF} = {6AAE677C-A38E-4AD0-951B-4E64D91EE928}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E3C4EEBB-EB37-4D19-9722-29741BCD589C}

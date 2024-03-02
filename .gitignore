@@ -12,3 +12,5 @@ _ReSharper*/
 .DS_Store
 
 packages/
+
+.vs/
