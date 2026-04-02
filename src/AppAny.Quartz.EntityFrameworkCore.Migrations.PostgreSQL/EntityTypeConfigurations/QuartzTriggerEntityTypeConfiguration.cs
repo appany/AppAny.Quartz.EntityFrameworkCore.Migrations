@@ -80,6 +80,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasColumnName("end_time")
         .HasColumnType("bigint");
 
+      builder.Property(x => x.MisfireOriginalFireTime)
+        .HasColumnName("misfire_orig_fire_time")
+        .HasColumnType("bigint");
+
       builder.Property(x => x.CalendarName)
         .HasColumnName("calendar_name")
         .HasColumnType("text");
