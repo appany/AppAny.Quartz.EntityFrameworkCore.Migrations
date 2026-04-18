@@ -84,6 +84,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
         .HasColumnName("END_TIME")
         .HasColumnType("bigint");
 
+      builder.Property(x => x.MisfireOriginalFireTime)
+        .HasColumnName("MISFIRE_ORIG_FIRE_TIME")
+        .HasColumnType("bigint");
+
       builder.Property(x => x.CalendarName)
         .HasColumnName("CALENDAR_NAME")
         .HasMaxLength(200)

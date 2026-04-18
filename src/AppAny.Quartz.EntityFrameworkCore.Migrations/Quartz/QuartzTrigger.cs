@@ -17,6 +17,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
     public string TriggerType { get; set; } = null!;
     public long StartTime { get; set; }
     public long? EndTime { get; set; }
+    public long? MisfireOriginalFireTime { get; set; }
     public string? CalendarName { get; set; } = null!;
     public short? MisfireInstruction { get; set; }
     public byte[]? JobData { get; set; }

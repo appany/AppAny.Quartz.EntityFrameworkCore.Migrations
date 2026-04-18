@@ -78,6 +78,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
         .HasColumnName("END_TIME")
         .HasColumnType("bigint(19)");
 
+      builder.Property(x => x.MisfireOriginalFireTime)
+        .HasColumnName("MISFIRE_ORIG_FIRE_TIME")
+        .HasColumnType("bigint(19)");
+
       builder.Property(x => x.CalendarName)
         .HasColumnName("CALENDAR_NAME")
         .HasColumnType("varchar(200)");
