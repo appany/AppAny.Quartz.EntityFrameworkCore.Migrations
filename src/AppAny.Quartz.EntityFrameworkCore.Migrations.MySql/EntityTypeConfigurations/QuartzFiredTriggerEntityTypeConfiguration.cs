@@ -80,6 +80,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
         .HasColumnName("REQUESTS_RECOVERY")
         .HasColumnType("tinyint(1)");
 
+      builder.Property(x => x.ExecutionGroup)
+        .HasColumnName("EXECUTION_GROUP")
+        .HasColumnType("varchar(200)");
+
       builder.HasIndex(x => x.TriggerName)
         .HasDatabaseName($"IDX_{prefix}FT_TRIG_NAME");
 

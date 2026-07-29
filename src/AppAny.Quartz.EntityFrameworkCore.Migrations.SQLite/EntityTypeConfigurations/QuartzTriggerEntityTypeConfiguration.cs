@@ -82,6 +82,20 @@ public class QuartzTriggerEntityTypeConfiguration : IEntityTypeConfiguration<Qua
       .HasColumnName("MISFIRE_ORIG_FIRE_TIME")
       .HasColumnType("bigint");
 
+    builder.Property(x => x.ExecutionGroup)
+      .HasColumnName("EXECUTION_GROUP")
+      .HasColumnType("text");
+
+    builder.Property(x => x.PreferredNode)
+      .HasColumnName("PREFERRED_NODE")
+      .HasColumnType("text");
+
+    builder.Property(x => x.PreferredNodeAuto)
+      .HasColumnName("PREFERRED_NODE_AUTO")
+      .HasColumnType("bool")
+      .HasDefaultValue(false)
+      .IsRequired();
+
     builder.Property(x => x.CalendarName)
       .HasColumnName("CALENDAR_NAME")
       .HasColumnType("text");

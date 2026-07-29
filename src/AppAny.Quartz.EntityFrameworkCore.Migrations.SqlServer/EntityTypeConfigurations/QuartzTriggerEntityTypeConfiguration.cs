@@ -88,6 +88,21 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
         .HasColumnName("MISFIRE_ORIG_FIRE_TIME")
         .HasColumnType("bigint");
 
+      builder.Property(x => x.ExecutionGroup)
+        .HasColumnName("EXECUTION_GROUP")
+        .HasMaxLength(200)
+        .IsUnicode();
+
+      builder.Property(x => x.PreferredNode)
+        .HasColumnName("PREFERRED_NODE")
+        .HasMaxLength(200)
+        .IsUnicode();
+
+      builder.Property(x => x.PreferredNodeAuto)
+        .HasColumnName("PREFERRED_NODE_AUTO")
+        .HasDefaultValue(false)
+        .IsRequired();
+
       builder.Property(x => x.CalendarName)
         .HasColumnName("CALENDAR_NAME")
         .HasMaxLength(200)
