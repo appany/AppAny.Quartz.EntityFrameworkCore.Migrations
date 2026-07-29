@@ -80,6 +80,10 @@ public class QuartzFiredTriggerEntityTypeConfiguration : IEntityTypeConfiguratio
       .HasColumnName("REQUESTS_RECOVERY")
       .HasColumnType("bool");
 
+    builder.Property(x => x.ExecutionGroup)
+      .HasColumnName("EXECUTION_GROUP")
+      .HasColumnType("text");
+
     builder.HasIndex(x => x.TriggerName)
       .HasDatabaseName($"IDX_{_prefix}FT_TRIG_NAME");
 

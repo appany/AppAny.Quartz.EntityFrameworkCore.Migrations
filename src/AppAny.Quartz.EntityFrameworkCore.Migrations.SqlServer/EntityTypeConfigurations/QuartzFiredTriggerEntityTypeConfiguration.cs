@@ -84,6 +84,11 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
       builder.Property(x => x.RequestsRecovery)
         .HasColumnName("REQUESTS_RECOVERY");
 
+      builder.Property(x => x.ExecutionGroup)
+        .HasColumnName("EXECUTION_GROUP")
+        .HasMaxLength(200)
+        .IsUnicode();
+
       builder.HasIndex(x => x.TriggerName)
         .HasDatabaseName($"IDX_{prefix}FT_TRIG_NAME");
 
