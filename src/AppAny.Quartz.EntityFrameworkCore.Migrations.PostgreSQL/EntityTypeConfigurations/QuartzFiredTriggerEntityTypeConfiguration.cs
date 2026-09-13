@@ -82,6 +82,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasColumnName("requests_recovery")
         .HasColumnType("bool");
 
+      builder.Property(x => x.ExecutionGroup)
+        .HasColumnName("execution_group")
+        .HasColumnType("varchar(200)");
+
       builder.HasIndex(x => x.TriggerName)
         .HasDatabaseName($"idx_{prefix}ft_trig_name");
 

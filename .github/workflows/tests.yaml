@@ -9,9 +9,12 @@ on:
 
 jobs:
   tests:
-    name: Tests
+    name: Tests (Quartz ${{ matrix.quartz-version }})
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    strategy:
+      matrix:
+        quartz-version: [3.21.0, 4.0.1]
 
     steps:
       - name: Tests | Checkout
@@ -28,7 +31,7 @@ jobs:
             10.0.x
 
       - name: Tests
-        run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
+        run: dotnet test --framework net10.0 -p:QuartzVersion=${{ matrix.quartz-version }} /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
 
       - name: Tests | Coverage
         uses: codecov/codecov-action@v1

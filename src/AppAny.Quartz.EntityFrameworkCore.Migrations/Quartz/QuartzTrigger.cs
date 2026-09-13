@@ -18,6 +18,11 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
     public long StartTime { get; set; }
     public long? EndTime { get; set; }
     public long? MisfireOriginalFireTime { get; set; }
+    public string? ExecutionGroup { get; set; }
+    public string? PreferredNode { get; set; }
+    public bool PreferredNodeAuto { get; set; }
+    public string? RetryPolicy { get; set; }
+    public int? RetryAttempt { get; set; }
     public string? CalendarName { get; set; } = null!;
     public short? MisfireInstruction { get; set; }
     public byte[]? JobData { get; set; }

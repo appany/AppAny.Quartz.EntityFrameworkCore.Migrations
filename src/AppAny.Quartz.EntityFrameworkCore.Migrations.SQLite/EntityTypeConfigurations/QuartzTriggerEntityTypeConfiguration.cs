@@ -82,6 +82,28 @@ public class QuartzTriggerEntityTypeConfiguration : IEntityTypeConfiguration<Qua
       .HasColumnName("MISFIRE_ORIG_FIRE_TIME")
       .HasColumnType("bigint");
 
+    builder.Property(x => x.ExecutionGroup)
+      .HasColumnName("EXECUTION_GROUP")
+      .HasColumnType("text");
+
+    builder.Property(x => x.PreferredNode)
+      .HasColumnName("PREFERRED_NODE")
+      .HasColumnType("text");
+
+    builder.Property(x => x.PreferredNodeAuto)
+      .HasColumnName("PREFERRED_NODE_AUTO")
+      .HasColumnType("bit")
+      .HasDefaultValue(false)
+      .IsRequired();
+
+    builder.Property(x => x.RetryPolicy)
+      .HasColumnName("RETRY_POLICY")
+      .HasColumnType("text");
+
+    builder.Property(x => x.RetryAttempt)
+      .HasColumnName("RETRY_ATTEMPT")
+      .HasColumnType("integer");
+
     builder.Property(x => x.CalendarName)
       .HasColumnName("CALENDAR_NAME")
       .HasColumnType("text");
@@ -109,4 +131,3 @@ public class QuartzTriggerEntityTypeConfiguration : IEntityTypeConfiguration<Qua
       .HasDatabaseName($"IDX_{_prefix}T_NFT_ST");
   }
 }
-

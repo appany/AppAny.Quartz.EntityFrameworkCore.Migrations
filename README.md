@@ -43,6 +43,13 @@ dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite
 dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
 ```
 
+## Quartz Versions
+
+The data model is compatible with Quartz.NET 4.0.1. It includes the Quartz 4 columns
+for triggers and fired triggers, as well as the `QRTZ_PAUSED_JOB_GRPS` table.
+
+The packages do not reference Quartz.NET directly. The test projects can be run with
+both Quartz 3.21.0 and Quartz 4.0.1 by passing `-p:QuartzVersion=<version>`.
 
 
 

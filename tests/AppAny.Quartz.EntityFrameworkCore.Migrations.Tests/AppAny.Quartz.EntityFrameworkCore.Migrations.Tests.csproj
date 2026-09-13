@@ -2,14 +2,18 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6.0;net7.0;net8.0;net10.0</TargetFrameworks>
+    <QuartzVersion Condition="'$(QuartzVersion)' == ''">4.0.1</QuartzVersion>
+    <DefineConstants Condition="'$(QuartzVersion)' == '4.0.1' and '$(TargetFramework)' == 'net10.0'">$(DefineConstants);QUARTZ_4</DefineConstants>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup Label="xUnit">
-    <PackageReference Include="Quartz" Version="3.18.1" />
-    <PackageReference Include="Quartz.Serialization.Json" Version="3.18.1" />
+    <PackageReference Include="Quartz" Version="$(QuartzVersion)" Condition="'$(TargetFramework)' == 'net10.0'" />
+    <PackageReference Include="Quartz.Serialization.Json" Version="$(QuartzVersion)" Condition="'$(TargetFramework)' == 'net10.0'" />
+    <PackageReference Include="Quartz" Version="3.21.0" Condition="'$(TargetFramework)' != 'net10.0'" />
+    <PackageReference Include="Quartz.Serialization.Json" Version="3.21.0" Condition="'$(TargetFramework)' != 'net10.0'" />
     <PackageReference Include="SharpCompress" Version="0.48.1" />
     <PackageReference Include="TestEnvironment.Docker.Containers.Postgres" Version="2.1.8" />
     <PackageReference Include="TestEnvironment.Docker.Containers.Mssql" Version="2.1.10" />

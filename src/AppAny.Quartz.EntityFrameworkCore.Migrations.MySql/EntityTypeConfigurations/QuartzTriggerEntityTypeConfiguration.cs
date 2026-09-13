@@ -82,6 +82,28 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
         .HasColumnName("MISFIRE_ORIG_FIRE_TIME")
         .HasColumnType("bigint(19)");
 
+      builder.Property(x => x.ExecutionGroup)
+        .HasColumnName("EXECUTION_GROUP")
+        .HasColumnType("varchar(200)");
+
+      builder.Property(x => x.PreferredNode)
+        .HasColumnName("PREFERRED_NODE")
+        .HasColumnType("varchar(200)");
+
+      builder.Property(x => x.PreferredNodeAuto)
+        .HasColumnName("PREFERRED_NODE_AUTO")
+        .HasColumnType("tinyint(1)")
+        .HasDefaultValue(false)
+        .IsRequired();
+
+      builder.Property(x => x.RetryPolicy)
+        .HasColumnName("RETRY_POLICY")
+        .HasColumnType("varchar(250)");
+
+      builder.Property(x => x.RetryAttempt)
+        .HasColumnName("RETRY_ATTEMPT")
+        .HasColumnType("integer");
+
       builder.Property(x => x.CalendarName)
         .HasColumnName("CALENDAR_NAME")
         .HasColumnType("varchar(200)");

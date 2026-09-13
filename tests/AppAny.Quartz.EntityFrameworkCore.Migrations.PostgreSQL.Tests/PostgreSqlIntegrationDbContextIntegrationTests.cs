@@ -30,26 +30,49 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.Tests
       await this._dbContext.Database.MigrateAsync();
 
       // Act
+#if QUARTZ_4
+      var scheduler = await QuartzSchedulerBuilder.Create(q => q
+#else
       var scheduler = await SchedulerBuilder.Create()
+#endif
         .UseDefaultThreadPool(x => x.MaxConcurrency = 5)
         .UsePersistentStore(
           x =>
           {
+#if QUARTZ_4
+            x.ConfigureStore(options =>
+            {
+              options.TablePrefix = "quartz.qrtz_";
+              options.SchemaProvisioning = SchemaProvisioning.Validate;
+            });
+#else
             x.Properties.Add("quartz.jobStore.tablePrefix", "quartz.qrtz_");
             x.PerformSchemaValidation = true;
+#endif
             x.UsePostgres(this._connectionString);
             x.UseNewtonsoftJsonSerializer();
           })
+#if QUARTZ_4
+        )
+#endif
         .BuildScheduler();
 
       var exception = await Record.ExceptionAsync(async () => await scheduler.Start());
 
       // Assert
       Assert.Null(exception);
+#if QUARTZ_4
+      Assert.Equal(SchedulerStatus.Running, scheduler.Status);
+#else
       Assert.True(scheduler.IsStarted);
+#endif
 
       await scheduler.Shutdown();
+#if QUARTZ_4
+      Assert.Equal(SchedulerStatus.Shutdown, scheduler.Status);
+#else
       Assert.True(scheduler.IsShutdown);
+#endif
     }
 
     public void Dispose()

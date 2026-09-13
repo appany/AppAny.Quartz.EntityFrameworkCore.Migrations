@@ -84,6 +84,28 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasColumnName("misfire_orig_fire_time")
         .HasColumnType("bigint");
 
+      builder.Property(x => x.ExecutionGroup)
+        .HasColumnName("execution_group")
+        .HasColumnType("varchar(200)");
+
+      builder.Property(x => x.PreferredNode)
+        .HasColumnName("preferred_node")
+        .HasColumnType("varchar(200)");
+
+      builder.Property(x => x.PreferredNodeAuto)
+        .HasColumnName("preferred_node_auto")
+        .HasColumnType("boolean")
+        .HasDefaultValue(false)
+        .IsRequired();
+
+      builder.Property(x => x.RetryPolicy)
+        .HasColumnName("retry_policy")
+        .HasColumnType("varchar(250)");
+
+      builder.Property(x => x.RetryAttempt)
+        .HasColumnName("retry_attempt")
+        .HasColumnType("integer");
+
       builder.Property(x => x.CalendarName)
         .HasColumnName("calendar_name")
         .HasColumnType("text");

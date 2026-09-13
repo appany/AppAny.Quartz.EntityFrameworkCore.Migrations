@@ -38,6 +38,9 @@ public static class QuartzModelBuilderSQLiteExtensions
         new QuartzPausedTriggerGroupEntityTypeConfiguration(prefix));
 
       context.ModelBuilder.ApplyConfiguration(
+        new QuartzPausedJobGroupEntityTypeConfiguration(prefix));
+
+      context.ModelBuilder.ApplyConfiguration(
         new QuartzFiredTriggerEntityTypeConfiguration(prefix));
 
       context.ModelBuilder.ApplyConfiguration(
