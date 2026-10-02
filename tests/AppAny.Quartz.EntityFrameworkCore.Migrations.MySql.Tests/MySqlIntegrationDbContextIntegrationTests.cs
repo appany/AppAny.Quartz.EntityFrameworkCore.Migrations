@@ -32,8 +32,15 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.Tests
       this._dbContext = new MySqlIntegrationDbContext(options);
     }
 
-    [Fact]
-    public async Task ShouldBuildScheduler()
+#if QUARTZ_4_2
+      [Theory]
+      [InlineData(false)]
+      [InlineData(true)]
+      public async Task ShouldBuildScheduler(bool useExecutionHistory)
+#else
+      [Fact]
+      public async Task ShouldBuildScheduler()
+#endif
     {
       // Arrange
       await this._dbContext.Database.EnsureCreatedAsync();
@@ -53,6 +60,12 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql.Tests
             x.ConfigureStore(options => options.SchemaProvisioning = SchemaProvisioning.Validate);
 #else
             x.PerformSchemaValidation = true;
+#endif
+#if QUARTZ_4_2
+                                    if (useExecutionHistory)
+                                    {
+                                          x.UseExecutionHistory();
+                                    }
 #endif
             x.UseMySql(this._connectionString);
             x.UseNewtonsoftJsonSerializer();

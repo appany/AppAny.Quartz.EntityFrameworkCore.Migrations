@@ -84,6 +84,14 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
         .HasColumnName("EXECUTION_GROUP")
         .HasColumnType("varchar(200)");
 
+      builder.Property(trigger => trigger.Progress)
+        .HasColumnName("PROGRESS")
+        .HasColumnType("integer");
+
+      builder.Property(trigger => trigger.ProgressMessage)
+        .HasColumnName("PROGRESS_MESSAGE")
+        .HasColumnType("varchar(250)");
+
       builder.HasIndex(x => x.TriggerName)
         .HasDatabaseName($"IDX_{prefix}FT_TRIG_NAME");
 

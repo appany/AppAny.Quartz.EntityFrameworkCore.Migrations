@@ -27,6 +27,18 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
         .HasColumnName("JOB_GROUP")
         .HasColumnType("varchar(200)")
         .IsRequired();
+
+      builder.Property(group => group.PauseReason)
+        .HasColumnName("PAUSE_REASON")
+        .HasColumnType("varchar(250)");
+
+      builder.Property(group => group.PausedBy)
+        .HasColumnName("PAUSED_BY")
+        .HasColumnType("varchar(200)");
+
+      builder.Property(group => group.PausedAt)
+        .HasColumnName("PAUSED_AT")
+        .HasColumnType("bigint(19)");
     }
   }
 }

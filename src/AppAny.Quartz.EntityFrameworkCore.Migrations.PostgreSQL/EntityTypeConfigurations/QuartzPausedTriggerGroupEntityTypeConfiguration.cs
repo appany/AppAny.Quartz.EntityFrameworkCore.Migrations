@@ -29,6 +29,18 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasColumnName("trigger_group")
         .HasColumnType("text")
         .IsRequired();
+
+      builder.Property(group => group.PauseReason)
+        .HasColumnName("pause_reason")
+        .HasColumnType("varchar(250)");
+
+      builder.Property(group => group.PausedBy)
+        .HasColumnName("paused_by")
+        .HasColumnType("varchar(200)");
+
+      builder.Property(group => group.PausedAt)
+        .HasColumnName("paused_at")
+        .HasColumnType("bigint");
     }
   }
 }
