@@ -106,6 +106,34 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasColumnName("retry_attempt")
         .HasColumnType("integer");
 
+      builder.Property(trigger => trigger.ContinuesTriggerName)
+        .HasColumnName("continues_trigger_name")
+        .HasColumnType("text");
+
+      builder.Property(trigger => trigger.ContinuesTriggerGroup)
+        .HasColumnName("continues_trigger_group")
+        .HasColumnType("text");
+
+      builder.Property(trigger => trigger.ContinuationCondition)
+        .HasColumnName("continuation_condition")
+        .HasColumnType("integer");
+
+      builder.Property(trigger => trigger.OverlapPolicy)
+        .HasColumnName("overlap_policy")
+        .HasColumnType("integer");
+
+      builder.Property(trigger => trigger.PauseReason)
+        .HasColumnName("pause_reason")
+        .HasColumnType("varchar(250)");
+
+      builder.Property(trigger => trigger.PausedBy)
+        .HasColumnName("paused_by")
+        .HasColumnType("varchar(200)");
+
+      builder.Property(trigger => trigger.PausedAt)
+        .HasColumnName("paused_at")
+        .HasColumnType("bigint");
+
       builder.Property(x => x.CalendarName)
         .HasColumnName("calendar_name")
         .HasColumnType("text");

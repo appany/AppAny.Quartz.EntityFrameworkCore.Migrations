@@ -84,6 +84,14 @@ public class QuartzFiredTriggerEntityTypeConfiguration : IEntityTypeConfiguratio
       .HasColumnName("EXECUTION_GROUP")
       .HasColumnType("text");
 
+    builder.Property(trigger => trigger.Progress)
+      .HasColumnName("PROGRESS")
+      .HasColumnType("integer");
+
+    builder.Property(trigger => trigger.ProgressMessage)
+      .HasColumnName("PROGRESS_MESSAGE")
+      .HasColumnType("text");
+
     builder.HasIndex(x => x.TriggerName)
       .HasDatabaseName($"IDX_{_prefix}FT_TRIG_NAME");
 

@@ -23,6 +23,13 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
     public bool PreferredNodeAuto { get; set; }
     public string? RetryPolicy { get; set; }
     public int? RetryAttempt { get; set; }
+    public string? ContinuesTriggerName { get; set; }
+    public string? ContinuesTriggerGroup { get; set; }
+    public int? ContinuationCondition { get; set; }
+    public int? OverlapPolicy { get; set; }
+    public string? PauseReason { get; set; }
+    public string? PausedBy { get; set; }
+    public long? PausedAt { get; set; }
     public string? CalendarName { get; set; } = null!;
     public short? MisfireInstruction { get; set; }
     public byte[]? JobData { get; set; }

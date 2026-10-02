@@ -22,8 +22,15 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.Tests
       this._dbContext = new PostgreSqlIntegrationDbContext(options);
     }
 
+  #if QUARTZ_4_2
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task ShouldBuildScheduler(bool useExecutionHistory)
+  #else
     [Fact]
     public async Task ShouldBuildScheduler()
+  #endif
     {
       // Arrange
       await this._dbContext.Database.EnsureCreatedAsync();
@@ -48,6 +55,12 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.Tests
 #else
             x.Properties.Add("quartz.jobStore.tablePrefix", "quartz.qrtz_");
             x.PerformSchemaValidation = true;
+#endif
+#if QUARTZ_4_2
+            if (useExecutionHistory)
+            {
+              x.UseExecutionHistory();
+            }
 #endif
             x.UsePostgres(this._connectionString);
             x.UseNewtonsoftJsonSerializer();

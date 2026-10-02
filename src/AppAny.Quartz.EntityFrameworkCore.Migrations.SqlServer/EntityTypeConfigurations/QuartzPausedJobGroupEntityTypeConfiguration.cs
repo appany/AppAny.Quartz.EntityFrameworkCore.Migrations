@@ -31,6 +31,19 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
         .HasMaxLength(150)
         .IsUnicode()
         .IsRequired();
+
+      builder.Property(group => group.PauseReason)
+        .HasColumnName("PAUSE_REASON")
+        .HasMaxLength(250)
+        .IsUnicode();
+
+      builder.Property(group => group.PausedBy)
+        .HasColumnName("PAUSED_BY")
+        .HasMaxLength(200)
+        .IsUnicode();
+
+      builder.Property(group => group.PausedAt)
+        .HasColumnName("PAUSED_AT");
     }
   }
 }

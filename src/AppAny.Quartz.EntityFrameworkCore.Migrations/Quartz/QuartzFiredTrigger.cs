@@ -16,5 +16,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
     public bool IsNonConcurrent { get; set; }
     public bool? RequestsRecovery { get; set; }
     public string? ExecutionGroup { get; set; }
+    public int? Progress { get; set; }
+    public string? ProgressMessage { get; set; }
   }
 }

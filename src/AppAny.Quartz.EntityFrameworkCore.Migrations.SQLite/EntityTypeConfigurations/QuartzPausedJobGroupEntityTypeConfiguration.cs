@@ -27,5 +27,17 @@ public class QuartzPausedJobGroupEntityTypeConfiguration : IEntityTypeConfigurat
       .HasColumnName("JOB_GROUP")
       .HasColumnType("text")
       .IsRequired();
+
+    builder.Property(group => group.PauseReason)
+      .HasColumnName("PAUSE_REASON")
+      .HasColumnType("text");
+
+    builder.Property(group => group.PausedBy)
+      .HasColumnName("PAUSED_BY")
+      .HasColumnType("text");
+
+    builder.Property(group => group.PausedAt)
+      .HasColumnName("PAUSED_AT")
+      .HasColumnType("bigint");
   }
 }

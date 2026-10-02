@@ -38,6 +38,12 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
           new QuartzFiredTriggerEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
+          new QuartzExecutionHistoryEntityTypeConfiguration(prefix));
+
+        context.ModelBuilder.ApplyConfiguration(
+          new QuartzMisfireHistoryEntityTypeConfiguration(prefix));
+
+        context.ModelBuilder.ApplyConfiguration(
           new QuartzSchedulerStateEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(

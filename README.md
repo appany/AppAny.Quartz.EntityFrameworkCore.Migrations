@@ -45,14 +45,34 @@ dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
 
 ## Quartz Versions
 
-The data model is compatible with Quartz.NET 4.0.1. It includes the Quartz 4 columns
-for triggers and fired triggers, as well as the `QRTZ_PAUSED_JOB_GRPS` table.
+The data model supports Quartz.NET 4.2.0 and 4.3.0 and remains compatible with
+Quartz 3.21.0 and 4.0.1. All four database providers include:
 
-The packages do not reference Quartz.NET directly. The test projects can be run with
-both Quartz 3.21.0 and Quartz 4.0.1 by passing `-p:QuartzVersion=<version>`.
+- The Quartz 4.0 trigger columns and `QRTZ_PAUSED_JOB_GRPS` table.
+- The Quartz 4.2 continuation columns, `QRTZ_EXECUTION_HISTORY` and
+      `QRTZ_MISFIRE_HISTORY` tables, including retry metadata and retention indexes.
+- The Quartz 4.3 overlap policy, progress and pause reason columns, execution log
+      and misfire reason.
 
+The history tables are created with the rest of the schema. Quartz only uses them
+when `UsePersistentStore(store => store.UseExecutionHistory())` is enabled. They
+have no foreign keys so history remains available after a job or trigger is deleted.
 
+For an existing database, scaffold and apply a new EF Core migration before
+upgrading the scheduler, for example `dotnet ef migrations add UpgradeQuartz43`
+followed by `dotnet ef database update`. Nullable columns and history retry defaults
+preserve existing rows; no version-specific model configuration is required.
 
+With clustered schedulers, migrate first and upgrade every node before using
+continuations or overlap policies.
+
+The packages do not reference Quartz.NET directly. The .NET 10 test projects use
+Quartz 4.3.0 by default and CI tests all four versions. To select a version:
+
+```bash
+dotnet test --framework net10.0 -p:QuartzVersion=4.2.0
+dotnet test --framework net10.0 -p:QuartzVersion=4.3.0
+```
 
 ## 🎨 Usage 🎨
 
