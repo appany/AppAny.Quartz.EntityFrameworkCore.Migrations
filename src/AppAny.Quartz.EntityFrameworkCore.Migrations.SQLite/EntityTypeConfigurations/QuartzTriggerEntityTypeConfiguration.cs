@@ -104,6 +104,34 @@ public class QuartzTriggerEntityTypeConfiguration : IEntityTypeConfiguration<Qua
       .HasColumnName("RETRY_ATTEMPT")
       .HasColumnType("integer");
 
+    builder.Property(trigger => trigger.ContinuesTriggerName)
+      .HasColumnName("CONTINUES_TRIGGER_NAME")
+      .HasColumnType("text");
+
+    builder.Property(trigger => trigger.ContinuesTriggerGroup)
+      .HasColumnName("CONTINUES_TRIGGER_GROUP")
+      .HasColumnType("text");
+
+    builder.Property(trigger => trigger.ContinuationCondition)
+      .HasColumnName("CONTINUATION_CONDITION")
+      .HasColumnType("integer");
+
+    builder.Property(trigger => trigger.OverlapPolicy)
+      .HasColumnName("OVERLAP_POLICY")
+      .HasColumnType("integer");
+
+    builder.Property(trigger => trigger.PauseReason)
+      .HasColumnName("PAUSE_REASON")
+      .HasColumnType("text");
+
+    builder.Property(trigger => trigger.PausedBy)
+      .HasColumnName("PAUSED_BY")
+      .HasColumnType("text");
+
+    builder.Property(trigger => trigger.PausedAt)
+      .HasColumnName("PAUSED_AT")
+      .HasColumnType("bigint");
+
     builder.Property(x => x.CalendarName)
       .HasColumnName("CALENDAR_NAME")
       .HasColumnType("text");

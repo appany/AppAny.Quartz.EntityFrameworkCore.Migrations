@@ -111,6 +111,35 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
       builder.Property(x => x.RetryAttempt)
         .HasColumnName("RETRY_ATTEMPT");
 
+      builder.Property(trigger => trigger.ContinuesTriggerName)
+        .HasColumnName("CONTINUES_TRIGGER_NAME")
+        .HasMaxLength(150)
+        .IsUnicode();
+
+      builder.Property(trigger => trigger.ContinuesTriggerGroup)
+        .HasColumnName("CONTINUES_TRIGGER_GROUP")
+        .HasMaxLength(150)
+        .IsUnicode();
+
+      builder.Property(trigger => trigger.ContinuationCondition)
+        .HasColumnName("CONTINUATION_CONDITION");
+
+      builder.Property(trigger => trigger.OverlapPolicy)
+        .HasColumnName("OVERLAP_POLICY");
+
+      builder.Property(trigger => trigger.PauseReason)
+        .HasColumnName("PAUSE_REASON")
+        .HasMaxLength(250)
+        .IsUnicode();
+
+      builder.Property(trigger => trigger.PausedBy)
+        .HasColumnName("PAUSED_BY")
+        .HasMaxLength(200)
+        .IsUnicode();
+
+      builder.Property(trigger => trigger.PausedAt)
+        .HasColumnName("PAUSED_AT");
+
       builder.Property(x => x.CalendarName)
         .HasColumnName("CALENDAR_NAME")
         .HasMaxLength(200)

@@ -22,8 +22,15 @@ public class SqlServerIntegrationDbContextIntegrationTests : IClassFixture<Datab
     this._dbContext = new SqlServerIntegrationDbContext(options);
   }
 
+#if QUARTZ_4_2
+  [Theory]
+  [InlineData(false)]
+  [InlineData(true)]
+  public async Task ShouldBuildScheduler(bool useExecutionHistory)
+#else
   [Fact]
   public async Task ShouldBuildScheduler()
+#endif
   {
     // Arrange
     await this._dbContext.Database.EnsureCreatedAsync();
@@ -48,6 +55,12 @@ public class SqlServerIntegrationDbContextIntegrationTests : IClassFixture<Datab
 #else
           x.Properties.Add("quartz.jobStore.tablePrefix", "[quartz].QRTZ_");
           x.PerformSchemaValidation = true;
+#endif
+#if QUARTZ_4_2
+          if (useExecutionHistory)
+          {
+            x.UseExecutionHistory();
+          }
 #endif
           x.UseSqlServer(this._connectionString);
           x.UseNewtonsoftJsonSerializer();

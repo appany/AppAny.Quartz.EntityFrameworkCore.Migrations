@@ -89,6 +89,14 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
         .HasMaxLength(200)
         .IsUnicode();
 
+      builder.Property(trigger => trigger.Progress)
+        .HasColumnName("PROGRESS");
+
+      builder.Property(trigger => trigger.ProgressMessage)
+        .HasColumnName("PROGRESS_MESSAGE")
+        .HasMaxLength(250)
+        .IsUnicode();
+
       builder.HasIndex(x => new { x.SchedulerName, x.InstanceName, x.RequestsRecovery })
         .HasDatabaseName($"IDX_{prefix}FT_INST_JOB_REQ_RCVRY");
 

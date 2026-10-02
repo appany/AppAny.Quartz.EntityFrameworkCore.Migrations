@@ -132,6 +132,142 @@ public class QuartzTriggerModelMappingTests
       .ToArray();
   }
 
+  [Theory]
+  [InlineData(nameof(QuartzTrigger.ContinuesTriggerName), "CONTINUES_TRIGGER_NAME", "varchar(200)")]
+  [InlineData(nameof(QuartzTrigger.ContinuesTriggerGroup), "CONTINUES_TRIGGER_GROUP", "varchar(200)")]
+  [InlineData(nameof(QuartzTrigger.ContinuationCondition), "CONTINUATION_CONDITION", "integer")]
+  [InlineData(nameof(QuartzTrigger.OverlapPolicy), "OVERLAP_POLICY", "integer")]
+  [InlineData(nameof(QuartzTrigger.PauseReason), "PAUSE_REASON", "varchar(250)")]
+  [InlineData(nameof(QuartzTrigger.PausedBy), "PAUSED_BY", "varchar(200)")]
+  [InlineData(nameof(QuartzTrigger.PausedAt), "PAUSED_AT", "bigint(19)")]
+  public void ShouldMapQuartz42And43TriggerColumns(string propertyName, string columnName, string columnType)
+  {
+    using var dbContext = new MySqlIntegrationDbContext(CreateOptions());
+    var entityType = dbContext.Model.FindEntityType(typeof(QuartzTrigger));
+
+    Assert.NotNull(entityType);
+
+    var property = entityType!.FindProperty(propertyName);
+    Assert.NotNull(property);
+
+    var table = StoreObjectIdentifier.Table(entityType.GetTableName()!, entityType.GetSchema());
+    Assert.Equal(columnName, property!.GetColumnName(table));
+    Assert.Equal(columnType, property.GetColumnType());
+    Assert.True(property.IsNullable);
+    Assert.Null(property.GetDefaultValue());
+  }
+
+  [Theory]
+  [InlineData(typeof(QuartzFiredTrigger), nameof(QuartzFiredTrigger.Progress), "PROGRESS", "integer")]
+  [InlineData(typeof(QuartzFiredTrigger), nameof(QuartzFiredTrigger.ProgressMessage), "PROGRESS_MESSAGE", "varchar(250)")]
+  [InlineData(typeof(QuartzPausedTriggerGroup), nameof(QuartzPausedTriggerGroup.PauseReason), "PAUSE_REASON", "varchar(250)")]
+  [InlineData(typeof(QuartzPausedTriggerGroup), nameof(QuartzPausedTriggerGroup.PausedBy), "PAUSED_BY", "varchar(200)")]
+  [InlineData(typeof(QuartzPausedTriggerGroup), nameof(QuartzPausedTriggerGroup.PausedAt), "PAUSED_AT", "bigint(19)")]
+  [InlineData(typeof(QuartzPausedJobGroup), nameof(QuartzPausedJobGroup.PauseReason), "PAUSE_REASON", "varchar(250)")]
+  [InlineData(typeof(QuartzPausedJobGroup), nameof(QuartzPausedJobGroup.PausedBy), "PAUSED_BY", "varchar(200)")]
+  [InlineData(typeof(QuartzPausedJobGroup), nameof(QuartzPausedJobGroup.PausedAt), "PAUSED_AT", "bigint(19)")]
+  public void ShouldMapQuartz43ProgressAndPauseColumns(Type entityClrType, string propertyName,
+    string columnName, string columnType)
+  {
+    using var dbContext = new MySqlIntegrationDbContext(CreateOptions());
+    var entityType = dbContext.Model.FindEntityType(entityClrType);
+
+    Assert.NotNull(entityType);
+
+    var property = entityType!.FindProperty(propertyName);
+    Assert.NotNull(property);
+
+    var table = StoreObjectIdentifier.Table(entityType.GetTableName()!, entityType.GetSchema());
+    Assert.Equal(columnName, property!.GetColumnName(table));
+    Assert.Equal(columnType, property.GetColumnType());
+    Assert.True(property.IsNullable);
+    Assert.Null(property.GetDefaultValue());
+  }
+
+  [Theory]
+  [InlineData(typeof(QuartzExecutionHistory), "QRTZ_EXECUTION_HISTORY")]
+  [InlineData(typeof(QuartzMisfireHistory), "QRTZ_MISFIRE_HISTORY")]
+  public void ShouldMapHistoryTablesWithoutForeignKeys(Type entityClrType, string tableName)
+  {
+    using var dbContext = new MySqlIntegrationDbContext(CreateOptions());
+    var entityType = dbContext.Model.FindEntityType(entityClrType);
+
+    Assert.NotNull(entityType);
+    Assert.Equal(tableName, entityType!.GetTableName());
+    Assert.Equal(new[] { "SchedulerName", "EntryId" },
+      entityType.FindPrimaryKey()!.Properties.Select(property => property.Name));
+    Assert.Equal(ValueGenerated.Never, entityType.FindProperty("EntryId")!.ValueGenerated);
+    Assert.Empty(entityType.GetForeignKeys());
+  }
+
+  [Theory]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.SchedulerName), "SCHED_NAME", "varchar(120)", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.EntryId), "ENTRY_ID", "varchar(140)", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.InstanceName), "INSTANCE_NAME", "varchar(200)", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.JobName), "JOB_NAME", "varchar(200)", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.JobGroup), "JOB_GROUP", "varchar(200)", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.TriggerName), "TRIGGER_NAME", "varchar(200)", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.TriggerGroup), "TRIGGER_GROUP", "varchar(200)", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.FiredTime), "FIRED_TIME", "bigint(19)", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.RunTime), "RUN_TIME", "bigint(19)", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.Succeeded), "SUCCEEDED", "tinyint(1)", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.ErrorMessage), "ERROR_MESSAGE", "varchar(1000)", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.RetryAttempt), "RETRY_ATTEMPT", "integer", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.RetryScheduled), "RETRY_SCHEDULED", "tinyint(1)", false)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.ExecutionLog), "EXECUTION_LOG", "longtext", true)]
+  [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.SchedulerName), "SCHED_NAME", "varchar(120)", false)]
+  [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.EntryId), "ENTRY_ID", "varchar(140)", false)]
+  [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.InstanceName), "INSTANCE_NAME", "varchar(200)", false)]
+  [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.TriggerName), "TRIGGER_NAME", "varchar(200)", false)]
+  [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.TriggerGroup), "TRIGGER_GROUP", "varchar(200)", false)]
+  [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.JobName), "JOB_NAME", "varchar(200)", true)]
+  [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.JobGroup), "JOB_GROUP", "varchar(200)", true)]
+  [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.MisfireTime), "MISFIRE_TIME", "bigint(19)", false)]
+  [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.ScheduledTime), "SCHED_TIME", "bigint(19)", true)]
+  [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.Reason), "REASON", "integer", true)]
+  public void ShouldMapHistoryColumns(Type entityClrType, string propertyName, string columnName,
+    string columnType, bool isNullable)
+  {
+    using var dbContext = new MySqlIntegrationDbContext(CreateOptions());
+    var entityType = dbContext.Model.FindEntityType(entityClrType);
+
+    Assert.NotNull(entityType);
+
+    var property = entityType!.FindProperty(propertyName);
+    Assert.NotNull(property);
+
+    var table = StoreObjectIdentifier.Table(entityType.GetTableName()!, entityType.GetSchema());
+    Assert.Equal(columnName, property!.GetColumnName(table));
+    Assert.Equal(columnType, property.GetColumnType());
+    Assert.Equal(isNullable, property.IsNullable);
+  }
+
+  [Fact]
+  public void ShouldMapHistoryRetryDefaults()
+  {
+    using var dbContext = new MySqlIntegrationDbContext(CreateOptions());
+    var entityType = dbContext.Model.FindEntityType(typeof(QuartzExecutionHistory));
+
+    Assert.NotNull(entityType);
+    Assert.Equal(0, entityType!.FindProperty(nameof(QuartzExecutionHistory.RetryAttempt))!.GetDefaultValue());
+    Assert.Equal(false, entityType.FindProperty(nameof(QuartzExecutionHistory.RetryScheduled))!.GetDefaultValue());
+  }
+
+  [Theory]
+  [InlineData(typeof(QuartzExecutionHistory), "IDX_QRTZ_EH_FIRED_TIME", nameof(QuartzExecutionHistory.FiredTime))]
+  [InlineData(typeof(QuartzExecutionHistory), "IDX_QRTZ_EH_INST", nameof(QuartzExecutionHistory.InstanceName))]
+  [InlineData(typeof(QuartzMisfireHistory), "IDX_QRTZ_MH_MISFIRE_TIME", nameof(QuartzMisfireHistory.MisfireTime))]
+  [InlineData(typeof(QuartzMisfireHistory), "IDX_QRTZ_MH_INST", nameof(QuartzMisfireHistory.InstanceName))]
+  public void ShouldMapHistoryIndexes(Type entityClrType, string indexName, string propertyName)
+  {
+    using var dbContext = new MySqlIntegrationDbContext(CreateOptions());
+    var entityType = dbContext.Model.FindEntityType(entityClrType);
+
+    Assert.NotNull(entityType);
+    Assert.Contains(entityType!.GetIndexes(), index => index.GetDatabaseName() == indexName
+      && index.Properties.Select(property => property.Name).SequenceEqual(new[] { "SchedulerName", propertyName }));
+  }
+
   private static DbContextOptions<MySqlIntegrationDbContext> CreateOptions()
   {
 #if NET10_0_OR_GREATER
