@@ -45,14 +45,21 @@ dotnet add package AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
 
 ## Quartz Versions
 
-The data model supports Quartz.NET 4.2.0 and 4.3.0 and remains compatible with
-Quartz 3.21.0 and 4.0.1. All four database providers include:
+The schema includes the Quartz 4.0, 4.2 and 4.3 additions and remains compatible
+with Quartz.NET 3.21.0 and 4.0.1. All four database providers include:
 
 - The Quartz 4.0 trigger columns and `QRTZ_PAUSED_JOB_GRPS` table.
 - The Quartz 4.2 continuation columns, `QRTZ_EXECUTION_HISTORY` and
-      `QRTZ_MISFIRE_HISTORY` tables, including retry metadata and retention indexes.
+  `QRTZ_MISFIRE_HISTORY` tables, including retry metadata and retention indexes.
 - The Quartz 4.3 overlap policy, progress and pause reason columns, execution log
-      and misfire reason.
+  and misfire reason.
+
+The indexes match the Quartz.NET 4.0.1 table scripts for every provider. Upgrading from 0.6.1 or earlier
+produces a migration that drops the legacy indexes, renames two of them and creates the new ones
+(including a reshaped `IDX_QRTZ_T_NFT_ST`). All indexes are non-unique, but on large tables apply it in a
+maintenance window. On MySQL, stop the schedulers while it runs: Quartz references `IDX_QRTZ_T_NFT_ST` by
+name (`FORCE INDEX`) and the index is briefly missing. The Oracle `MySql.EntityFrameworkCore` provider
+(net10.0) ignores the `PRIORITY DESC` column direction of `IDX_QRTZ_T_NFT_ST`.
 
 The history tables are created with the rest of the schema. Quartz only uses them
 when `UsePersistentStore(store => store.UseExecutionHistory())` is enabled. They
@@ -85,7 +92,7 @@ public class DatabaseContext : DbContext
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     // Prefix and schema can be passed as parameters
-    
+
     // Adds Quartz.NET MySql schema to EntityFrameworkCore
     modelBuilder.AddQuartz(builder => builder.UseMySql());
 

@@ -68,8 +68,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasColumnName("job_data")
         .HasColumnType("bytea");
 
-      builder.HasIndex(x => x.RequestsRecovery)
-        .HasDatabaseName($"idx_{prefix}j_req_recovery");
+      builder.HasIndex(x => new { x.SchedulerName, x.JobGroup, x.JobName })
+        .HasDatabaseName($"idx_{prefix}j_g_n");
     }
   }
 }

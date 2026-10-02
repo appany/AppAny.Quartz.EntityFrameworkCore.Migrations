@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using AppAny.Quartz.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 public class QuartzTriggerModelMappingTests
@@ -83,6 +84,55 @@ public class QuartzTriggerModelMappingTests
     Assert.Equal("bit", preferredNodeAuto.GetColumnType());
     Assert.False(preferredNodeAuto.IsNullable);
     Assert.Equal(false, preferredNodeAuto.GetDefaultValue());
+  }
+
+  // Index set of the Quartz.NET 4.0.1 table scripts (database/tables/tables_sqlServer.sql)
+  [Fact]
+  public void ShouldMapQuartzIndexes()
+  {
+    using var dbContext = new SqlServerIntegrationDbContext(CreateOptions());
+
+    Assert.Equal(
+      new[] { "IDX_QRTZ_J_G_N (SCHED_NAME, JOB_GROUP, JOB_NAME)" },
+      GetIndexes<QuartzJobDetail>(dbContext));
+
+    Assert.Equal(
+      new[]
+      {
+        "IDX_QRTZ_T_C (SCHED_NAME, CALENDAR_NAME)",
+        "IDX_QRTZ_T_G_N (SCHED_NAME, TRIGGER_GROUP, TRIGGER_NAME)",
+        "IDX_QRTZ_T_J (SCHED_NAME, JOB_NAME, JOB_GROUP)",
+        "IDX_QRTZ_T_NFT_ST (SCHED_NAME, TRIGGER_STATE, NEXT_FIRE_TIME, PRIORITY DESC, MISFIRE_INSTR)"
+      },
+      GetIndexes<QuartzTrigger>(dbContext));
+
+    Assert.Equal(
+      new[]
+      {
+        "IDX_QRTZ_FT_INST_JOB_REQ_RCVRY (SCHED_NAME, INSTANCE_NAME, REQUESTS_RECOVERY)",
+        "IDX_QRTZ_FT_J_G (SCHED_NAME, JOB_NAME, JOB_GROUP)",
+        "IDX_QRTZ_FT_T_G (SCHED_NAME, TRIGGER_NAME, TRIGGER_GROUP)"
+      },
+      GetIndexes<QuartzFiredTrigger>(dbContext));
+  }
+
+  private static string[] GetIndexes<TEntity>(DbContext dbContext)
+  {
+    var entityType = dbContext.GetService<IDesignTimeModel>().Model.FindEntityType(typeof(TEntity))!;
+    var table = StoreObjectIdentifier.Table(entityType.GetTableName()!, entityType.GetSchema());
+
+    return entityType.GetIndexes()
+      .Select(index =>
+      {
+        var columns = index.Properties.Select((property, i) =>
+          index.IsDescending is { } descending && (descending.Count == 0 || descending[i])
+            ? property.GetColumnName(table) + " DESC"
+            : property.GetColumnName(table));
+
+        return $"{index.GetDatabaseName()} ({string.Join(", ", columns)})";
+      })
+      .OrderBy(x => x, StringComparer.Ordinal)
+      .ToArray();
   }
 
   [Theory]
