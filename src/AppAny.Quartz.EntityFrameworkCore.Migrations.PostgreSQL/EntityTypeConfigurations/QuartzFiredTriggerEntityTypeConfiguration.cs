@@ -86,6 +86,14 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasColumnName("execution_group")
         .HasColumnType("varchar(200)");
 
+      builder.Property(trigger => trigger.Progress)
+        .HasColumnName("progress")
+        .HasColumnType("integer");
+
+      builder.Property(trigger => trigger.ProgressMessage)
+        .HasColumnName("progress_message")
+        .HasColumnType("varchar(250)");
+
       builder.HasIndex(x => x.TriggerName)
         .HasDatabaseName($"idx_{prefix}ft_trig_name");
 

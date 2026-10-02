@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <TargetFrameworks>net6.0;net7.0;net8.0;net10.0</TargetFrameworks>
-    <QuartzVersion Condition="'$(QuartzVersion)' == ''">4.0.1</QuartzVersion>
-    <DefineConstants Condition="'$(QuartzVersion)' == '4.0.1' and '$(TargetFramework)' == 'net10.0'">$(DefineConstants);QUARTZ_4</DefineConstants>
+    <QuartzVersion Condition="'$(QuartzVersion)' == ''">4.3.0</QuartzVersion>
+    <DefineConstants Condition="$([MSBuild]::VersionGreaterThanOrEquals('$(QuartzVersion)', '4.0.0')) and '$(TargetFramework)' == 'net10.0'">$(DefineConstants);QUARTZ_4</DefineConstants>
+    <DefineConstants Condition="$([MSBuild]::VersionGreaterThanOrEquals('$(QuartzVersion)', '4.2.0')) and '$(TargetFramework)' == 'net10.0'">$(DefineConstants);QUARTZ_4_2</DefineConstants>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>

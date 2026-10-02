@@ -104,6 +104,34 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
         .HasColumnName("RETRY_ATTEMPT")
         .HasColumnType("integer");
 
+      builder.Property(trigger => trigger.ContinuesTriggerName)
+        .HasColumnName("CONTINUES_TRIGGER_NAME")
+        .HasColumnType("varchar(200)");
+
+      builder.Property(trigger => trigger.ContinuesTriggerGroup)
+        .HasColumnName("CONTINUES_TRIGGER_GROUP")
+        .HasColumnType("varchar(200)");
+
+      builder.Property(trigger => trigger.ContinuationCondition)
+        .HasColumnName("CONTINUATION_CONDITION")
+        .HasColumnType("integer");
+
+      builder.Property(trigger => trigger.OverlapPolicy)
+        .HasColumnName("OVERLAP_POLICY")
+        .HasColumnType("integer");
+
+      builder.Property(trigger => trigger.PauseReason)
+        .HasColumnName("PAUSE_REASON")
+        .HasColumnType("varchar(250)");
+
+      builder.Property(trigger => trigger.PausedBy)
+        .HasColumnName("PAUSED_BY")
+        .HasColumnType("varchar(200)");
+
+      builder.Property(trigger => trigger.PausedAt)
+        .HasColumnName("PAUSED_AT")
+        .HasColumnType("bigint(19)");
+
       builder.Property(x => x.CalendarName)
         .HasColumnName("CALENDAR_NAME")
         .HasColumnType("varchar(200)");
