@@ -1,7 +1,10 @@
 namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL.Tests;
 
+using System;
+using System.Linq;
 using AppAny.Quartz.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 public class QuartzTriggerModelMappingTests
@@ -78,6 +81,55 @@ public class QuartzTriggerModelMappingTests
     Assert.Equal("boolean", preferredNodeAuto.GetColumnType());
     Assert.False(preferredNodeAuto.IsNullable);
     Assert.Equal(false, preferredNodeAuto.GetDefaultValue());
+  }
+
+  // Index set of the Quartz.NET 4.0.1 table scripts (database/tables/tables_postgres.sql)
+  [Fact]
+  public void ShouldMapQuartzIndexes()
+  {
+    using var dbContext = new PostgreSqlIntegrationDbContext(CreateOptions());
+
+    Assert.Equal(
+      new[] { "idx_qrtz_j_g_n (sched_name, job_group, job_name)" },
+      GetIndexes<QuartzJobDetail>(dbContext));
+
+    Assert.Equal(
+      new[]
+      {
+        "idx_qrtz_t_c (sched_name, calendar_name)",
+        "idx_qrtz_t_g_n (sched_name, trigger_group, trigger_name)",
+        "idx_qrtz_t_j (sched_name, job_name, job_group)",
+        "idx_qrtz_t_nft_st (sched_name, trigger_state, next_fire_time, priority DESC, misfire_instr)"
+      },
+      GetIndexes<QuartzTrigger>(dbContext));
+
+    Assert.Equal(
+      new[]
+      {
+        "idx_qrtz_ft_inst_job_req_rcvry (sched_name, instance_name, requests_recovery)",
+        "idx_qrtz_ft_j_g (sched_name, job_name, job_group)",
+        "idx_qrtz_ft_t_g (sched_name, trigger_name, trigger_group)"
+      },
+      GetIndexes<QuartzFiredTrigger>(dbContext));
+  }
+
+  private static string[] GetIndexes<TEntity>(DbContext dbContext)
+  {
+    var entityType = dbContext.GetService<IDesignTimeModel>().Model.FindEntityType(typeof(TEntity))!;
+    var table = StoreObjectIdentifier.Table(entityType.GetTableName()!, entityType.GetSchema());
+
+    return entityType.GetIndexes()
+      .Select(index =>
+      {
+        var columns = index.Properties.Select((property, i) =>
+          index.IsDescending is { } descending && (descending.Count == 0 || descending[i])
+            ? property.GetColumnName(table) + " DESC"
+            : property.GetColumnName(table));
+
+        return $"{index.GetDatabaseName()} ({string.Join(", ", columns)})";
+      })
+      .OrderBy(x => x, StringComparer.Ordinal)
+      .ToArray();
   }
 
   private static DbContextOptions<PostgreSqlIntegrationDbContext> CreateOptions()

@@ -51,6 +51,13 @@ for triggers and fired triggers, as well as the `QRTZ_PAUSED_JOB_GRPS` table.
 The packages do not reference Quartz.NET directly. The test projects can be run with
 both Quartz 3.21.0 and Quartz 4.0.1 by passing `-p:QuartzVersion=<version>`.
 
+The indexes match the Quartz.NET 4.0.1 table scripts for every provider. Upgrading from 0.6.1 or earlier
+produces a migration that drops the legacy indexes, renames two of them and creates the new ones
+(including a reshaped `IDX_QRTZ_T_NFT_ST`). All indexes are non-unique, but on large tables apply it in a
+maintenance window. On MySQL, stop the schedulers while it runs: Quartz references `IDX_QRTZ_T_NFT_ST` by
+name (`FORCE INDEX`) and the index is briefly missing. The Oracle `MySql.EntityFrameworkCore` provider
+(net10.0) ignores the `PRIORITY DESC` column direction of `IDX_QRTZ_T_NFT_ST`.
+
 
 
 

@@ -84,25 +84,13 @@ public class QuartzFiredTriggerEntityTypeConfiguration : IEntityTypeConfiguratio
       .HasColumnName("EXECUTION_GROUP")
       .HasColumnType("text");
 
-    builder.HasIndex(x => x.TriggerName)
-      .HasDatabaseName($"IDX_{_prefix}FT_TRIG_NAME");
+    builder.HasIndex(x => new { x.SchedulerName, x.InstanceName, x.RequestsRecovery })
+      .HasDatabaseName($"IDX_{_prefix}FT_INST_JOB_REQ_RCVRY");
 
-    builder.HasIndex(x => x.TriggerGroup)
-      .HasDatabaseName($"IDX_{_prefix}FT_TRIG_GROUP");
+    builder.HasIndex(x => new { x.SchedulerName, x.JobName, x.JobGroup })
+      .HasDatabaseName($"IDX_{_prefix}FT_J_G");
 
     builder.HasIndex(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup })
-      .HasDatabaseName($"IDX_{_prefix}FT_TRIG_NM_GP");
-
-    builder.HasIndex(x => x.InstanceName)
-      .HasDatabaseName($"IDX_{_prefix}FT_TRIG_INST_NAME");
-
-    builder.HasIndex(x => x.JobName)
-      .HasDatabaseName($"IDX_{_prefix}FT_JOB_NAME");
-
-    builder.HasIndex(x => x.JobGroup)
-      .HasDatabaseName($"IDX_{_prefix}FT_JOB_GROUP");
-
-    builder.HasIndex(x => x.RequestsRecovery)
-      .HasDatabaseName($"IDX_{_prefix}FT_JOB_REQ_RECOVERY");
+      .HasDatabaseName($"IDX_{_prefix}FT_T_G");
   }
 }

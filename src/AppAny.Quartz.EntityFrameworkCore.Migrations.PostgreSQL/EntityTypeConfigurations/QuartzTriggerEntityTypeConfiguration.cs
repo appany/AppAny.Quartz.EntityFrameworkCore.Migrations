@@ -123,14 +123,18 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasForeignKey(x => new { x.SchedulerName, x.JobName, x.JobGroup })
         .IsRequired();
 
-      builder.HasIndex(x => x.NextFireTime)
-        .HasDatabaseName($"idx_{prefix}t_next_fire_time");
+      builder.HasIndex(x => new { x.SchedulerName, x.JobName, x.JobGroup })
+        .HasDatabaseName($"idx_{prefix}t_j");
 
-      builder.HasIndex(x => x.TriggerState)
-        .HasDatabaseName($"idx_{prefix}t_state");
+      builder.HasIndex(x => new { x.SchedulerName, x.TriggerGroup, x.TriggerName })
+        .HasDatabaseName($"idx_{prefix}t_g_n");
 
-      builder.HasIndex(x => new { x.NextFireTime, x.TriggerState })
-        .HasDatabaseName($"idx_{prefix}t_nft_st");
+      builder.HasIndex(x => new { x.SchedulerName, x.CalendarName })
+        .HasDatabaseName($"idx_{prefix}t_c");
+
+      builder.HasIndex(x => new { x.SchedulerName, x.TriggerState, x.NextFireTime, x.Priority, x.MisfireInstruction })
+        .HasDatabaseName($"idx_{prefix}t_nft_st")
+        .IsDescending(false, false, false, true, false);
     }
   }
 }

@@ -86,26 +86,14 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasColumnName("execution_group")
         .HasColumnType("varchar(200)");
 
-      builder.HasIndex(x => x.TriggerName)
-        .HasDatabaseName($"idx_{prefix}ft_trig_name");
+      builder.HasIndex(x => new { x.SchedulerName, x.InstanceName, x.RequestsRecovery })
+        .HasDatabaseName($"idx_{prefix}ft_inst_job_req_rcvry");
 
-      builder.HasIndex(x => x.TriggerGroup)
-        .HasDatabaseName($"idx_{prefix}ft_trig_group");
+      builder.HasIndex(x => new { x.SchedulerName, x.JobName, x.JobGroup })
+        .HasDatabaseName($"idx_{prefix}ft_j_g");
 
       builder.HasIndex(x => new { x.SchedulerName, x.TriggerName, x.TriggerGroup })
-        .HasDatabaseName($"idx_{prefix}ft_trig_nm_gp");
-
-      builder.HasIndex(x => x.InstanceName)
-        .HasDatabaseName($"idx_{prefix}ft_trig_inst_name");
-
-      builder.HasIndex(x => x.JobName)
-        .HasDatabaseName($"idx_{prefix}ft_job_name");
-
-      builder.HasIndex(x => x.JobGroup)
-        .HasDatabaseName($"idx_{prefix}ft_job_group");
-
-      builder.HasIndex(x => x.RequestsRecovery)
-        .HasDatabaseName($"idx_{prefix}ft_job_req_recovery");
+        .HasDatabaseName($"idx_{prefix}ft_t_g");
     }
   }
 }

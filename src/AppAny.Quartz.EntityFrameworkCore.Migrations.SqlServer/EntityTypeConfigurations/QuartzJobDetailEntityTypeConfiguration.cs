@@ -68,8 +68,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
       builder.Property(x => x.JobData)
         .HasColumnName("JOB_DATA");
 
-      builder.HasIndex(x => x.RequestsRecovery)
-        .HasDatabaseName($"IDX_{prefix}J_REQ_RECOVERY");
+      builder.HasIndex(x => new { x.SchedulerName, x.JobGroup, x.JobName })
+        .HasDatabaseName($"IDX_{prefix}J_G_N");
     }
   }
 }

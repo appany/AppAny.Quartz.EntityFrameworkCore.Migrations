@@ -66,8 +66,8 @@ public class QuartzJobDetailEntityTypeConfiguration : IEntityTypeConfiguration<Q
       .HasColumnName("JOB_DATA")
       .HasColumnType("bytea");
 
-    builder.HasIndex(x => x.RequestsRecovery)
-      .HasDatabaseName($"IDX_{_prefix}J_REQ_RECOVERY");
+    builder.HasIndex(x => new { x.SchedulerName, x.JobGroup, x.JobName })
+      .HasDatabaseName($"IDX_{_prefix}J_G_N");
   }
 }
 

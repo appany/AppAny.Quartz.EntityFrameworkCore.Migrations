@@ -121,14 +121,19 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
         .HasForeignKey(x => new { x.SchedulerName, x.JobName, x.JobGroup })
         .IsRequired();
 
-      builder.HasIndex(x => x.NextFireTime)
-        .HasDatabaseName($"IDX_{prefix}T_NEXT_FIRE_TIME");
+      builder.HasIndex(x => new { x.SchedulerName, x.JobName, x.JobGroup })
+        .HasDatabaseName($"IDX_{prefix}T_J");
 
-      builder.HasIndex(x => x.TriggerState)
-        .HasDatabaseName($"IDX_{prefix}T_STATE");
+      builder.HasIndex(x => new { x.SchedulerName, x.TriggerGroup, x.TriggerName })
+        .HasDatabaseName($"IDX_{prefix}T_G_N");
 
-      builder.HasIndex(x => new { x.NextFireTime, x.TriggerState })
-        .HasDatabaseName($"IDX_{prefix}T_NFT_ST");
+      builder.HasIndex(x => new { x.SchedulerName, x.CalendarName })
+        .HasDatabaseName($"IDX_{prefix}T_C");
+
+      // Quartz's MySQLDelegate hints this index by name (FORCE INDEX) for acquisition and misfire scans.
+      builder.HasIndex(x => new { x.SchedulerName, x.TriggerState, x.NextFireTime, x.Priority, x.MisfireInstruction })
+        .HasDatabaseName($"IDX_{prefix}T_NFT_ST")
+        .IsDescending(false, false, false, true, false);
     }
   }
 }
