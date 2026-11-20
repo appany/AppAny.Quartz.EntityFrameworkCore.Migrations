@@ -41,6 +41,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
 
         context.ModelBuilder.ApplyConfiguration(
           new QuartzMisfireHistoryEntityTypeConfiguration(prefix, schema));
+        context.ModelBuilder.ApplyConfiguration(
+          new QuartzJobStatusEntityTypeConfiguration(prefix, schema));
 
         context.ModelBuilder.ApplyConfiguration(
           new QuartzSchedulerStateEntityTypeConfiguration(prefix, schema));

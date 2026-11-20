@@ -214,7 +214,13 @@ public class QuartzTriggerModelMappingTests
   [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.ErrorMessage), "error_message", "text", true)]
   [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.RetryAttempt), "retry_attempt", "integer", false)]
   [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.RetryScheduled), "retry_scheduled", "bool", false)]
-  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.ExecutionLog), "execution_log", "text", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.Result), "result", "integer", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.Summary), "summary", "text", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.Metrics), "metrics", "text", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.Manual), "manual", "bool", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.FireInstanceId), "fire_instance_id", "text", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.JobInput), "job_input", "text", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.JobInputTooLarge), "job_input_too_large", "bool", true)]
   [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.SchedulerName), "sched_name", "text", false)]
   [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.EntryId), "entry_id", "text", false)]
   [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.InstanceName), "instance_name", "text", false)]
@@ -266,6 +272,42 @@ public class QuartzTriggerModelMappingTests
     Assert.NotNull(entityType);
     Assert.Contains(entityType!.GetIndexes(), index => index.GetDatabaseName() == indexName
       && index.Properties.Select(property => property.Name).SequenceEqual(new[] { "SchedulerName", propertyName }));
+  }
+
+  [Theory]
+  [InlineData(typeof(QuartzTrigger), nameof(QuartzTrigger.MisfireThreshold), "misfire_threshold", "bigint")]
+  [InlineData(typeof(QuartzTrigger), nameof(QuartzTrigger.FixedDelay), "fixed_delay", "boolean")]
+  [InlineData(typeof(QuartzFiredTrigger), nameof(QuartzFiredTrigger.InterruptRequestedTime), "interrupt_requested_time", "bigint")]
+  [InlineData(typeof(QuartzSchedulerState), nameof(QuartzSchedulerState.QuartzVersion), "quartz_version", "varchar(20)")]
+  public void ShouldMapQuartz47Columns(Type entityClrType, string propertyName, string columnName, string columnType)
+  {
+    using var dbContext = new PostgreSqlIntegrationDbContext(CreateOptions());
+    var entityType = dbContext.Model.FindEntityType(entityClrType);
+
+    Assert.NotNull(entityType);
+    var property = entityType!.FindProperty(propertyName);
+    Assert.NotNull(property);
+
+    var table = StoreObjectIdentifier.Table(entityType.GetTableName()!, entityType.GetSchema());
+    Assert.Equal(columnName, property!.GetColumnName(table));
+    Assert.Equal(columnType, property.GetColumnType());
+    Assert.True(property.IsNullable);
+    Assert.Null(property.GetDefaultValue());
+  }
+
+  [Fact]
+  public void ShouldMapQuartzJobStatusTable()
+  {
+    using var dbContext = new PostgreSqlIntegrationDbContext(CreateOptions());
+    var entityType = dbContext.Model.FindEntityType(typeof(QuartzJobStatus));
+
+    Assert.NotNull(entityType);
+    Assert.Equal("qrtz_job_status", entityType!.GetTableName());
+    Assert.Equal(new[] { "SchedulerName", "JobGroup", "JobName" },
+      entityType.FindPrimaryKey()!.Properties.Select(property => property.Name));
+    Assert.Equal(0, entityType.FindProperty(nameof(QuartzJobStatus.ConsecutiveFailures))!.GetDefaultValue());
+    Assert.Equal(0L, entityType.FindProperty(nameof(QuartzJobStatus.RunCount))!.GetDefaultValue());
+    Assert.Equal(0L, entityType.FindProperty(nameof(QuartzJobStatus.FailureCount))!.GetDefaultValue());
   }
 
   private static DbContextOptions<PostgreSqlIntegrationDbContext> CreateOptions()

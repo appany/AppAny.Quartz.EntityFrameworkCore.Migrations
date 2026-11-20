@@ -92,6 +92,10 @@ public class QuartzFiredTriggerEntityTypeConfiguration : IEntityTypeConfiguratio
       .HasColumnName("PROGRESS_MESSAGE")
       .HasColumnType("text");
 
+    builder.Property(x => x.InterruptRequestedTime)
+      .HasColumnName("INTERRUPT_REQUESTED_TIME")
+      .HasColumnType("bigint");
+
     builder.HasIndex(x => new { x.SchedulerName, x.InstanceName, x.RequestsRecovery })
       .HasDatabaseName($"IDX_{_prefix}FT_INST_JOB_REQ_RCVRY");
 

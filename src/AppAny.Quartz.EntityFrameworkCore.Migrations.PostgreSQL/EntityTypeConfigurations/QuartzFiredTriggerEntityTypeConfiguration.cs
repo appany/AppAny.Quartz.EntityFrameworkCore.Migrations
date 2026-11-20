@@ -93,6 +93,9 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
       builder.Property(trigger => trigger.ProgressMessage)
         .HasColumnName("progress_message")
         .HasColumnType("varchar(250)");
+      builder.Property(x => x.InterruptRequestedTime)
+        .HasColumnName("interrupt_requested_time")
+        .HasColumnType("bigint");
 
       builder.HasIndex(x => new { x.SchedulerName, x.InstanceName, x.RequestsRecovery })
         .HasDatabaseName($"idx_{prefix}ft_inst_job_req_rcvry");

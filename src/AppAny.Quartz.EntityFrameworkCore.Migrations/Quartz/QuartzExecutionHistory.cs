@@ -16,5 +16,12 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
     public int RetryAttempt { get; set; }
     public bool RetryScheduled { get; set; }
     public string? ExecutionLog { get; set; }
+    public int? Result { get; set; }
+    public string? Summary { get; set; }
+    public string? Metrics { get; set; }
+    public bool? Manual { get; set; }
+    public string? FireInstanceId { get; set; }
+    public string? JobInput { get; set; }
+    public bool? JobInputTooLarge { get; set; }
   }
 }
