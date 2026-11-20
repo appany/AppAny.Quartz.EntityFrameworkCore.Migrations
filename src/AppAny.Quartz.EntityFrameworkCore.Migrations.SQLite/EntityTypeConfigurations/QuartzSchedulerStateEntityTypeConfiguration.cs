@@ -37,6 +37,9 @@ public class QuartzSchedulerStateEntityTypeConfiguration : IEntityTypeConfigurat
       .HasColumnName("CHECKIN_INTERVAL")
       .HasColumnType("bigint")
       .IsRequired();
+    builder.Property(x => x.QuartzVersion)
+      .HasColumnName("QUARTZ_VERSION")
+      .HasColumnType("text");
   }
 }
 

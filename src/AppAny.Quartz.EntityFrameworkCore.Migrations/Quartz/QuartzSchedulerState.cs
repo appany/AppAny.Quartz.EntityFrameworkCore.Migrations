@@ -6,5 +6,6 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
     public string InstanceName { get; set; } = null!;
     public long LastCheckInTime { get; set; }
     public long CheckInInterval { get; set; }
+    public string? QuartzVersion { get; set; }
   }
 }

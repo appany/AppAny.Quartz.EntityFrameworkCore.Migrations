@@ -82,6 +82,14 @@ public class QuartzTriggerEntityTypeConfiguration : IEntityTypeConfiguration<Qua
       .HasColumnName("MISFIRE_ORIG_FIRE_TIME")
       .HasColumnType("bigint");
 
+    builder.Property(x => x.MisfireThreshold)
+      .HasColumnName("MISFIRE_THRESHOLD")
+      .HasColumnType("bigint");
+
+    builder.Property(x => x.FixedDelay)
+      .HasColumnName("FIXED_DELAY")
+      .HasColumnType("bit");
+
     builder.Property(x => x.ExecutionGroup)
       .HasColumnName("EXECUTION_GROUP")
       .HasColumnType("text");

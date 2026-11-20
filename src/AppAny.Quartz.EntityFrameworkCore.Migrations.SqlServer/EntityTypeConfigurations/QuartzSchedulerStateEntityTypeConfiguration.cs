@@ -39,6 +39,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
       builder.Property(x => x.CheckInInterval)
         .HasColumnName("CHECKIN_INTERVAL")
         .IsRequired();
+      builder.Property(x => x.QuartzVersion)
+        .HasColumnName("QUARTZ_VERSION")
+        .HasMaxLength(20)
+        .IsUnicode();
     }
   }
 }

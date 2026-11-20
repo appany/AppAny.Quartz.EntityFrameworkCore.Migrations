@@ -42,6 +42,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
 
         context.ModelBuilder.ApplyConfiguration(
           new QuartzMisfireHistoryEntityTypeConfiguration(prefix));
+        context.ModelBuilder.ApplyConfiguration(
+          new QuartzJobStatusEntityTypeConfiguration(prefix));
 
         context.ModelBuilder.ApplyConfiguration(
           new QuartzSchedulerStateEntityTypeConfiguration(prefix));

@@ -82,6 +82,14 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
         .HasColumnName("MISFIRE_ORIG_FIRE_TIME")
         .HasColumnType("bigint(19)");
 
+      builder.Property(x => x.MisfireThreshold)
+        .HasColumnName("MISFIRE_THRESHOLD")
+        .HasColumnType("bigint(19)");
+
+      builder.Property(x => x.FixedDelay)
+        .HasColumnName("FIXED_DELAY")
+        .HasColumnType("tinyint(1)");
+
       builder.Property(x => x.ExecutionGroup)
         .HasColumnName("EXECUTION_GROUP")
         .HasColumnType("varchar(200)");

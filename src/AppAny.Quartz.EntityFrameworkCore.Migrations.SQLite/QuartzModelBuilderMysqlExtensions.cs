@@ -50,6 +50,9 @@ public static class QuartzModelBuilderSQLiteExtensions
         new QuartzMisfireHistoryEntityTypeConfiguration(prefix));
 
       context.ModelBuilder.ApplyConfiguration(
+        new QuartzJobStatusEntityTypeConfiguration(prefix));
+
+      context.ModelBuilder.ApplyConfiguration(
         new QuartzSchedulerStateEntityTypeConfiguration(prefix));
 
       context.ModelBuilder.ApplyConfiguration(

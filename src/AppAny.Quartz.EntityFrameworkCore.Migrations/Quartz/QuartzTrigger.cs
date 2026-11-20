@@ -18,6 +18,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
     public long StartTime { get; set; }
     public long? EndTime { get; set; }
     public long? MisfireOriginalFireTime { get; set; }
+    public long? MisfireThreshold { get; set; }
+    public bool? FixedDelay { get; set; }
     public string? ExecutionGroup { get; set; }
     public string? PreferredNode { get; set; }
     public bool PreferredNodeAuto { get; set; }
