@@ -96,6 +96,9 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
         .HasColumnName("PROGRESS_MESSAGE")
         .HasMaxLength(250)
         .IsUnicode();
+      builder.Property(x => x.InterruptRequestedTime)
+        .HasColumnName("INTERRUPT_REQUESTED_TIME")
+        .HasColumnType("bigint");
 
       builder.HasIndex(x => new { x.SchedulerName, x.InstanceName, x.RequestsRecovery })
         .HasDatabaseName($"IDX_{prefix}FT_INST_JOB_REQ_RCVRY");

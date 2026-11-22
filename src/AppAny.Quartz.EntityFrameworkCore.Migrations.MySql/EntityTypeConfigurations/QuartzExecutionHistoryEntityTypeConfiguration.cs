@@ -88,6 +88,34 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
         .HasColumnName("EXECUTION_LOG")
         .HasColumnType("longtext");
 
+      builder.Property(history => history.Result)
+        .HasColumnName("RESULT")
+        .HasColumnType("integer");
+
+      builder.Property(history => history.Summary)
+        .HasColumnName("SUMMARY")
+        .HasColumnType("varchar(1000)");
+
+      builder.Property(history => history.Metrics)
+        .HasColumnName("METRICS")
+        .HasColumnType("longtext");
+
+      builder.Property(history => history.Manual)
+        .HasColumnName("MANUAL")
+        .HasColumnType("tinyint(1)");
+
+      builder.Property(history => history.FireInstanceId)
+        .HasColumnName("FIRE_INSTANCE_ID")
+        .HasColumnType("varchar(140)");
+
+      builder.Property(history => history.JobInput)
+        .HasColumnName("JOB_INPUT")
+        .HasColumnType("longtext");
+
+      builder.Property(history => history.JobInputTooLarge)
+        .HasColumnName("JOB_INPUT_TOO_LARGE")
+        .HasColumnType("tinyint(1)");
+
       builder.HasIndex(history => new { history.SchedulerName, history.FiredTime })
         .HasDatabaseName($"IDX_{prefix}EH_FIRED_TIME");
 

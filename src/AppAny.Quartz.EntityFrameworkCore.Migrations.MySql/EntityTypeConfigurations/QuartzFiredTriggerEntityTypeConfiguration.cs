@@ -91,6 +91,9 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
       builder.Property(trigger => trigger.ProgressMessage)
         .HasColumnName("PROGRESS_MESSAGE")
         .HasColumnType("varchar(250)");
+      builder.Property(x => x.InterruptRequestedTime)
+        .HasColumnName("INTERRUPT_REQUESTED_TIME")
+        .HasColumnType("bigint(19)");
 
       builder.HasIndex(x => new { x.SchedulerName, x.InstanceName, x.RequestsRecovery })
         .HasDatabaseName($"IDX_{prefix}FT_INST_JOB_REQ_RCVRY");

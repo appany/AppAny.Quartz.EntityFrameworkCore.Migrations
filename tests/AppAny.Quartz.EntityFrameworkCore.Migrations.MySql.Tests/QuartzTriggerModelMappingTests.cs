@@ -214,7 +214,13 @@ public class QuartzTriggerModelMappingTests
   [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.ErrorMessage), "ERROR_MESSAGE", "varchar(1000)", true)]
   [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.RetryAttempt), "RETRY_ATTEMPT", "integer", false)]
   [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.RetryScheduled), "RETRY_SCHEDULED", "tinyint(1)", false)]
-  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.ExecutionLog), "EXECUTION_LOG", "longtext", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.Result), "RESULT", "integer", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.Summary), "SUMMARY", "varchar(1000)", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.Metrics), "METRICS", "longtext", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.Manual), "MANUAL", "tinyint(1)", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.FireInstanceId), "FIRE_INSTANCE_ID", "varchar(140)", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.JobInput), "JOB_INPUT", "longtext", true)]
+  [InlineData(typeof(QuartzExecutionHistory), nameof(QuartzExecutionHistory.JobInputTooLarge), "JOB_INPUT_TOO_LARGE", "tinyint(1)", true)]
   [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.SchedulerName), "SCHED_NAME", "varchar(120)", false)]
   [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.EntryId), "ENTRY_ID", "varchar(140)", false)]
   [InlineData(typeof(QuartzMisfireHistory), nameof(QuartzMisfireHistory.InstanceName), "INSTANCE_NAME", "varchar(200)", false)]
@@ -266,6 +272,42 @@ public class QuartzTriggerModelMappingTests
     Assert.NotNull(entityType);
     Assert.Contains(entityType!.GetIndexes(), index => index.GetDatabaseName() == indexName
       && index.Properties.Select(property => property.Name).SequenceEqual(new[] { "SchedulerName", propertyName }));
+  }
+
+  [Theory]
+  [InlineData(typeof(QuartzTrigger), nameof(QuartzTrigger.MisfireThreshold), "MISFIRE_THRESHOLD", "bigint(19)")]
+  [InlineData(typeof(QuartzTrigger), nameof(QuartzTrigger.FixedDelay), "FIXED_DELAY", "tinyint(1)")]
+  [InlineData(typeof(QuartzFiredTrigger), nameof(QuartzFiredTrigger.InterruptRequestedTime), "INTERRUPT_REQUESTED_TIME", "bigint(19)")]
+  [InlineData(typeof(QuartzSchedulerState), nameof(QuartzSchedulerState.QuartzVersion), "QUARTZ_VERSION", "varchar(20)")]
+  public void ShouldMapQuartz47Columns(Type entityClrType, string propertyName, string columnName, string columnType)
+  {
+    using var dbContext = new MySqlIntegrationDbContext(CreateOptions());
+    var entityType = dbContext.Model.FindEntityType(entityClrType);
+
+    Assert.NotNull(entityType);
+    var property = entityType!.FindProperty(propertyName);
+    Assert.NotNull(property);
+
+    var table = StoreObjectIdentifier.Table(entityType.GetTableName()!, entityType.GetSchema());
+    Assert.Equal(columnName, property!.GetColumnName(table));
+    Assert.Equal(columnType, property.GetColumnType());
+    Assert.True(property.IsNullable);
+    Assert.Null(property.GetDefaultValue());
+  }
+
+  [Fact]
+  public void ShouldMapQuartzJobStatusTable()
+  {
+    using var dbContext = new MySqlIntegrationDbContext(CreateOptions());
+    var entityType = dbContext.Model.FindEntityType(typeof(QuartzJobStatus));
+
+    Assert.NotNull(entityType);
+    Assert.Equal("QRTZ_JOB_STATUS", entityType!.GetTableName());
+    Assert.Equal(new[] { "SchedulerName", "JobGroup", "JobName" },
+      entityType.FindPrimaryKey()!.Properties.Select(property => property.Name));
+    Assert.Equal(0, entityType.FindProperty(nameof(QuartzJobStatus.ConsecutiveFailures))!.GetDefaultValue());
+    Assert.Equal(0L, entityType.FindProperty(nameof(QuartzJobStatus.RunCount))!.GetDefaultValue());
+    Assert.Equal(0L, entityType.FindProperty(nameof(QuartzJobStatus.FailureCount))!.GetDefaultValue());
   }
 
   private static DbContextOptions<MySqlIntegrationDbContext> CreateOptions()

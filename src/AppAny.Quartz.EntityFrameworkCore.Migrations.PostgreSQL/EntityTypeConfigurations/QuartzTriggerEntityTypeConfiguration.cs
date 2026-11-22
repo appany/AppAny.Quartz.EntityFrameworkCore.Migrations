@@ -84,6 +84,14 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasColumnName("misfire_orig_fire_time")
         .HasColumnType("bigint");
 
+      builder.Property(x => x.MisfireThreshold)
+        .HasColumnName("misfire_threshold")
+        .HasColumnType("bigint");
+
+      builder.Property(x => x.FixedDelay)
+        .HasColumnName("fixed_delay")
+        .HasColumnType("boolean");
+
       builder.Property(x => x.ExecutionGroup)
         .HasColumnName("execution_group")
         .HasColumnType("varchar(200)");

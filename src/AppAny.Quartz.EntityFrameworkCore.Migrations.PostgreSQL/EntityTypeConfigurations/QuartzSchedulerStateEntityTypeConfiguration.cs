@@ -39,6 +39,9 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasColumnName("checkin_interval")
         .HasColumnType("bigint")
         .IsRequired();
+      builder.Property(x => x.QuartzVersion)
+        .HasColumnName("quartz_version")
+        .HasColumnType("varchar(20)");
     }
   }
 }

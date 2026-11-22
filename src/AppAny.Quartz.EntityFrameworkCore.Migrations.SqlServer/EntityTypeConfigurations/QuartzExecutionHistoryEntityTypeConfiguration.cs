@@ -93,6 +93,33 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SqlServer
         .HasColumnName("EXECUTION_LOG")
         .IsUnicode();
 
+      builder.Property(history => history.Result)
+        .HasColumnName("RESULT");
+
+      builder.Property(history => history.Summary)
+        .HasColumnName("SUMMARY")
+        .HasMaxLength(1000)
+        .IsUnicode();
+
+      builder.Property(history => history.Metrics)
+        .HasColumnName("METRICS")
+        .IsUnicode();
+
+      builder.Property(history => history.Manual)
+        .HasColumnName("MANUAL");
+
+      builder.Property(history => history.FireInstanceId)
+        .HasColumnName("FIRE_INSTANCE_ID")
+        .HasMaxLength(140)
+        .IsUnicode();
+
+      builder.Property(history => history.JobInput)
+        .HasColumnName("JOB_INPUT")
+        .IsUnicode();
+
+      builder.Property(history => history.JobInputTooLarge)
+        .HasColumnName("JOB_INPUT_TOO_LARGE");
+
       builder.HasIndex(history => new { history.SchedulerName, history.FiredTime })
         .HasDatabaseName($"IDX_{prefix}EH_FIRED_TIME");
 

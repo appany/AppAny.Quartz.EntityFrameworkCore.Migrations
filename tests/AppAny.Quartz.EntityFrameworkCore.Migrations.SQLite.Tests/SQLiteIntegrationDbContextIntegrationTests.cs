@@ -107,6 +107,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.Tests
                   oldModelBuilder.AddQuartz(quartz => quartz.UseSqlite());
                   oldModelBuilder.Ignore<QuartzExecutionHistory>();
                   oldModelBuilder.Ignore<QuartzMisfireHistory>();
+                  oldModelBuilder.Ignore<QuartzJobStatus>();
                   oldModelBuilder.Entity<QuartzTrigger>()
                         .Ignore(trigger => trigger.ContinuesTriggerName)
                         .Ignore(trigger => trigger.ContinuesTriggerGroup)
@@ -114,10 +115,15 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.Tests
                         .Ignore(trigger => trigger.OverlapPolicy)
                         .Ignore(trigger => trigger.PauseReason)
                         .Ignore(trigger => trigger.PausedBy)
-                        .Ignore(trigger => trigger.PausedAt);
+                        .Ignore(trigger => trigger.PausedAt)
+                        .Ignore(trigger => trigger.MisfireThreshold)
+                        .Ignore(trigger => trigger.FixedDelay);
                   oldModelBuilder.Entity<QuartzFiredTrigger>()
                         .Ignore(trigger => trigger.Progress)
-                        .Ignore(trigger => trigger.ProgressMessage);
+                        .Ignore(trigger => trigger.ProgressMessage)
+                        .Ignore(trigger => trigger.InterruptRequestedTime);
+                  oldModelBuilder.Entity<QuartzSchedulerState>()
+                        .Ignore(state => state.QuartzVersion);
                   oldModelBuilder.Entity<QuartzPausedTriggerGroup>()
                         .Ignore(group => group.PauseReason)
                         .Ignore(group => group.PausedBy)
@@ -152,8 +158,8 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.Tests
                   await ExecuteMigrationOperations(seedMigration.Operations, oldModel);
 
                   var upgradeOperations = modelDiffer.GetDifferences(oldModel.GetRelationalModel(), newModel.GetRelationalModel());
-                  Assert.Equal(2, upgradeOperations.OfType<CreateTableOperation>().Count());
-                  Assert.Equal(15, upgradeOperations.OfType<AddColumnOperation>().Count());
+                  Assert.Equal(3, upgradeOperations.OfType<CreateTableOperation>().Count());
+                  Assert.Equal(19, upgradeOperations.OfType<AddColumnOperation>().Count());
                   Assert.Equal(4, upgradeOperations.OfType<CreateIndexOperation>().Count());
                   Assert.All(upgradeOperations, operation =>
                         Assert.True(operation is CreateTableOperation or AddColumnOperation or CreateIndexOperation));
@@ -175,8 +181,10 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.SQLite.Tests
                   Assert.Null(trigger.ContinuationCondition);
                   Assert.Null(trigger.OverlapPolicy);
                   Assert.Null(trigger.PauseReason);
-                  Assert.Null(trigger.PausedBy);
-                  Assert.Null(trigger.PausedAt);
+                  Assert.Null(trigger.MisfireThreshold);
+                  Assert.Null(trigger.FixedDelay);
+                  Assert.Null((await this._dbContext.Set<QuartzFiredTrigger>().SingleOrDefaultAsync())?.InterruptRequestedTime);
+                  Assert.Null((await this._dbContext.Set<QuartzSchedulerState>().SingleOrDefaultAsync())?.QuartzVersion);
                   Assert.Empty(await this._dbContext.Set<QuartzExecutionHistory>().ToListAsync());
                   Assert.Empty(await this._dbContext.Set<QuartzMisfireHistory>().ToListAsync());
             }

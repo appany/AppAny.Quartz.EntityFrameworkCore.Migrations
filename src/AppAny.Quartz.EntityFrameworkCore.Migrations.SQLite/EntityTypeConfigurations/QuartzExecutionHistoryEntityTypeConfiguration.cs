@@ -88,6 +88,34 @@ public class QuartzExecutionHistoryEntityTypeConfiguration : IEntityTypeConfigur
       .HasColumnName("EXECUTION_LOG")
       .HasColumnType("text");
 
+    builder.Property(history => history.Result)
+      .HasColumnName("RESULT")
+      .HasColumnType("integer");
+
+    builder.Property(history => history.Summary)
+      .HasColumnName("SUMMARY")
+      .HasColumnType("text");
+
+    builder.Property(history => history.Metrics)
+      .HasColumnName("METRICS")
+      .HasColumnType("text");
+
+    builder.Property(history => history.Manual)
+      .HasColumnName("MANUAL")
+      .HasColumnType("bit");
+
+    builder.Property(history => history.FireInstanceId)
+      .HasColumnName("FIRE_INSTANCE_ID")
+      .HasColumnType("text");
+
+    builder.Property(history => history.JobInput)
+      .HasColumnName("JOB_INPUT")
+      .HasColumnType("text");
+
+    builder.Property(history => history.JobInputTooLarge)
+      .HasColumnName("JOB_INPUT_TOO_LARGE")
+      .HasColumnType("bit");
+
     builder.HasIndex(history => new { history.SchedulerName, history.FiredTime })
       .HasDatabaseName($"IDX_{_prefix}EH_FIRED_TIME");
 

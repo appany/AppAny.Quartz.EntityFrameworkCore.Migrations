@@ -90,6 +90,34 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.PostgreSQL
         .HasColumnName("execution_log")
         .HasColumnType("text");
 
+      builder.Property(history => history.Result)
+        .HasColumnName("result")
+        .HasColumnType("integer");
+
+      builder.Property(history => history.Summary)
+        .HasColumnName("summary")
+        .HasColumnType("text");
+
+      builder.Property(history => history.Metrics)
+        .HasColumnName("metrics")
+        .HasColumnType("text");
+
+      builder.Property(history => history.Manual)
+        .HasColumnName("manual")
+        .HasColumnType("bool");
+
+      builder.Property(history => history.FireInstanceId)
+        .HasColumnName("fire_instance_id")
+        .HasColumnType("text");
+
+      builder.Property(history => history.JobInput)
+        .HasColumnName("job_input")
+        .HasColumnType("text");
+
+      builder.Property(history => history.JobInputTooLarge)
+        .HasColumnName("job_input_too_large")
+        .HasColumnType("bool");
+
       builder.HasIndex(history => new { history.SchedulerName, history.FiredTime })
         .HasDatabaseName($"idx_{prefix}eh_fired_time");
 

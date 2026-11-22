@@ -17,6 +17,7 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations
     public bool? RequestsRecovery { get; set; }
     public string? ExecutionGroup { get; set; }
     public int? Progress { get; set; }
+    public long? InterruptRequestedTime { get; set; }
     public string? ProgressMessage { get; set; }
   }
 }

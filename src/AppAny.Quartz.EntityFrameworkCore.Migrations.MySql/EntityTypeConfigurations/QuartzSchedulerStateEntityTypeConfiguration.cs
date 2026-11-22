@@ -37,6 +37,9 @@ namespace AppAny.Quartz.EntityFrameworkCore.Migrations.MySql
         .HasColumnName("CHECKIN_INTERVAL")
         .HasColumnType("bigint(19)")
         .IsRequired();
+      builder.Property(x => x.QuartzVersion)
+        .HasColumnName("QUARTZ_VERSION")
+        .HasColumnType("varchar(20)");
     }
   }
 }
